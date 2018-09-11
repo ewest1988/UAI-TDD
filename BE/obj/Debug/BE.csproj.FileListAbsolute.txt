@@ -1,0 +1,5 @@
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BE\bin\Debug\BE.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BE\bin\Debug\BE.pdb
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BE\obj\Debug\BE.csprojResolveAssemblyReference.cache
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BE\obj\Debug\BE.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BE\obj\Debug\BE.pdb

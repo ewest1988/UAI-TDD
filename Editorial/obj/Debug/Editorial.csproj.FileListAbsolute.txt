@@ -1,0 +1,7 @@
+c:\users\p045922\documents\visual studio 2015\Projects\Editorial\Editorial\bin\Debug\Editorial.exe.config
+c:\users\p045922\documents\visual studio 2015\Projects\Editorial\Editorial\bin\Debug\Editorial.exe
+c:\users\p045922\documents\visual studio 2015\Projects\Editorial\Editorial\bin\Debug\Editorial.pdb
+c:\users\p045922\documents\visual studio 2015\Projects\Editorial\Editorial\obj\Debug\Editorial.Properties.Resources.resources
+c:\users\p045922\documents\visual studio 2015\Projects\Editorial\Editorial\obj\Debug\Editorial.csproj.GenerateResource.Cache
+c:\users\p045922\documents\visual studio 2015\Projects\Editorial\Editorial\obj\Debug\Editorial.exe
+c:\users\p045922\documents\visual studio 2015\Projects\Editorial\Editorial\obj\Debug\Editorial.pdb

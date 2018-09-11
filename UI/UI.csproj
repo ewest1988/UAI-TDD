@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{25781E6F-332A-4310-AC7B-84DB9340124E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UI</RootNamespace>
+    <AssemblyName>UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AsignarFamilia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AsignarFamilia.Designer.cs">
+      <DependentUpon>AsignarFamilia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Backup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Backup.Designer.cs">
+      <DependentUpon>Backup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BuscarDocumento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuscarDocumento.Designer.cs">
+      <DependentUpon>BuscarDocumento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cambiarContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cambiarContraseña.Designer.cs">
+      <DependentUpon>cambiarContraseña.cs</DependentUpon>
+    </Compile>
+    <Compile Include="crearDocumento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="crearDocumento.Designer.cs">
+      <DependentUpon>crearDocumento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="datosPersonales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="datosPersonales.Designer.cs">
+      <DependentUpon>datosPersonales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="exportarDocumento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="exportarDocumento.Designer.cs">
+      <DependentUpon>exportarDocumento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="generarEdicion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="generarEdicion.Designer.cs">
+      <DependentUpon>generarEdicion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gestionarBitacora.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gestionarBitacora.Designer.cs">
+      <DependentUpon>gestionarBitacora.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gestionarFamilia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gestionarFamilia.Designer.cs">
+      <DependentUpon>gestionarFamilia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gestionarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gestionarUsuario.Designer.cs">
+      <DependentUpon>gestionarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="main.Designer.cs">
+      <DependentUpon>main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="modificarFamilia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modificarFamilia.Designer.cs">
+      <DependentUpon>modificarFamilia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="modificarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modificarUsuario.Designer.cs">
+      <DependentUpon>modificarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nota.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nota.Designer.cs">
+      <DependentUpon>nota.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nuevaFamilia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nuevaFamilia.Designer.cs">
+      <DependentUpon>nuevaFamilia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nuevoUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nuevoUsuario.Designer.cs">
+      <DependentUpon>nuevoUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="relacionarDocumentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="relacionarDocumentos.Designer.cs">
+      <DependentUpon>relacionarDocumentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="restore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="restore.Designer.cs">
+      <DependentUpon>restore.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AsignarFamilia.resx">
+      <DependentUpon>AsignarFamilia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Backup.resx">
+      <DependentUpon>Backup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BuscarDocumento.resx">
+      <DependentUpon>BuscarDocumento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cambiarContraseña.resx">
+      <DependentUpon>cambiarContraseña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crearDocumento.resx">
+      <DependentUpon>crearDocumento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="datosPersonales.resx">
+      <DependentUpon>datosPersonales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="exportarDocumento.resx">
+      <DependentUpon>exportarDocumento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="generarEdicion.resx">
+      <DependentUpon>generarEdicion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gestionarBitacora.resx">
+      <DependentUpon>gestionarBitacora.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gestionarFamilia.resx">
+      <DependentUpon>gestionarFamilia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gestionarUsuario.resx">
+      <DependentUpon>gestionarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="login.resx">
+      <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="main.resx">
+      <DependentUpon>main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="modificarFamilia.resx">
+      <DependentUpon>modificarFamilia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="modificarUsuario.resx">
+      <DependentUpon>modificarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="nota.resx">
+      <DependentUpon>nota.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="nuevaFamilia.resx">
+      <DependentUpon>nuevaFamilia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="nuevoUsuario.resx">
+      <DependentUpon>nuevoUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="relacionarDocumentos.resx">
+      <DependentUpon>relacionarDocumentos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="restore.resx">
+      <DependentUpon>restore.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
