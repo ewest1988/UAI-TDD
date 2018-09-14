@@ -19,6 +19,7 @@ namespace UI
 
         private void GestionDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             var gesUser = new gestionarUsuario();
             gesUser.MdiParent = this;
             gesUser.Show();
@@ -83,6 +84,11 @@ namespace UI
             var restore = new restore();
             restore.MdiParent = this;
             restore.Show();
+        }
+
+        private void main_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

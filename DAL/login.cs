@@ -4,13 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
+
+
 namespace DAL
 {
-    public class login : BE.ICRUD<login>
+    public class login 
     {
-        public bool Create(login objAlta)
+        public bool validarUsuario(BE.user user)
         {
-            throw new NotImplementedException();
+            string passbase = null;
+
+            try
+            {
+                passbase = new SQLHelper().EjecutarScalar("SELECT contraseña FROM Usuario WHERE Usuario = '" + user.usuario + "'");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            if (passbase == user.pass)
+                return true;
+            else
+                return false;
         }
 
         public bool Delete(login objDel)

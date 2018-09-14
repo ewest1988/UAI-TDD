@@ -31,13 +31,13 @@
             this.MenuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GestionDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GestionarBitacoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CrearDocumentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BuscarDocumentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AgregarEdicionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GestionarFamiliaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DatosPersonalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HerramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RealizarBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RealizarRestoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,13 +76,6 @@
             this.GestionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.GestionDeUsuariosToolStripMenuItem.Text = "Gestion de Usuarios";
             this.GestionDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.GestionDeUsuariosToolStripMenuItem_Click);
-            // 
-            // CerrarSesiónToolStripMenuItem
-            // 
-            this.CerrarSesiónToolStripMenuItem.Name = "CerrarSesiónToolStripMenuItem";
-            this.CerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.CerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
-            this.CerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.CerrarSesiónToolStripMenuItem_Click);
             // 
             // GestionarBitacoraToolStripMenuItem
             // 
@@ -126,6 +119,13 @@
             this.DatosPersonalesToolStripMenuItem.Text = "Datos Personales";
             this.DatosPersonalesToolStripMenuItem.Click += new System.EventHandler(this.DatosPersonalesToolStripMenuItem_Click);
             // 
+            // CerrarSesiónToolStripMenuItem
+            // 
+            this.CerrarSesiónToolStripMenuItem.Name = "CerrarSesiónToolStripMenuItem";
+            this.CerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.CerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
+            this.CerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.CerrarSesiónToolStripMenuItem_Click);
+            // 
             // HerramientasToolStripMenuItem
             // 
             this.HerramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -158,6 +158,7 @@
             this.IsMdiContainer = true;
             this.Name = "main";
             this.Text = "main";
+            this.Load += new System.EventHandler(this.main_Load);
             this.MenuStrip1.ResumeLayout(false);
             this.MenuStrip1.PerformLayout();
             this.ResumeLayout(false);

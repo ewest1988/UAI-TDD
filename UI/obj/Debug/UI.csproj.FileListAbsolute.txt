@@ -1,6 +1,4 @@
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\UI.exe.config
-C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\UI.exe
-C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\UI.pdb
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.AsignarFamilia.resources
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.Backup.resources
@@ -24,5 +22,13 @@ C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.relacionarDocumentos.resources
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.restore.resources
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.csproj.GenerateResource.Cache
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\UI.exe
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\UI.pdb
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\BE.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\BLL.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\DAL.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\BE.pdb
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\BLL.pdb
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\DAL.pdb
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.exe
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.pdb

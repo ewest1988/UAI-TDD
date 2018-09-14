@@ -1,1 +1,9 @@
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BLL\bin\Debug\BLL.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BLL\bin\Debug\BLL.pdb
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BLL\bin\Debug\BE.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BLL\bin\Debug\DAL.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BLL\bin\Debug\BE.pdb
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BLL\bin\Debug\DAL.pdb
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BLL\obj\Debug\BLL.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\BLL\obj\Debug\BLL.pdb

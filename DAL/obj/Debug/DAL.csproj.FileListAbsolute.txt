@@ -1,5 +1,8 @@
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\bin\Debug\DAL.dll.config
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\bin\Debug\DAL.dll
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\bin\Debug\DAL.pdb
-C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\bin\Debug\BE.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\bin\Debug\BE.pdb
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\obj\Debug\DAL.dll
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\obj\Debug\DAL.pdb

@@ -31,8 +31,8 @@
             this.Label3 = new System.Windows.Forms.Label();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.Button1 = new System.Windows.Forms.Button();
-            this.TextBox2 = new System.Windows.Forms.TextBox();
-            this.TextBox1 = new System.Windows.Forms.TextBox();
+            this.txtPass = new System.Windows.Forms.TextBox();
+            this.txtUser = new System.Windows.Forms.TextBox();
             this.Label2 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -64,19 +64,19 @@
             this.Button1.UseVisualStyleBackColor = true;
             this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // TextBox2
+            // txtPass
             // 
-            this.TextBox2.Location = new System.Drawing.Point(27, 96);
-            this.TextBox2.Name = "TextBox2";
-            this.TextBox2.Size = new System.Drawing.Size(183, 20);
-            this.TextBox2.TabIndex = 10;
+            this.txtPass.Location = new System.Drawing.Point(27, 96);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.Size = new System.Drawing.Size(183, 20);
+            this.txtPass.TabIndex = 10;
             // 
-            // TextBox1
+            // txtUser
             // 
-            this.TextBox1.Location = new System.Drawing.Point(27, 34);
-            this.TextBox1.Name = "TextBox1";
-            this.TextBox1.Size = new System.Drawing.Size(183, 20);
-            this.TextBox1.TabIndex = 9;
+            this.txtUser.Location = new System.Drawing.Point(27, 34);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(183, 20);
+            this.txtUser.TabIndex = 9;
             // 
             // Label2
             // 
@@ -104,8 +104,8 @@
             this.Controls.Add(this.Label3);
             this.Controls.Add(this.ComboBox1);
             this.Controls.Add(this.Button1);
-            this.Controls.Add(this.TextBox2);
-            this.Controls.Add(this.TextBox1);
+            this.Controls.Add(this.txtPass);
+            this.Controls.Add(this.txtUser);
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.Label1);
             this.Name = "login";
@@ -121,8 +121,8 @@
         internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.ComboBox ComboBox1;
         internal System.Windows.Forms.Button Button1;
-        internal System.Windows.Forms.TextBox TextBox2;
-        internal System.Windows.Forms.TextBox TextBox1;
+        internal System.Windows.Forms.TextBox txtPass;
+        internal System.Windows.Forms.TextBox txtUser;
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label Label1;
     }

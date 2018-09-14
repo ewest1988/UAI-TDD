@@ -7,26 +7,15 @@ using BE;
 
 namespace BLL
 {
-    class login : BE.ICRUD<BE.login>
+    public class login
     {
-        public bool Create(BE.login objAlta)
-        {
-            throw new NotImplementedException();
-        }
+        public BE.user usuario { get; set; }
 
-        public bool Delete(BE.login objDel)
+        public bool loginUser(BE.user user)
         {
-            throw new NotImplementedException();
-        }
+            var login = new DAL.login();
 
-        public List<BE.login> Retrieve()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(BE.login objUpd)
-        {
-            throw new NotImplementedException();
+            return login.validarUsuario(user);
         }
     }
 }

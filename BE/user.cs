@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class login
+    public class user
     {
         public string usuario { get; set; }
         public string pass { get; set; }
+
     }
 }

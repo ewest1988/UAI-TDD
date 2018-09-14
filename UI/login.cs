@@ -12,6 +12,8 @@ namespace UI
 {
     public partial class login : Form
     {
+        public BE.user user { get; set; }
+
         public login()
         {
             InitializeComponent();
@@ -19,18 +21,29 @@ namespace UI
 
         private void login_Load(object sender, EventArgs e)
         {
-
             ComboBox1.Items.Add("ES");
             ComboBox1.Items.Add("EN");
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            user = new BE.user();
+            user.usuario = txtUser.Text;
+            user.pass = txtPass.Text;
+            bool validarUsuario = new BLL.login().loginUser(user);
 
-            this.Hide();
-            var main = new main();
-            main.WindowState = FormWindowState.Maximized;
-            main.Show();
+            if (validarUsuario == true)
+            {
+
+                this.Hide();
+                var main = new main();
+                main.WindowState = FormWindowState.Maximized;
+                main.Show();
+            }
+            else {
+                MessageBox.Show("no se puede ingresar a la aplicacion");
+            }
+            
         }
     }
 }
