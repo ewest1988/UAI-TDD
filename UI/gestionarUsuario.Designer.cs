@@ -83,6 +83,7 @@
             this.Button2.TabIndex = 20;
             this.Button2.Text = "Nuevo Usuario";
             this.Button2.UseVisualStyleBackColor = true;
+            this.Button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // Button1
             // 
@@ -136,6 +137,7 @@
             this.Controls.Add(this.Label1);
             this.Name = "gestionarUsuario";
             this.Text = "gestionarUsuario";
+            this.Load += new System.EventHandler(this.gestionarUsuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

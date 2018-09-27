@@ -12,7 +12,8 @@ namespace UI
 {
     public partial class login : Form
     {
-        public BE.user user { get; set; }
+        public BLL.usuario usuario = new BLL.usuario();
+        public BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
 
         public login()
         {
@@ -27,22 +28,32 @@ namespace UI
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            user = new BE.user();
-            user.usuario = txtUser.Text;
+
+            string hash_nuevo = gestorDV.CacularDVV(usuario.listarTablaUsuarios());
+            string hash_actual = gestorDV.ObtenerDVV("Usuario");
+            BE.usuario user = new BE.usuario();
+            user.uss = txtUser.Text;
             user.pass = txtPass.Text;
+
             bool validarUsuario = new BLL.login().loginUser(user);
-
-            if (validarUsuario == true)
+            if (hash_nuevo == hash_actual)
             {
+                if (validarUsuario == true)
+                {
 
-                this.Hide();
-                var main = new main();
-                main.WindowState = FormWindowState.Maximized;
-                main.Show();
+                    this.Hide();
+                    var main = new main();
+                    main.WindowState = FormWindowState.Maximized;
+                    main.Show();
+                }
+                else {
+                    MessageBox.Show("no se puede ingresar a la aplicacion");
+                }
             }
             else {
-                MessageBox.Show("no se puede ingresar a la aplicacion");
+                MessageBox.Show("Inconsistencias en el Digito Verificador Vertical");
             }
+            
             
         }
     }

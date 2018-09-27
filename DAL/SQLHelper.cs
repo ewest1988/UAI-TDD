@@ -31,6 +31,7 @@ namespace DAL
             catch (Exception ex)
             {
                 CancelarTX();
+                throw ex;
             }
             finally
             {
@@ -63,7 +64,7 @@ namespace DAL
             catch (Exception ex)
             {
                 CancelarTX();
-                return fa.ToString();
+                throw ex;    
             }
             finally
             {
@@ -88,20 +89,15 @@ namespace DAL
                     withBlock.Transaction = tx;
             }
 
-            try
-            {
-                if (!scalar)
-                    fa = command.ExecuteNonQuery();
-                else
-                    fa = (int)command.ExecuteScalar();
+            try {
 
+                fa = command.ExecuteNonQuery();
                 ConfirmarTX();
             }
-            catch (Exception ex)
-            {
-                fa = -1;
+            catch (Exception ex) {
+
                 CancelarTX();
-                return fa;
+                throw ex;
             }
             finally
             {
@@ -122,8 +118,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                fa = -1;
-                return fa;
+                throw ex;
             }
             finally
             {
@@ -147,7 +142,7 @@ namespace DAL
 
         private void Cerrar()
         {
-            if (tx == null)
+            if (tx != null)
             {
                 cn.Close();
             }

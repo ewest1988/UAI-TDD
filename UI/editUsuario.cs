@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class nuevoUsuario : Form
+    public partial class editUsuario : Form
     {
-        public nuevoUsuario()
+        public editUsuario()
         {
             InitializeComponent();
         }
 
-        private void nuevoUsuario_Load(object sender, EventArgs e)
+        private void Label10_Click(object sender, EventArgs e)
         {
 
         }

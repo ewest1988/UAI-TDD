@@ -10,13 +10,13 @@ namespace DAL
 {
     public class login 
     {
-        public bool validarUsuario(BE.user user)
+        public bool validarUsuario(BE.usuario user)
         {
             string passbase = null;
 
             try
             {
-                passbase = new SQLHelper().EjecutarScalar("SELECT contraseña FROM Usuario WHERE Usuario = '" + user.usuario + "'");
+                passbase = new SQLHelper().EjecutarScalar("SELECT contraseña FROM Usuario WHERE Usuario = '" + user.uss + "'");
             }
             catch (Exception ex)
             {

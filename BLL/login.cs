@@ -9,9 +9,9 @@ namespace BLL
 {
     public class login
     {
-        public BE.user usuario { get; set; }
+        public BE.usuario usuario { get; set; }
 
-        public bool loginUser(BE.user user)
+        public bool loginUser(BE.usuario user)
         {
             var login = new DAL.login();
 
