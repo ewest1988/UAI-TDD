@@ -24,13 +24,13 @@ namespace DAL
             return digito;
         }
 
-        public bool Modificar_Verificador(string cadena, string tabla)
+        public bool modificarVerificador(string cadena, string tabla)
         {
             int respuesta = 0;
-            try
-            {
-                bool scalar = false;
-                respuesta = sqlHelper.Ejecutar("UPDATE Digito_Verificador SET Verificador = '" + cadena + "' WHERE Tabla = '" + tabla + "'", scalar);
+
+            try {
+
+                respuesta = sqlHelper.Ejecutar("UPDATE Digito_Verificador SET Digito_Verificador = '" + cadena + "' WHERE Tabla = '" + tabla + "'", false);
             }
             catch (Exception ex)
             {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    class encriptacion
+    public class encriptacion
     {
         public string Encrypt(string clearText)
         {

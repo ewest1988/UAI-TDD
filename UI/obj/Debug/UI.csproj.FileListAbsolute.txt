@@ -14,7 +14,6 @@ C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.login.resources
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.main.resources
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.modificarFamilia.resources
-C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.modificarUsuario.resources
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.nota.resources
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.nuevaFamilia.resources
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.nuevoUsuario.resources
@@ -32,3 +31,5 @@ C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\BL
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\DAL.pdb
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.exe
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.pdb
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.editUsuario.resources
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.modificarPermisosUsuario.resources

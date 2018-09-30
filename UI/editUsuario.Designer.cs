@@ -276,6 +276,7 @@
             this.Controls.Add(this.Label1);
             this.Name = "editUsuario";
             this.Text = "editUsuario";
+            this.Load += new System.EventHandler(this.editUsuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

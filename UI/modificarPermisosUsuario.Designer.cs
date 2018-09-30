@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class modificarUsuario
+    partial class modificarPermisosUsuario
     {
         /// <summary>
         /// Required designer variable.

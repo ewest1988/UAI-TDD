@@ -50,12 +50,12 @@ namespace BLL
             return seguridad.ObtenerHash(expression.ToString());
         }
 
-        public bool Modificar_Verificador(string cadena, string tabla)
+        public bool modificarVerificador(string cadena, string tabla)
         {
             bool res = false;
             try
             {
-                res = digitoverificador.Modificar_Verificador(cadena, tabla);
+                res = digitoverificador.modificarVerificador(cadena, tabla);
                 return res;
             }
             catch (Exception ex)

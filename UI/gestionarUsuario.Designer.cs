@@ -56,6 +56,7 @@
             this.Button5.TabIndex = 23;
             this.Button5.Text = "Salir";
             this.Button5.UseVisualStyleBackColor = true;
+            this.Button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // Button4
             // 
@@ -74,6 +75,7 @@
             this.Button3.TabIndex = 21;
             this.Button3.Text = "Eliminar Usuario";
             this.Button3.UseVisualStyleBackColor = true;
+            this.Button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // Button2
             // 

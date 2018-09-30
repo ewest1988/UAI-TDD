@@ -86,6 +86,12 @@
     <Compile Include="datosPersonales.Designer.cs">
       <DependentUpon>datosPersonales.cs</DependentUpon>
     </Compile>
+    <Compile Include="editUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editUsuario.Designer.cs">
+      <DependentUpon>editUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="exportarDocumento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,11 +140,11 @@
     <Compile Include="modificarFamilia.Designer.cs">
       <DependentUpon>modificarFamilia.cs</DependentUpon>
     </Compile>
-    <Compile Include="modificarUsuario.cs">
+    <Compile Include="modificarPermisosUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modificarUsuario.Designer.cs">
-      <DependentUpon>modificarUsuario.cs</DependentUpon>
+    <Compile Include="modificarPermisosUsuario.Designer.cs">
+      <DependentUpon>modificarPermisosUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="nota.cs">
       <SubType>Form</SubType>
@@ -190,6 +196,9 @@
     <EmbeddedResource Include="datosPersonales.resx">
       <DependentUpon>datosPersonales.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="editUsuario.resx">
+      <DependentUpon>editUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="exportarDocumento.resx">
       <DependentUpon>exportarDocumento.cs</DependentUpon>
     </EmbeddedResource>
@@ -214,8 +223,8 @@
     <EmbeddedResource Include="modificarFamilia.resx">
       <DependentUpon>modificarFamilia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="modificarUsuario.resx">
-      <DependentUpon>modificarUsuario.cs</DependentUpon>
+    <EmbeddedResource Include="modificarPermisosUsuario.resx">
+      <DependentUpon>modificarPermisosUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="nota.resx">
       <DependentUpon>nota.cs</DependentUpon>

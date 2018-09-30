@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class modificarUsuario : Form
+    public partial class modificarPermisosUsuario : Form
     {
-        public modificarUsuario()
+        public modificarPermisosUsuario()
         {
             InitializeComponent();
         }

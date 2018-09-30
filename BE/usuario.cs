@@ -14,6 +14,7 @@ namespace BE
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string mail { get; set; }
+        public int documento { get; set; }
         public string direccion { get; set; }
         public int telefono { get; set; }
         public int IdEstado { get; set; }

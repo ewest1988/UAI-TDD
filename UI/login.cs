@@ -12,6 +12,7 @@ namespace UI
 {
     public partial class login : Form
     {
+        public BLL.seguridad seguridad = new BLL.seguridad();
         public BLL.usuario usuario = new BLL.usuario();
         public BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
 
@@ -32,8 +33,8 @@ namespace UI
             string hash_nuevo = gestorDV.CacularDVV(usuario.listarTablaUsuarios());
             string hash_actual = gestorDV.ObtenerDVV("Usuario");
             BE.usuario user = new BE.usuario();
-            user.uss = txtUser.Text;
-            user.pass = txtPass.Text;
+            user.uss = seguridad.ObtenerHash(txtUser.Text);
+            user.pass = seguridad.ObtenerHash(txtPass.Text);
 
             bool validarUsuario = new BLL.login().loginUser(user);
             if (hash_nuevo == hash_actual)

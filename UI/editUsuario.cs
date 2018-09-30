@@ -21,5 +21,10 @@ namespace UI
         {
 
         }
+
+        private void editUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

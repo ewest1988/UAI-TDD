@@ -6,7 +6,8 @@ namespace DAL
     public class usuario
     {
         private SQLHelper sqlHelper = new SQLHelper();
-        public DataTable Listar_Usuarios() {
+
+        public DataTable listarUsuarios() {
             DataTable datos = new DataTable();
 
             try {
@@ -19,10 +20,12 @@ namespace DAL
             }
         }
 
-        public bool Agregar_Usuario(BE.usuario usuario) {
+        public bool agregarUsuario(BE.usuario usuario) {
+
             int respuesta = 0;
+
             try {
-                respuesta = sqlHelper.Ejecutar("INSERT INTO Usuario (usuario,contraseña,nombre,apellido,mail,direccion,telefono,id_estado,digito_verificador) VALUES ('" + usuario.uss + "','" + usuario.pass + "','" + usuario.nombre + "'," + usuario.apellido + ",'" + usuario.mail + "'," + usuario.direccion + ",'" + usuario.telefono + ",'" + usuario.IdEstado + ",'" + usuario.digitoVerificador + "')", false);
+                respuesta = sqlHelper.Ejecutar("INSERT INTO Usuario (usuario,contraseña,nombre,apellido,mail,documento,direccion,telefono,id_estado,digito_verificador) VALUES ('" + usuario.uss + "','" + usuario.pass + "','" + usuario.nombre + "','" + usuario.apellido + "','" + usuario.mail + "'," + usuario.documento + ",'" + usuario.direccion + "'," + usuario.telefono + "," + usuario.IdEstado + ",'" + usuario.digitoVerificador + "')", false);
             } catch (Exception ex)
             {
                 throw ex;
@@ -31,7 +34,7 @@ namespace DAL
             else return false;
         }
 
-        public bool ValidarLogin(string usuario, string contraseña)
+        public bool validarLogin(string usuario, string contraseña)
         {
            string passbase = null;
 
@@ -45,7 +48,7 @@ namespace DAL
             return (passbase == contraseña);
         }
 
-        public DataTable ObtenerUsuario(string usuario)
+        public DataTable obtenerUsuario(string usuario)
         {
             DataTable datos = new DataTable();
             try
@@ -60,7 +63,7 @@ namespace DAL
             return datos;
         }
 
-        public string ObtenerVerificador(string usuario)
+        public string obtenerVerificador(string usuario)
         {
             string datos = null;
             try {
@@ -73,7 +76,7 @@ namespace DAL
             return datos;
         }
 
-        public bool Eliminar_Usuario(int id) {
+        public bool eliminarUsuario(int id) {
 
             int respuesta = 0;
             try {
@@ -87,7 +90,7 @@ namespace DAL
             else return false;
         }
 
-        public bool Cambiar_Idioma(int usuario, int idioma)
+        public bool cambiarIdioma(int usuario, int idioma)
         {
             int respuesta = 0;
             try {
@@ -101,7 +104,7 @@ namespace DAL
             else return false;
         }
 
-        public bool Modificar_Usuario(BE.usuario usuario)
+        public bool modificarUsuario(BE.usuario usuario)
         {
             int respuesta = 0;
             try
@@ -117,7 +120,7 @@ namespace DAL
             else return false;
         }
 
-        public string ObtenerHash(string usuario)
+        public string obtenerHash(string usuario)
         {
             DataTable datos = new DataTable();
             string hash = string.Empty;
