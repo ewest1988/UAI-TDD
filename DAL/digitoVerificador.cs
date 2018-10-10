@@ -10,7 +10,7 @@ namespace DAL
     {
         private SQLHelper sqlHelper = new SQLHelper();
 
-        public string Obtener_Digito(string tabla)
+        public string obtenerDigito(string tabla)
         {
             string digito = string.Empty;
             try

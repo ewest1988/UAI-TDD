@@ -122,7 +122,7 @@ namespace DAL
             }
             finally
             {
-                Cerrar();
+                cn.Close();
             }
             return fa;
         }

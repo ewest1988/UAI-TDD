@@ -40,12 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="backup.cs" />
+    <Compile Include="bitacora.cs" />
     <Compile Include="digitoVerificador.cs" />
     <Compile Include="editorialDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>editorialDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="idioma.cs" />
     <Compile Include="login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

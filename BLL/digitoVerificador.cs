@@ -14,7 +14,7 @@ namespace BLL
 
         public string ObtenerDVV(string tabla)
         {
-            return digitoverificador.Obtener_Digito(tabla);
+            return digitoverificador.obtenerDigito(tabla);
         }
 
         public bool VerificadorHorizontal(string cadena, string verificador)

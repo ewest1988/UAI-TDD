@@ -48,12 +48,12 @@ namespace DAL
             return (passbase == contraseña);
         }
 
-        public DataTable obtenerUsuario(string usuario)
+        public DataTable obtenerUsuario(BE.usuario usuario)
         {
             DataTable datos = new DataTable();
             try
             {
-                datos = sqlHelper.ObtenerDatos("SELECT * FROM Usuario WHERE Usuario = '" + usuario + "'");
+                datos = sqlHelper.ObtenerDatos("SELECT * FROM Usuario WHERE id_usuario = " + usuario.IdUsuario + ";");
             }
             catch (Exception ex)
             {
@@ -63,11 +63,26 @@ namespace DAL
             return datos;
         }
 
-        public string obtenerVerificador(string usuario)
+        public DataTable obtenerUsuario(string usuario)
+        {
+            DataTable datos = new DataTable();
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("SELECT * FROM Usuario WHERE usuario = '" + usuario + "';");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return datos;
+        }
+
+        public string obtenerVerificador(BE.usuario usuario)
         {
             string datos = null;
             try {
-                datos = sqlHelper.EjecutarScalar("SELECT Verificador FROM Usuario WHERE Usuario = '" + usuario + "'");
+                datos = sqlHelper.EjecutarScalar("SELECT Digito_Verificador FROM Usuario WHERE id_usuario = '" + usuario.IdUsuario + "'");
             }
             catch (Exception ex) {
                 throw ex;
@@ -109,7 +124,7 @@ namespace DAL
             int respuesta = 0;
             try
             {
-                respuesta = sqlHelper.Ejecutar("UPDATE Usuario SET usuario = " + usuario.uss +  ", contraseña =  " + usuario.pass + ", nombre = " + usuario.nombre + ", apellido = " + usuario.apellido +", mail = " + usuario.mail + ", direccion = " + usuario.direccion + ", telefono = " + usuario.telefono + ", id_estado = " + usuario.IdEstado + ", digito_verificador = " + usuario.digitoVerificador , false);
+                respuesta = sqlHelper.Ejecutar("UPDATE Usuario SET usuario = '" + usuario.uss +  "', contraseña =  '" + usuario.pass + "', nombre = '" + usuario.nombre + "', apellido = '" + usuario.apellido +"', mail = '" + usuario.mail + "', direccion = '" + usuario.direccion + "', telefono = " + usuario.telefono + ", id_estado = " + usuario.IdEstado + ", digito_verificador = '" + usuario.digitoVerificador + "' WHERE id_usuario = " + usuario.IdUsuario, false);
             }
             catch (Exception ex)
             {
@@ -120,15 +135,21 @@ namespace DAL
             else return false;
         }
 
-        public string obtenerHash(string usuario)
+        public string obtenerHash(BE.usuario usuario)
         {
+            string concat = string.Empty;
             DataTable datos = new DataTable();
             string hash = string.Empty;
             try
             {
-                datos = sqlHelper.ObtenerDatos("SELECT ID_Usuario,Nombre,Apellido,Usuario,Familia_ID,Clave,Idioma_ID FROM Usuario WHERE Usuario = '" + usuario + "'");
+                datos = sqlHelper.ObtenerDatos("SELECT usuario,contraseña,nombre,apellido,mail,direccion,telefono,id_estado FROM Usuario WHERE id_usuario = '" + usuario.IdUsuario + "'");
                 foreach (DataRow row in datos.Rows)
                 {
+                    foreach (DataColumn col in datos.Columns)
+                    {
+                        
+                        concat += row[col].ToString();
+                    }
                 }
             }
             catch (Exception ex)
@@ -136,7 +157,7 @@ namespace DAL
                 throw ex;
             }
 
-            return hash;
+            return concat;
         }
     }
 }

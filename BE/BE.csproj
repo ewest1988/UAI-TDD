@@ -44,7 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bitacora.cs" />
+    <Compile Include="criticidad.cs" />
+    <Compile Include="evento.cs" />
+    <Compile Include="filtroBitacora.cs" />
     <Compile Include="ICRUD.cs" />
+    <Compile Include="idioma.cs" />
     <Compile Include="usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

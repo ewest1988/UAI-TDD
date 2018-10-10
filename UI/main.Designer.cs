@@ -134,6 +134,7 @@
             this.HerramientasToolStripMenuItem.Name = "HerramientasToolStripMenuItem";
             this.HerramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
             this.HerramientasToolStripMenuItem.Text = "Herramientas";
+            this.HerramientasToolStripMenuItem.Click += new System.EventHandler(this.HerramientasToolStripMenuItem_Click);
             // 
             // RealizarBackupToolStripMenuItem
             // 

@@ -61,6 +61,7 @@
             this.Button2.TabIndex = 110;
             this.Button2.Text = "Cancelar";
             this.Button2.UseVisualStyleBackColor = true;
+            this.Button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // Button1
             // 
@@ -70,6 +71,7 @@
             this.Button1.TabIndex = 109;
             this.Button1.Text = "Guardar";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // Label10
             // 
@@ -106,6 +108,7 @@
             // 
             this.TextBox9.Location = new System.Drawing.Point(299, 300);
             this.TextBox9.Name = "TextBox9";
+            this.TextBox9.PasswordChar = '*';
             this.TextBox9.Size = new System.Drawing.Size(100, 20);
             this.TextBox9.TabIndex = 105;
             // 
@@ -122,6 +125,7 @@
             // 
             this.TextBox7.Location = new System.Drawing.Point(299, 264);
             this.TextBox7.Name = "TextBox7";
+            this.TextBox7.PasswordChar = '*';
             this.TextBox7.Size = new System.Drawing.Size(100, 20);
             this.TextBox7.TabIndex = 103;
             // 
@@ -137,6 +141,7 @@
             // TextBox8
             // 
             this.TextBox8.Location = new System.Drawing.Point(101, 264);
+            this.TextBox8.MaxLength = 10;
             this.TextBox8.Name = "TextBox8";
             this.TextBox8.Size = new System.Drawing.Size(100, 20);
             this.TextBox8.TabIndex = 101;
@@ -153,9 +158,11 @@
             // TextBox4
             // 
             this.TextBox4.Location = new System.Drawing.Point(299, 169);
+            this.TextBox4.MaxLength = 8;
             this.TextBox4.Name = "TextBox4";
             this.TextBox4.Size = new System.Drawing.Size(100, 20);
             this.TextBox4.TabIndex = 99;
+            this.TextBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox4_keyPress);
             // 
             // Label4
             // 
@@ -188,6 +195,7 @@
             this.TextBox6.Name = "TextBox6";
             this.TextBox6.Size = new System.Drawing.Size(100, 20);
             this.TextBox6.TabIndex = 95;
+            this.TextBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox6_KeyPress);
             // 
             // Label6
             // 

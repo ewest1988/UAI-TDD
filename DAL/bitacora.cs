@@ -1,69 +1,109 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
-using Microsoft.VisualBasic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class MP_Bitacora
+namespace DAL
 {
-    private Acceso _acceso = new Acceso();
-
-    public DataTable Listar_Bitacora()
+    public class bitacora
     {
-        DataTable datos;
-        try
-        {
-            datos = _acceso.ObtenerDatos("SELECT * FROM Bitacora");
-            return datos;
-        }
-        catch (Exception ex)
-        {
-            Interaction.MsgBox(ex.ToString());
-            return null/* TODO Change to default(_) if this is not a reference type */;
-        }
-    }
+        SQLHelper sqlHelper = new SQLHelper();
+        string qryListar = "SELECT B.ID_BITACORA, U.usuario, E.desc_evento, B.fec_evento, C.desc_criticidad, B.digito_verificador FROM BITACORA B " +
+                                          "INNER JOIN Usuario U ON B.id_usuario = U.id_usuario " +
+                                          "INNER JOIN Evento E ON B.id_evento = E.id_evento " +
+                                          "INNER JOIN CRITICIDAD C ON B.id_criticidad = C.id_criticidad ";
 
-    public DataTable Obtener_Bitacora(int id)
-    {
-        DataTable datos;
-        try
-        {
-            datos = _acceso.ObtenerDatos("SELECT * FROM Bitacora WHERE ID_Bitacora = " + id);
-            return datos;
-        }
-        catch (Exception ex)
-        {
-            Interaction.MsgBox(ex.ToString());
-            return null/* TODO Change to default(_) if this is not a reference type */;
-        }
-    }
+        public DataTable listarBitacora() {
 
-    public bool Eliminar_Bitacora(int id)
-    {
-        bool res;
-        try
-        {
-            res = _acceso.Ejecutar("DELETE FROM Bitacora WHERE ID_Bitacora = " + id, 0);
-            return res;
+            return sqlHelper.ObtenerDatos(qryListar); 
         }
-        catch (Exception ex)
-        {
-            Interaction.MsgBox(ex.ToString());
-            return false;
-        }
-    }
 
-    public bool Agregar_Bitacora(string usuario, string descripcion, DateTime fecha)
-    {
-        bool res;
-        try
+        public DataTable listarBitacora(BE.filtroBitacora filtro)
         {
+            string filterUser = "";
+            string filterEvent = "";
+            string filterCritic = "";
+            string filterDate = "";
+
+            filterDate = "WHERE B.FEC_EVENTO BETWEEN '" + filtro.fecDesde.Year + "-" + filtro.fecDesde.Month + "-" + filtro.fecDesde.Day + 
+                "' AND '" + filtro.fecHasta.Year + "-" + filtro.fecHasta.Month + "-" + filtro.fecHasta.Day + "' ";
+
+            if (filtro.idUsuario != 0) filterUser = "AND B.ID_USUARIO = " + filtro.idUsuario + " ";
+            if (filtro.idEvento != 0) filterEvent = "AND B.ID_EVENTO = " + filtro.idEvento + " ";
+            if (filtro.idCriticidad!= 0) filterCritic = "AND B.ID_CRITICIDAD = " + filtro.idCriticidad + " ";
+            return sqlHelper.ObtenerDatos(qryListar + filterDate + filterUser + filterEvent + filterCritic);
+        }
+
+        public DataTable listarTablaBitacora()
+        {
+            DataTable datos = new DataTable();
+
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("SELECT * FROM bitacora");
+                return datos;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool eliminarBitacora(List<int> lista) {
+
+            int respuesta = 0;
+            string strId = "";
+            foreach (int id in lista) { strId += id.ToString() + ","; }
+
+            try {
+
+                respuesta = sqlHelper.Ejecutar("DELETE FROM Bitacora WHERE ID_BITACORA IN (" + strId.Substring(0, strId.Length - 1) + ")", false);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            if (respuesta > 0) return true;
+            else return false;
+        }
+
+        public bool agregarBitacora(BE.bitacora bitacora) {
+
+            int respuesta = 0;
+
+            try {
+
+                respuesta = sqlHelper.Ejecutar("INSERT INTO BITACORA VALUES (" + bitacora.idUsuario + "," + bitacora.idEvento + ",'" +
+                                                bitacora.FecEvento.Year + "-" + bitacora.FecEvento.Month + "-" + bitacora.FecEvento.Day + "',1,'" + bitacora.DigitoVerificador + "')", false);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            if (respuesta > 0) return true;
+            else return false;
+        }
+
+        public DataTable listarEventos() {
+
+            return sqlHelper.ObtenerDatos("SELECT * FROM EVENTO");
+        }
+
+        public DataTable listarCriticidad()
+        {
+
+            return sqlHelper.ObtenerDatos("SELECT * FROM CRITICIDAD");
+        }
+
+        public bool guardarEvento(BE.bitacora bitacora) {
             
-            res = _acceso.Ejecutar("INSERT INTO Bitacora(Usuario,Descripcion,Fecha) VALUES('" + usuario + "','" + descripcion + "'," + fecha + ")", 0);
-            return res;
-        }
-        catch (Exception ex)
-        {
-            Interaction.MsgBox(ex.ToString());
-            return false;
+              
+            return true;
         }
     }
 }

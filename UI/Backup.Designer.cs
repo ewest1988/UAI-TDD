@@ -28,37 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Button2 = new System.Windows.Forms.Button();
-            this.Button1 = new System.Windows.Forms.Button();
-            this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.Label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Button2
             // 
-            this.Button2.Location = new System.Drawing.Point(103, 84);
+            this.Button2.Location = new System.Drawing.Point(289, 125);
             this.Button2.Name = "Button2";
             this.Button2.Size = new System.Drawing.Size(75, 23);
             this.Button2.TabIndex = 7;
-            this.Button2.Text = "Aceptar";
+            this.Button2.Text = "Exportar";
             this.Button2.UseVisualStyleBackColor = true;
-            // 
-            // Button1
-            // 
-            this.Button1.Location = new System.Drawing.Point(205, 37);
-            this.Button1.Name = "Button1";
-            this.Button1.Size = new System.Drawing.Size(75, 23);
-            this.Button1.TabIndex = 6;
-            this.Button1.Text = "Examinar";
-            this.Button1.UseVisualStyleBackColor = true;
-            // 
-            // ComboBox1
-            // 
-            this.ComboBox1.FormattingEnabled = true;
-            this.ComboBox1.Location = new System.Drawing.Point(12, 37);
-            this.ComboBox1.Name = "ComboBox1";
-            this.ComboBox1.Size = new System.Drawing.Size(181, 21);
-            this.ComboBox1.TabIndex = 5;
+            this.Button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // Label1
             // 
@@ -69,17 +57,48 @@
             this.Label1.TabIndex = 4;
             this.Label1.Text = "Ruta de destino:";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(12, 82);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(181, 23);
+            this.progressBar1.TabIndex = 8;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(15, 39);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(447, 20);
+            this.textBox1.TabIndex = 9;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(387, 125);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Cancelar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Backup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 121);
+            this.ClientSize = new System.Drawing.Size(474, 160);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.Button2);
-            this.Controls.Add(this.Button1);
-            this.Controls.Add(this.ComboBox1);
             this.Controls.Add(this.Label1);
             this.Name = "Backup";
             this.Text = "Backup";
+            this.Load += new System.EventHandler(this.Backup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -88,8 +107,11 @@
         #endregion
 
         internal System.Windows.Forms.Button Button2;
-        internal System.Windows.Forms.Button Button1;
-        internal System.Windows.Forms.ComboBox ComboBox1;
         internal System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.TextBox textBox1;
+        internal System.Windows.Forms.Button button3;
     }
 }

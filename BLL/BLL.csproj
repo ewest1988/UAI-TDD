@@ -44,8 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backup.cs" />
+    <Compile Include="bitacora.cs" />
     <Compile Include="digitoVerificador.cs" />
     <Compile Include="encriptacion.cs" />
+    <Compile Include="idioma.cs" />
     <Compile Include="login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="seguridad.cs" />

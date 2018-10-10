@@ -12,6 +12,14 @@ namespace UI
 {
     public partial class gestionarBitacora : Form
     {
+        BLL.bitacora gestorBitacora = new BLL.bitacora();
+        BLL.usuario usuario = new BLL.usuario();
+        List<BE.usuario> usuarios = new List<BE.usuario>();
+        List<BE.evento> eventos = new List<BE.evento>();
+        List<BE.criticidad> criticidades = new List<BE.criticidad>();
+        List<BE.bitacora> listadoBitacora = new List<BE.bitacora>();
+        BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
+
         public gestionarBitacora()
         {
             InitializeComponent();
@@ -19,7 +27,86 @@ namespace UI
 
         private void gestionarBitacora_Load(object sender, EventArgs e)
         {
+            string hash_nuevo = gestorDV.CacularDVV(usuario.listarTablaUsuarios());
+            string hash_actual = gestorDV.ObtenerDVV("Usuario");
 
+            if (hash_actual == hash_nuevo) {
+
+                try {
+
+                    usuarios = usuario.listarUsuarios();
+                    eventos = gestorBitacora.listarEventos();
+                    criticidades = gestorBitacora.listarCriticidad();
+
+                    foreach (BE.usuario user in usuarios) { ComboBox1.Items.Add(user.uss); }
+                    foreach (BE.evento evento in eventos) { ComboBox2.Items.Add(evento.descripcion); }
+                    foreach (BE.criticidad critico in criticidades) { ComboBox3.Items.Add(critico.descripcion); }
+                }
+                catch (Exception ex) {
+
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+            else {
+
+                MessageBox.Show("Inconsistencia en la tabla de bitacora");
+            }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            BE.filtroBitacora filtroBitacora = new BE.filtroBitacora();
+
+            if (ComboBox1.SelectedItem != null) {
+
+                foreach (BE.usuario usuario in usuarios) {
+
+                    if (usuario.uss == ComboBox1.SelectedItem.ToString()) filtroBitacora.idUsuario = usuario.IdUsuario;
+                }
+                
+            }
+
+            if (ComboBox2.SelectedItem != null) {
+
+                foreach (BE.evento evento in eventos) {
+
+                    if (evento.descripcion == ComboBox2.SelectedItem.ToString()) filtroBitacora.idEvento = evento.idEvento;
+                }
+            }
+
+            if (ComboBox3.SelectedItem != null) {
+
+                foreach (BE.criticidad critico in criticidades) {
+
+                    if (critico.descripcion == ComboBox3.SelectedItem.ToString()) filtroBitacora.idCriticidad = critico.idCriticidad;
+                }
+            }
+
+            filtroBitacora.fecDesde = DateTimePicker1.Value;
+            filtroBitacora.fecHasta = DateTimePicker2.Value;
+
+            listadoBitacora = gestorBitacora.listarBitacora(filtroBitacora);
+            DataGridView1.DataSource = listadoBitacora.Select(x => new { Usuario = x.Usuario, Evento = x.evento, Fecha = x.FecEvento, Criticidad = x.criticidad }).ToList();
+        }
+
+        private void Button2_Click(object sender, EventArgs e) {
+
+            List<int> listId = new List<int>();
+
+            foreach (BE.bitacora bitacora in listadoBitacora) {
+                listId.Add(bitacora.IdBitacora);
+            }
+
+            try {
+
+                gestorBitacora.eliminarBitacora(listId);
+                MessageBox.Show("eventos depurados correctamente");
+                this.Close();
+            }
+            catch (Exception ex) {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

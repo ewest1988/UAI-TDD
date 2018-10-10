@@ -12,6 +12,10 @@ namespace UI
 {
     public partial class main : Form
     {
+        public BE.usuario userLogin { get; set; }
+        public BLL.bitacora gestorBitacora = new BLL.bitacora();
+        public BLL.seguridad seguridad = new BLL.seguridad();
+
         public main()
         {
             InitializeComponent();
@@ -21,6 +25,7 @@ namespace UI
         {
             
             var gesUser = new gestionarUsuario();
+            gesUser.userLogin = userLogin;
             gesUser.MdiParent = this;
             gesUser.Show();
         }
@@ -69,6 +74,16 @@ namespace UI
 
         private void CerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            BE.bitacora bitacora = new BE.bitacora();
+            bitacora.idUsuario = userLogin.IdUsuario;
+            bitacora.idEvento = 6;
+            DateTime now = DateTime.Now;
+            bitacora.FecEvento = now;
+            bitacora.DigitoVerificador = seguridad.ObtenerHash(gestorBitacora.concatenarCampos(bitacora));
+            gestorBitacora.agregarBitacora(bitacora);
+
+            login login = new login();
+            login.Show();
             this.Close();
         }
 
@@ -76,6 +91,7 @@ namespace UI
         {
             var backup = new Backup();
             backup.MdiParent = this;
+            backup.userLogin = userLogin;
             backup.Show();
         }
 
@@ -83,10 +99,16 @@ namespace UI
         {
             var restore = new restore();
             restore.MdiParent = this;
+            restore.userLogin = userLogin;
             restore.Show();
         }
 
         private void main_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HerramientasToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

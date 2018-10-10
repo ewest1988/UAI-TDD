@@ -66,6 +66,7 @@
             this.Button4.TabIndex = 22;
             this.Button4.Text = "Resetear Contraseña";
             this.Button4.UseVisualStyleBackColor = true;
+            this.Button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // Button3
             // 
@@ -95,6 +96,7 @@
             this.Button1.TabIndex = 19;
             this.Button1.Text = "Modificar Usuario";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // ComboBox1
             // 

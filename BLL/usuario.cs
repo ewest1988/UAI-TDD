@@ -14,7 +14,7 @@ namespace BLL
         private digitoVerificador digitoVerificador = new digitoVerificador();
         private encriptacion crypto = new encriptacion();
 
-        internal List<BE.usuario> Listar_Usuarios()
+        public List<BE.usuario> listarUsuarios()
         {
             List<BE.usuario> usuarios = new List<BE.usuario>();
             DataTable usuariosTabla = usuarioDatos.listarUsuarios();
@@ -24,8 +24,9 @@ namespace BLL
                 foreach (DataRow reg in usuariosTabla.Rows)
                 {
                     BE.usuario usuario = new BE.usuario();
-                    usuario.uss = reg["usuario"].ToString();
-                    usuario.pass = reg["pass"].ToString();
+                    usuario.IdUsuario = Convert.ToInt32(reg["id_usuario"]);
+                    usuario.uss = crypto.Decrypt(reg["usuario"].ToString());
+                    usuario.pass = reg["contraseña"].ToString();
 
                     usuarios.Add(usuario);
                 }
@@ -50,12 +51,30 @@ namespace BLL
 
         public bool modificarUsuario(BE.usuario usuario)
         {
-            string usuario_hash = usuarioDatos.obtenerHash(usuario.uss);
-            BE.usuario usuario_actual = obtenerUsuario(usuario.uss);
-            string verificador = usuarioDatos.obtenerVerificador(usuario.uss);
+            string usuario_hash = usuarioDatos.obtenerHash(usuario);
+            BE.usuario usuario_actual = obtenerUsuario(usuario);
+            string verificador = usuarioDatos.obtenerVerificador(usuario);
             bool res = digitoVerificador.VerificadorHorizontal(concatenarCampos(usuario_actual), verificador);
 
             if (res) {
+                string hash_nuevo = seguridad.ObtenerHash(concatenarCampos(usuario));
+                res = usuarioDatos.modificarUsuario(usuario);
+                actualizarVerificadorTabla();
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool resetPassword(BE.usuario usuario)
+        {
+            string usuario_hash = usuarioDatos.obtenerHash(usuario);
+            BE.usuario usuario_actual = obtenerUsuario(usuario);
+            string verificador = usuarioDatos.obtenerVerificador(usuario);
+            bool res = digitoVerificador.VerificadorHorizontal(concatenarCampos(usuario_actual), verificador);
+
+            if (res)
+            {
                 string hash_nuevo = seguridad.ObtenerHash(concatenarCampos(usuario));
                 res = usuarioDatos.modificarUsuario(usuario);
                 actualizarVerificadorTabla();
@@ -78,6 +97,32 @@ namespace BLL
             return res;
         }
 
+        public BE.usuario obtenerUsuario(BE.usuario usuario)
+        {
+            BE.usuario miUsuario = new BE.usuario();
+            DataTable datos = usuarioDatos.obtenerUsuario(usuario);
+
+            if (datos.Rows.Count > 0)
+            {
+                foreach (DataRow reg in datos.Rows)
+                {
+                    miUsuario.IdUsuario = Convert.ToInt32(reg["id_usuario"]);
+                    miUsuario.uss = reg["usuario"].ToString();
+                    miUsuario.pass = reg["contraseña"].ToString();
+                    miUsuario.nombre = reg["nombre"].ToString();
+                    miUsuario.documento = Convert.ToInt32(reg["documento"]);
+                    miUsuario.apellido = reg["apellido"].ToString();
+                    miUsuario.mail = reg["mail"].ToString();
+                    miUsuario.direccion = reg["direccion"].ToString();
+                    miUsuario.telefono = Convert.ToInt32(reg["telefono"]);
+                    miUsuario.IdEstado = Convert.ToInt32(reg["id_estado"]);
+                    miUsuario.digitoVerificador = reg["digito_verificador"].ToString();
+                }   
+            }
+
+            return miUsuario;
+        }
+
         public BE.usuario obtenerUsuario(string usuario)
         {
             BE.usuario miUsuario = new BE.usuario();
@@ -87,6 +132,7 @@ namespace BLL
             {
                 foreach (DataRow reg in datos.Rows)
                 {
+                    miUsuario.IdUsuario = Convert.ToInt32(reg["id_usuario"]);
                     miUsuario.uss = reg["usuario"].ToString();
                     miUsuario.pass = reg["contraseña"].ToString();
                     miUsuario.nombre = reg["nombre"].ToString();
@@ -96,10 +142,7 @@ namespace BLL
                     miUsuario.telefono = Convert.ToInt32(reg["telefono"]);
                     miUsuario.IdEstado = Convert.ToInt32(reg["id_estado"]);
                     miUsuario.digitoVerificador = reg["digito_verificador"].ToString();
-
-
-
-                }   
+                }
             }
 
             return miUsuario;

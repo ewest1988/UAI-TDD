@@ -146,6 +146,7 @@
             this.Button2.TabIndex = 16;
             this.Button2.Text = "Depurar";
             this.Button2.UseVisualStyleBackColor = true;
+            this.Button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // Button1
             // 
@@ -155,6 +156,7 @@
             this.Button1.TabIndex = 15;
             this.Button1.Text = "Consultar";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // ComboBox1
             // 
