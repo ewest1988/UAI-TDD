@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.MenuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GestionDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +42,7 @@
             this.HerramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RealizarBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RealizarRestoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,6 +152,11 @@
             this.RealizarRestoreToolStripMenuItem.Text = "Realizar Restore";
             this.RealizarRestoreToolStripMenuItem.Click += new System.EventHandler(this.RealizarRestoreToolStripMenuItem_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -182,5 +189,6 @@
         internal System.Windows.Forms.ToolStripMenuItem HerramientasToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem RealizarBackupToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem RealizarRestoreToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

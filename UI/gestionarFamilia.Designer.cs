@@ -44,6 +44,7 @@
             this.Button3.TabIndex = 12;
             this.Button3.Text = "Eliminar Familia";
             this.Button3.UseVisualStyleBackColor = true;
+            this.Button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // Button2
             // 
@@ -53,6 +54,7 @@
             this.Button2.TabIndex = 11;
             this.Button2.Text = "Nueva Familia";
             this.Button2.UseVisualStyleBackColor = true;
+            this.Button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // Button1
             // 
@@ -62,6 +64,7 @@
             this.Button1.TabIndex = 10;
             this.Button1.Text = "Modificar Familia";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // ComboBox1
             // 
@@ -104,6 +107,7 @@
             this.Controls.Add(this.Label1);
             this.Name = "gestionarFamilia";
             this.Text = "gestionarFamilia";
+            this.Load += new System.EventHandler(this.gestionarFamilia_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

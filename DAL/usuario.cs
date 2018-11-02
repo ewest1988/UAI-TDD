@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace DAL
@@ -76,6 +77,55 @@ namespace DAL
             }
 
             return datos;
+        }
+
+        public List<int> obtenerPatentes(BE.usuario usuario)
+        {
+            List<int> patentes = new List<int>();
+            DataTable datos = new DataTable();
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("SELECT id_patente FROM Usuario_Patente WHERE id_usuario = " + usuario.IdUsuario + ";");
+
+                if (datos.Rows.Count > 0)
+                {
+                    foreach (DataRow reg in datos.Rows)
+                    {
+                         patentes.Add(Convert.ToInt32(reg["id_patente"]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return patentes;
+        }
+
+        public List<int> obtenerFamilias(BE.usuario usuario)
+        {
+            DataTable datos = new DataTable();
+            List<int> familias = new List<int>();
+            
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("SELECT id_familia FROM Usuario_Familia WHERE id_usuario = " + usuario.IdUsuario + ";");
+
+                if (datos.Rows.Count > 0)
+                {
+                    foreach (DataRow reg in datos.Rows)
+                    {
+                        familias.Add(Convert.ToInt32(reg["id_familia"]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return familias;
         }
 
         public string obtenerVerificador(BE.usuario usuario)

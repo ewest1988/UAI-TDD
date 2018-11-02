@@ -31,13 +31,14 @@
             this.TextBox1 = new System.Windows.Forms.TextBox();
             this.Label1 = new System.Windows.Forms.Label();
             this.Button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TextBox1
             // 
             this.TextBox1.Location = new System.Drawing.Point(15, 49);
             this.TextBox1.Name = "TextBox1";
-            this.TextBox1.Size = new System.Drawing.Size(316, 20);
+            this.TextBox1.Size = new System.Drawing.Size(218, 20);
             this.TextBox1.TabIndex = 5;
             // 
             // Label1
@@ -51,23 +52,36 @@
             // 
             // Button1
             // 
-            this.Button1.Location = new System.Drawing.Point(128, 89);
+            this.Button1.Location = new System.Drawing.Point(77, 84);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(75, 23);
             this.Button1.TabIndex = 3;
-            this.Button1.Text = "Aceptar";
+            this.Button1.Text = "Guardar";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(158, 84);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Cancelar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // nuevaFamilia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 135);
+            this.ClientSize = new System.Drawing.Size(245, 119);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.TextBox1);
             this.Controls.Add(this.Label1);
             this.Controls.Add(this.Button1);
             this.Name = "nuevaFamilia";
             this.Text = "nuevaFamilia";
+            this.Load += new System.EventHandler(this.nuevaFamilia_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -78,5 +92,6 @@
         internal System.Windows.Forms.TextBox TextBox1;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.Button Button1;
+        internal System.Windows.Forms.Button button2;
     }
 }

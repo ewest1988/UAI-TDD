@@ -42,6 +42,7 @@
             this.Button2 = new System.Windows.Forms.Button();
             this.Button1 = new System.Windows.Forms.Button();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
+            this.Button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,7 +141,7 @@
             // 
             // Button2
             // 
-            this.Button2.Location = new System.Drawing.Point(296, 433);
+            this.Button2.Location = new System.Drawing.Point(128, 433);
             this.Button2.Name = "Button2";
             this.Button2.Size = new System.Drawing.Size(75, 23);
             this.Button2.TabIndex = 16;
@@ -150,7 +151,7 @@
             // 
             // Button1
             // 
-            this.Button1.Location = new System.Drawing.Point(79, 433);
+            this.Button1.Location = new System.Drawing.Point(25, 432);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(75, 23);
             this.Button1.TabIndex = 15;
@@ -166,11 +167,21 @@
             this.ComboBox1.Size = new System.Drawing.Size(121, 21);
             this.ComboBox1.TabIndex = 14;
             // 
+            // Button3
+            // 
+            this.Button3.Location = new System.Drawing.Point(372, 433);
+            this.Button3.Name = "Button3";
+            this.Button3.Size = new System.Drawing.Size(75, 23);
+            this.Button3.TabIndex = 28;
+            this.Button3.Text = "Salir";
+            this.Button3.UseVisualStyleBackColor = true;
+            // 
             // gestionarBitacora
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(473, 467);
+            this.Controls.Add(this.Button3);
             this.Controls.Add(this.DataGridView1);
             this.Controls.Add(this.Label6);
             this.Controls.Add(this.ComboBox3);
@@ -210,5 +221,6 @@
         internal System.Windows.Forms.Button Button2;
         internal System.Windows.Forms.Button Button1;
         internal System.Windows.Forms.ComboBox ComboBox1;
+        internal System.Windows.Forms.Button Button3;
     }
 }

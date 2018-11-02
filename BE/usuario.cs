@@ -18,6 +18,8 @@ namespace BE
         public string direccion { get; set; }
         public int telefono { get; set; }
         public int IdEstado { get; set; }
+        public List<int> patentes { get; set; }
+        public List<int> familias { get; set; }
         public string digitoVerificador { get; set; }
     }
 }

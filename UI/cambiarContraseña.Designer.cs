@@ -46,11 +46,13 @@
             this.Button2.TabIndex = 15;
             this.Button2.Text = "Cancelar";
             this.Button2.UseVisualStyleBackColor = true;
+            this.Button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // TextBox3
             // 
             this.TextBox3.Location = new System.Drawing.Point(184, 94);
             this.TextBox3.Name = "TextBox3";
+            this.TextBox3.PasswordChar = '*';
             this.TextBox3.Size = new System.Drawing.Size(139, 20);
             this.TextBox3.TabIndex = 14;
             // 
@@ -67,6 +69,7 @@
             // 
             this.TextBox2.Location = new System.Drawing.Point(184, 45);
             this.TextBox2.Name = "TextBox2";
+            this.TextBox2.PasswordChar = '*';
             this.TextBox2.Size = new System.Drawing.Size(139, 20);
             this.TextBox2.TabIndex = 12;
             // 
@@ -83,6 +86,7 @@
             // 
             this.TextBox1.Location = new System.Drawing.Point(12, 45);
             this.TextBox1.Name = "TextBox1";
+            this.TextBox1.PasswordChar = '*';
             this.TextBox1.Size = new System.Drawing.Size(139, 20);
             this.TextBox1.TabIndex = 10;
             // 
@@ -103,6 +107,7 @@
             this.Button1.TabIndex = 8;
             this.Button1.Text = "Guardar";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // cambiarContraseña
             // 
@@ -119,6 +124,7 @@
             this.Controls.Add(this.Button1);
             this.Name = "cambiarContraseña";
             this.Text = "cambiarContraseña";
+            this.Load += new System.EventHandler(this.cambiarContraseña_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

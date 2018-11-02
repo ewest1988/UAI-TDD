@@ -89,10 +89,9 @@ namespace BLL
             return usuario.uss + usuario.pass + usuario.nombre + usuario.apellido + usuario.mail + usuario.direccion + usuario.telefono + usuario.IdEstado;
         }
 
-        public bool validarLogin(string usuario, string hash)
+        public bool validarLogin(string usuario, string contraseña)
         {
             bool res = false;
-            string contraseña = crypto.Encrypt(hash);
             res = usuarioDatos.validarLogin(usuario, contraseña);
             return res;
         }
@@ -100,25 +99,9 @@ namespace BLL
         public BE.usuario obtenerUsuario(BE.usuario usuario)
         {
             BE.usuario miUsuario = new BE.usuario();
-            DataTable datos = usuarioDatos.obtenerUsuario(usuario);
-
-            if (datos.Rows.Count > 0)
-            {
-                foreach (DataRow reg in datos.Rows)
-                {
-                    miUsuario.IdUsuario = Convert.ToInt32(reg["id_usuario"]);
-                    miUsuario.uss = reg["usuario"].ToString();
-                    miUsuario.pass = reg["contraseña"].ToString();
-                    miUsuario.nombre = reg["nombre"].ToString();
-                    miUsuario.documento = Convert.ToInt32(reg["documento"]);
-                    miUsuario.apellido = reg["apellido"].ToString();
-                    miUsuario.mail = reg["mail"].ToString();
-                    miUsuario.direccion = reg["direccion"].ToString();
-                    miUsuario.telefono = Convert.ToInt32(reg["telefono"]);
-                    miUsuario.IdEstado = Convert.ToInt32(reg["id_estado"]);
-                    miUsuario.digitoVerificador = reg["digito_verificador"].ToString();
-                }   
-            }
+            miUsuario = mapper(usuarioDatos.obtenerUsuario(usuario));
+            miUsuario.patentes = usuarioDatos.obtenerPatentes(miUsuario);
+            miUsuario.familias = usuarioDatos.obtenerFamilias(miUsuario);
 
             return miUsuario;
         }
@@ -126,24 +109,9 @@ namespace BLL
         public BE.usuario obtenerUsuario(string usuario)
         {
             BE.usuario miUsuario = new BE.usuario();
-            DataTable datos = usuarioDatos.obtenerUsuario(usuario);
-
-            if (datos.Rows.Count > 0)
-            {
-                foreach (DataRow reg in datos.Rows)
-                {
-                    miUsuario.IdUsuario = Convert.ToInt32(reg["id_usuario"]);
-                    miUsuario.uss = reg["usuario"].ToString();
-                    miUsuario.pass = reg["contraseña"].ToString();
-                    miUsuario.nombre = reg["nombre"].ToString();
-                    miUsuario.apellido = reg["apellido"].ToString();
-                    miUsuario.mail = reg["mail"].ToString();
-                    miUsuario.direccion = reg["direccion"].ToString();
-                    miUsuario.telefono = Convert.ToInt32(reg["telefono"]);
-                    miUsuario.IdEstado = Convert.ToInt32(reg["id_estado"]);
-                    miUsuario.digitoVerificador = reg["digito_verificador"].ToString();
-                }
-            }
+            miUsuario = mapper(usuarioDatos.obtenerUsuario(usuario));
+            miUsuario.patentes = usuarioDatos.obtenerPatentes(miUsuario);
+            miUsuario.familias = usuarioDatos.obtenerFamilias(miUsuario);
 
             return miUsuario;
         }
@@ -160,24 +128,33 @@ namespace BLL
             return res;
         }
 
-        //public bool Cambiar_Idioma(BE.usuario usuario, Idioma idioma)
-        //{
-        //    bool resultado;
-        //    try
-        //    {
-        //        resultado = usuarioDatos.Cambiar_Idioma(usuario.Id, idioma.Id);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Interaction.MsgBox(ex.ToString());
-        //        return false;
-        //    }
-        //    return resultado;
-        //}
-
         public void actualizarVerificadorTabla() {
             var hash_nuevo = digitoVerificador.CacularDVV(listarTablaUsuarios());
             digitoVerificador.modificarVerificador(hash_nuevo, "Usuario");
+        }
+
+        public BE.usuario mapper(DataTable tablaUsuario) {
+
+            BE.usuario miUsuario = new BE.usuario();
+            if (tablaUsuario.Rows.Count > 0)
+            {
+                foreach (DataRow reg in tablaUsuario.Rows)
+                {
+                    miUsuario.IdUsuario = Convert.ToInt32(reg["id_usuario"]);
+                    miUsuario.uss = reg["usuario"].ToString();
+                    miUsuario.pass = reg["contraseña"].ToString();
+                    miUsuario.nombre = reg["nombre"].ToString();
+                    miUsuario.apellido = reg["apellido"].ToString();
+                    miUsuario.documento = Convert.ToInt32(reg["documento"]);
+                    miUsuario.mail = reg["mail"].ToString();
+                    miUsuario.direccion = reg["direccion"].ToString();
+                    miUsuario.telefono = Convert.ToInt32(reg["telefono"]);
+                    miUsuario.IdEstado = Convert.ToInt32(reg["id_estado"]);
+                    miUsuario.digitoVerificador = reg["digito_verificador"].ToString();
+                }
+            }
+
+            return miUsuario;
         }
     }
 }

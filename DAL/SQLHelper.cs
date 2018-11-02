@@ -40,6 +40,46 @@ namespace DAL
             return datos;
         }
 
+        public int EjecutarSP(string procedure, List<SqlParameter> parameters)
+        {
+            Abrir();
+            int fa = 0;
+            command = new SqlCommand();
+
+            {
+                var withBlock = command;
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = procedure;
+
+                foreach (var p in parameters) {
+                    command.Parameters.Add(p);
+                }
+
+                command.Connection = cn;
+                IniciarTX();
+                if (tx != null)
+                    withBlock.Transaction = tx;
+            }
+
+            try
+            {
+                fa = command.ExecuteNonQuery();
+
+                ConfirmarTX();
+            }
+            catch (Exception ex)
+            {
+                CancelarTX();
+                throw ex;
+            }
+            finally
+            {
+                Cerrar();
+            }
+
+            return fa;
+        }
+
         public string EjecutarScalar(string comando)
         {
             Abrir();

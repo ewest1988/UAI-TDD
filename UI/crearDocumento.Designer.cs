@@ -37,6 +37,7 @@
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.Button1 = new System.Windows.Forms.Button();
             this.Label1 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // Label3
@@ -63,6 +64,7 @@
             this.Button3.TabIndex = 15;
             this.Button3.Text = "Examinar";
             this.Button3.UseVisualStyleBackColor = true;
+            this.Button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // Label2
             // 
@@ -96,6 +98,7 @@
             this.ComboBox1.Name = "ComboBox1";
             this.ComboBox1.Size = new System.Drawing.Size(227, 21);
             this.ComboBox1.TabIndex = 11;
+            this.ComboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // Button1
             // 
@@ -105,6 +108,7 @@
             this.Button1.TabIndex = 10;
             this.Button1.Text = "Crear";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // Label1
             // 
@@ -114,6 +118,10 @@
             this.Label1.Size = new System.Drawing.Size(104, 13);
             this.Label1.TabIndex = 9;
             this.Label1.Text = "Tipo de Documento:";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // crearDocumento
             // 
@@ -131,6 +139,7 @@
             this.Controls.Add(this.Label1);
             this.Name = "crearDocumento";
             this.Text = "crearDocumento";
+            this.Load += new System.EventHandler(this.crearDocumento_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,5 +156,6 @@
         internal System.Windows.Forms.ComboBox ComboBox1;
         internal System.Windows.Forms.Button Button1;
         internal System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

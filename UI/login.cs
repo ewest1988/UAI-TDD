@@ -17,7 +17,9 @@ namespace UI
         public BLL.usuario usuario = new BLL.usuario();
         public BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
         public BLL.bitacora gestorBitacora = new BLL.bitacora();
-        public BLL.idioma idioma = new BLL.idioma();
+        public BLL.idioma gestorIdioma = new BLL.idioma();
+        public List<BE.idioma> etiquetas = new List<BE.idioma>();
+        BE.idioma mainIdioma = new BE.idioma();
 
         public login()
         {
@@ -30,6 +32,9 @@ namespace UI
             ComboBox1.Items.Add("EN");
 
             ComboBox1.SelectedIndex = 0;
+            mainIdioma.idMenu = 4;
+            mainIdioma.idLanguage = 1;
+            mapearIdioma();
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -37,13 +42,13 @@ namespace UI
 
             string hash_nuevo = gestorDV.CacularDVV(usuario.listarTablaUsuarios());
             string hash_actual = gestorDV.ObtenerDVV("Usuario");
-            BE.usuario user = new BE.usuario();
-            user.uss = encriptacion.Encrypt(txtUser.Text);
-            user.pass = encriptacion.Encrypt(txtPass.Text);
+            BE.usuario userLogin = new BE.usuario();
+            userLogin.uss = encriptacion.Encrypt(txtUser.Text);
+            userLogin.pass = seguridad.ObtenerHash(txtPass.Text);
 
             try {
 
-                bool validarUsuario = new BLL.login().loginUser(user);
+                bool validarUsuario = new BLL.login().loginUser(userLogin);
 
                 if (hash_nuevo == hash_actual)
                 {
@@ -52,20 +57,12 @@ namespace UI
 
                         this.Hide();
                         var main = new main();
-                        user = usuario.obtenerUsuario(user.uss);
+                        userLogin = usuario.obtenerUsuario(userLogin.uss);
 
-                        BE.bitacora bitacora = new BE.bitacora();
-                        bitacora.idUsuario = user.IdUsuario;
-                        bitacora.idEvento = 5; 
-                        DateTime now = DateTime.Now;
-                        bitacora.FecEvento = now;
-                        bitacora.DigitoVerificador = seguridad.ObtenerHash(gestorBitacora.concatenarCampos(bitacora));
-                        gestorBitacora.agregarBitacora(bitacora);
+                        gestorBitacora.agregarBitacora(userLogin.IdUsuario, 5);
 
-                        main.userLogin = user;
+                        main.userLogin = userLogin;
                         main.WindowState = FormWindowState.Maximized;
-
-                        BE.idioma mainIdioma = new BE.idioma();
 
                         if (ComboBox1.SelectedItem.Equals("ES")) {
 
@@ -77,7 +74,7 @@ namespace UI
 
                         List<BE.idioma> idiomas = new List<BE.idioma>();
 
-                        idiomas = idioma.listarIdioma(mainIdioma);
+                        idiomas = gestorIdioma.listarIdioma(mainIdioma);
 
                         int i = 0;
 
@@ -91,16 +88,18 @@ namespace UI
                         }
                         main.MenuStrip1.Items[0].Text = idiomas[10].etiqueta;
                         main.MenuStrip1.Items[1].Text = idiomas[11].etiqueta;
+
+                        main.idioma = mainIdioma;
                         main.Show();
                     }
 
                     else {
-                        MessageBox.Show("no se puede ingresar a la aplicacion");
+                        MessageBox.Show(etiquetas[4].etiqueta);
                     }
                 }
 
                 else {
-                    MessageBox.Show("Inconsistencias en el Digito Verificador Vertical");
+                    MessageBox.Show(etiquetas[5].etiqueta);
                 }
             }
             catch (Exception ex)
@@ -109,5 +108,31 @@ namespace UI
                 MessageBox.Show(ex.Message.ToString());
             }
         }
+
+        public void mapearIdioma() {
+
+            etiquetas = gestorIdioma.listarIdioma(mainIdioma);
+
+            Label1.Text = etiquetas [0].etiqueta;
+            Label2.Text = etiquetas [1].etiqueta;
+            Button1.Text = etiquetas [2].etiqueta;
+            Label3.Text = etiquetas [3].etiqueta;
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mainIdioma.idMenu = 4;
+
+            if (ComboBox1.SelectedItem.Equals("ES")) {
+
+                mainIdioma.idLanguage = 1;
+            }
+            else {
+                mainIdioma.idLanguage = 2;
+            }
+
+            mapearIdioma();
+        }
+
     }
 }

@@ -37,6 +37,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -86,6 +87,7 @@
     <Compile Include="datosPersonales.Designer.cs">
       <DependentUpon>datosPersonales.cs</DependentUpon>
     </Compile>
+    <Compile Include="documentosVista.cs" />
     <Compile Include="editUsuario.cs">
       <SubType>Form</SubType>
     </Compile>

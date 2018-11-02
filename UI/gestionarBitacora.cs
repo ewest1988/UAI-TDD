@@ -12,6 +12,10 @@ namespace UI
 {
     public partial class gestionarBitacora : Form
     {
+        public BE.usuario userLogin { get; set; }
+        public BE.idioma idioma { get; set; }
+        public List<BE.idioma> etiquetas { get; set; }
+
         BLL.bitacora gestorBitacora = new BLL.bitacora();
         BLL.usuario usuario = new BLL.usuario();
         List<BE.usuario> usuarios = new List<BE.usuario>();
@@ -19,6 +23,7 @@ namespace UI
         List<BE.criticidad> criticidades = new List<BE.criticidad>();
         List<BE.bitacora> listadoBitacora = new List<BE.bitacora>();
         BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
+        BLL.idioma gestorIdioma = new BLL.idioma();
 
         public gestionarBitacora()
         {
@@ -33,6 +38,19 @@ namespace UI
             if (hash_actual == hash_nuevo) {
 
                 try {
+
+                    idioma.idMenu = 6;
+                    etiquetas = gestorIdioma.listarIdioma(idioma);
+
+                    Label5.Text = etiquetas[0].etiqueta;
+                    Label1.Text = etiquetas[1].etiqueta;
+                    Label2.Text = etiquetas[2].etiqueta;
+                    Label3.Text = etiquetas[3].etiqueta;
+                    Label4.Text = etiquetas[4].etiqueta;
+                    Label6.Text = etiquetas[5].etiqueta;
+                    Button1.Text = etiquetas[6].etiqueta;
+                    Button2.Text = etiquetas[7].etiqueta;
+                    Button3.Text = etiquetas[8].etiqueta;
 
                     usuarios = usuario.listarUsuarios();
                     eventos = gestorBitacora.listarEventos();

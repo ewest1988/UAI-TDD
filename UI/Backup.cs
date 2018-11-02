@@ -47,13 +47,7 @@ namespace UI
             saveFileDialog1.FileName += ("\\editorial" + "_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
             backup.exportar("editorial", saveFileDialog1.FileName);
 
-            BE.bitacora bitacora = new BE.bitacora();
-            bitacora.idUsuario = userLogin.IdUsuario;
-            bitacora.idEvento = 3;
-            DateTime now = DateTime.Now;
-            bitacora.FecEvento = now;
-            bitacora.DigitoVerificador = seguridad.ObtenerHash(gestorBitacora.concatenarCampos(bitacora));
-            gestorBitacora.agregarBitacora(bitacora);
+            gestorBitacora.agregarBitacora(userLogin.IdUsuario, 3);
             gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
         }
 

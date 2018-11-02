@@ -14,11 +14,15 @@ namespace UI
     public partial class nuevoUsuario : Form
     {
         public BE.usuario userLogin { get; set; }
+        public BE.idioma idioma { get; set; }
+        public List<BE.idioma> etiquetas { get; set; }
+
         public BLL.encriptacion encriptacion = new BLL.encriptacion();
         public BLL.bitacora gestorBitacora = new BLL.bitacora();
         public BLL.usuario usuario = new BLL.usuario();
         public BLL.seguridad seguridad = new BLL.seguridad();
         public BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
+        public BLL.idioma gestorIdioma = new BLL.idioma();
 
         public nuevoUsuario() {
 
@@ -27,6 +31,23 @@ namespace UI
 
         private void nuevoUsuario_Load(object sender, EventArgs e) {
 
+            idioma.idMenu = 5;
+            etiquetas = gestorIdioma.listarIdioma(idioma);
+
+            Label10.Text = etiquetas[0].etiqueta;
+            Label11.Text = etiquetas[1].etiqueta;
+            Label1.Text = etiquetas[2].etiqueta;
+            Label2.Text = etiquetas[3].etiqueta;
+            Label3.Text = etiquetas[4].etiqueta;
+            Label4.Text = etiquetas[5].etiqueta;
+            Label5.Text = etiquetas[6].etiqueta;
+            Label6.Text = etiquetas[7].etiqueta;
+            Label12.Text = etiquetas[8].etiqueta;
+            Label8.Text = etiquetas[9].etiqueta;
+            Label7.Text = etiquetas[10].etiqueta;
+            Label9.Text = etiquetas[11].etiqueta;
+            Button1.Text = etiquetas[12].etiqueta;
+            Button2.Text = etiquetas[13].etiqueta;
         }
 
         private string concatenar(object obj) {
@@ -77,13 +98,7 @@ namespace UI
                     gestorUsuario.agregarUsuario(nuevoUsuario);
                     gestorDV.modificarVerificador(gestorDV.CacularDVV(usuario.listarTablaUsuarios()), "Usuario");
 
-                    BE.bitacora bitacora = new BE.bitacora();
-                    bitacora.idEvento = 1;
-                    bitacora.idUsuario = userLogin.IdUsuario;
-                    DateTime now = DateTime.Now;
-                    bitacora.FecEvento = now;
-                    bitacora.DigitoVerificador = seguridad.ObtenerHash(gestorBitacora.concatenarCampos(bitacora));
-                    gestorBitacora.agregarBitacora(bitacora);
+                    gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1);
                     gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
 
                     MessageBox.Show("Cliente guardado correctamente");

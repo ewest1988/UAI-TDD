@@ -13,8 +13,11 @@ namespace UI
     public partial class main : Form
     {
         public BE.usuario userLogin { get; set; }
+        public BE.idioma idioma { get; set; }
+
         public BLL.bitacora gestorBitacora = new BLL.bitacora();
         public BLL.seguridad seguridad = new BLL.seguridad();
+        public BLL.idioma gestorIdioma = new BLL.idioma();
 
         public main()
         {
@@ -26,7 +29,9 @@ namespace UI
             
             var gesUser = new gestionarUsuario();
             gesUser.userLogin = userLogin;
+            gesUser.idioma = idioma;
             gesUser.MdiParent = this;
+
             gesUser.Show();
         }
 
@@ -34,6 +39,8 @@ namespace UI
         {
             var gesBitacora = new gestionarBitacora();
             gesBitacora.MdiParent = this;
+            gesBitacora.userLogin = userLogin;
+            gesBitacora.idioma = idioma;
             gesBitacora.Show();
         }
 
@@ -41,6 +48,8 @@ namespace UI
         {
             var crearDoc = new crearDocumento();
             crearDoc.MdiParent = this;
+            crearDoc.userLogin = userLogin;
+            crearDoc.idioma = idioma;
             crearDoc.Show();
         }
 
@@ -62,6 +71,8 @@ namespace UI
         {
             var gestionarFamilia = new gestionarFamilia();
             gestionarFamilia.MdiParent = this;
+            gestionarFamilia.userLogin = userLogin;
+            gestionarFamilia.idioma = idioma;
             gestionarFamilia.Show();
         }
 
@@ -69,18 +80,14 @@ namespace UI
         {
             var datosPersonales = new datosPersonales();
             datosPersonales.MdiParent = this;
+            datosPersonales.userLogin = userLogin;
+            datosPersonales.idioma = idioma;
             datosPersonales.Show();
         }
 
         private void CerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BE.bitacora bitacora = new BE.bitacora();
-            bitacora.idUsuario = userLogin.IdUsuario;
-            bitacora.idEvento = 6;
-            DateTime now = DateTime.Now;
-            bitacora.FecEvento = now;
-            bitacora.DigitoVerificador = seguridad.ObtenerHash(gestorBitacora.concatenarCampos(bitacora));
-            gestorBitacora.agregarBitacora(bitacora);
+            gestorBitacora.agregarBitacora(userLogin.IdUsuario, 6);
 
             login login = new login();
             login.Show();
@@ -105,8 +112,55 @@ namespace UI
 
         private void main_Load(object sender, EventArgs e)
         {
+            foreach (ToolStripMenuItem masterToolStripMenuItem in MenuStrip1.Items)
+            {
+                var items = masterToolStripMenuItem.DropDownItems;
+                foreach (ToolStripMenuItem master in masterToolStripMenuItem.DropDownItems)
+                {
+                    if (master.Text.Equals("Gestionar Usuarios") || master.Text.Equals("Manage Users"))
+                    {
+                        if (userLogin.patentes.Contains(1)) master.Visible = true; else master.Visible = false;
+                    }
 
-        }
+                    if (master.Text.Equals("Gestionar Bitacora") || master.Text.Equals("Manage Log"))
+                    {
+                        if (userLogin.patentes.Contains(2)) master.Visible = true; else master.Visible = false;
+                    }
+
+                    if (master.Text.Equals("Crear Documento") || master.Text.Equals("Create Document"))
+                    {
+                        if (userLogin.patentes.Contains(3)) master.Visible = true; else master.Visible = false;
+                    }
+
+                    if (master.Text.Equals("Buscar Documento") || master.Text.Equals("Search Document"))
+                    {
+                        if (userLogin.patentes.Contains(4)) master.Visible = true; else master.Visible = false;
+                    }
+
+                    if (master.Text.Equals("Crear Edicion") || master.Text.Equals("Create Edition"))
+                    {
+                        if (userLogin.patentes.Contains(5)) master.Visible = true; else master.Visible = false;
+                    }
+
+                    if (master.Text.Equals("Gestionar Familia") || master.Text.Equals("Manage Family"))
+                    {
+                        if (userLogin.patentes.Contains(6)) master.Visible = true; else master.Visible = false;
+                    }
+
+                    if (master.Text.Equals("Resguardo") || master.Text.Equals("Backup"))
+                    {
+                        if (userLogin.patentes.Contains(6)) master.Visible = true; else master.Visible = false;
+                    }
+
+                    if (master.Text.Equals("Restaurar") || master.Text.Equals("Restore"))
+                    {
+                        if (userLogin.patentes.Contains(6)) master.Visible = true; else master.Visible = false;
+                    }
+
+                }
+            }
+         }
+        
 
         private void HerramientasToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -10,6 +10,7 @@ namespace BLL
     public class bitacora {
 
         DAL.bitacora gestorBitacora = new DAL.bitacora();
+        seguridad seguridad = new seguridad();
         encriptacion encriptacion = new encriptacion();
 
         public List<BE.bitacora> listarBitacora() {
@@ -29,7 +30,14 @@ namespace BLL
             return bitacoraTabla;
         }
 
-        public bool agregarBitacora(BE.bitacora bitacora) {
+        public bool agregarBitacora(int idUsuario, int evento) {
+
+            BE.bitacora bitacora = new BE.bitacora();
+            bitacora.idUsuario = idUsuario;
+            bitacora.idEvento = evento;
+            DateTime now = DateTime.Now;
+            bitacora.FecEvento = now;
+            bitacora.DigitoVerificador = seguridad.ObtenerHash(concatenarCampos(bitacora));
 
             return gestorBitacora.agregarBitacora(bitacora);
         }

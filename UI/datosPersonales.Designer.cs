@@ -43,31 +43,34 @@
             this.Label2 = new System.Windows.Forms.Label();
             this.TextBox1 = new System.Windows.Forms.TextBox();
             this.Label1 = new System.Windows.Forms.Label();
+            this.Button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Button2
             // 
-            this.Button2.Location = new System.Drawing.Point(355, 204);
+            this.Button2.Location = new System.Drawing.Point(242, 247);
             this.Button2.Name = "Button2";
             this.Button2.Size = new System.Drawing.Size(75, 23);
             this.Button2.TabIndex = 90;
             this.Button2.Text = "Guardar";
             this.Button2.UseVisualStyleBackColor = true;
+            this.Button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // Button1
             // 
-            this.Button1.Location = new System.Drawing.Point(98, 204);
+            this.Button1.Location = new System.Drawing.Point(37, 247);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(112, 23);
             this.Button1.TabIndex = 89;
             this.Button1.Text = "Cambiar Contraseña";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // Label11
             // 
             this.Label11.AutoSize = true;
             this.Label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.Label11.Location = new System.Drawing.Point(179, 19);
+            this.Label11.Location = new System.Drawing.Point(33, 31);
             this.Label11.Name = "Label11";
             this.Label11.Size = new System.Drawing.Size(156, 24);
             this.Label11.TabIndex = 88;
@@ -75,15 +78,15 @@
             // 
             // TextBox4
             // 
-            this.TextBox4.Location = new System.Drawing.Point(325, 144);
+            this.TextBox4.Location = new System.Drawing.Point(242, 200);
             this.TextBox4.Name = "TextBox4";
-            this.TextBox4.Size = new System.Drawing.Size(142, 20);
+            this.TextBox4.Size = new System.Drawing.Size(156, 20);
             this.TextBox4.TabIndex = 87;
             // 
             // Label4
             // 
             this.Label4.AutoSize = true;
-            this.Label4.Location = new System.Drawing.Point(290, 147);
+            this.Label4.Location = new System.Drawing.Point(239, 184);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(29, 13);
             this.Label4.TabIndex = 86;
@@ -91,15 +94,15 @@
             // 
             // TextBox5
             // 
-            this.TextBox5.Location = new System.Drawing.Point(325, 114);
+            this.TextBox5.Location = new System.Drawing.Point(242, 151);
             this.TextBox5.Name = "TextBox5";
-            this.TextBox5.Size = new System.Drawing.Size(142, 20);
+            this.TextBox5.Size = new System.Drawing.Size(156, 20);
             this.TextBox5.TabIndex = 85;
             // 
             // Label5
             // 
             this.Label5.AutoSize = true;
-            this.Label5.Location = new System.Drawing.Point(288, 117);
+            this.Label5.Location = new System.Drawing.Point(239, 135);
             this.Label5.Name = "Label5";
             this.Label5.Size = new System.Drawing.Size(34, 13);
             this.Label5.TabIndex = 84;
@@ -107,15 +110,15 @@
             // 
             // TextBox6
             // 
-            this.TextBox6.Location = new System.Drawing.Point(325, 84);
+            this.TextBox6.Location = new System.Drawing.Point(242, 103);
             this.TextBox6.Name = "TextBox6";
-            this.TextBox6.Size = new System.Drawing.Size(142, 20);
+            this.TextBox6.Size = new System.Drawing.Size(156, 20);
             this.TextBox6.TabIndex = 83;
             // 
             // Label6
             // 
             this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(270, 87);
+            this.Label6.Location = new System.Drawing.Point(239, 87);
             this.Label6.Name = "Label6";
             this.Label6.Size = new System.Drawing.Size(52, 13);
             this.Label6.TabIndex = 82;
@@ -123,15 +126,15 @@
             // 
             // TextBox3
             // 
-            this.TextBox3.Location = new System.Drawing.Point(84, 144);
+            this.TextBox3.Location = new System.Drawing.Point(37, 200);
             this.TextBox3.Name = "TextBox3";
-            this.TextBox3.Size = new System.Drawing.Size(142, 20);
+            this.TextBox3.Size = new System.Drawing.Size(156, 20);
             this.TextBox3.TabIndex = 81;
             // 
             // Label3
             // 
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(26, 147);
+            this.Label3.Location = new System.Drawing.Point(34, 184);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(55, 13);
             this.Label3.TabIndex = 80;
@@ -139,15 +142,15 @@
             // 
             // TextBox2
             // 
-            this.TextBox2.Location = new System.Drawing.Point(84, 114);
+            this.TextBox2.Location = new System.Drawing.Point(37, 151);
             this.TextBox2.Name = "TextBox2";
-            this.TextBox2.Size = new System.Drawing.Size(142, 20);
+            this.TextBox2.Size = new System.Drawing.Size(156, 20);
             this.TextBox2.TabIndex = 79;
             // 
             // Label2
             // 
             this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(33, 117);
+            this.Label2.Location = new System.Drawing.Point(34, 135);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(47, 13);
             this.Label2.TabIndex = 78;
@@ -155,9 +158,9 @@
             // 
             // TextBox1
             // 
-            this.TextBox1.Location = new System.Drawing.Point(84, 84);
+            this.TextBox1.Location = new System.Drawing.Point(37, 103);
             this.TextBox1.Name = "TextBox1";
-            this.TextBox1.Size = new System.Drawing.Size(142, 20);
+            this.TextBox1.Size = new System.Drawing.Size(156, 20);
             this.TextBox1.TabIndex = 77;
             // 
             // Label1
@@ -169,11 +172,22 @@
             this.Label1.TabIndex = 76;
             this.Label1.Text = "Nombre:";
             // 
+            // Button3
+            // 
+            this.Button3.Location = new System.Drawing.Point(323, 247);
+            this.Button3.Name = "Button3";
+            this.Button3.Size = new System.Drawing.Size(75, 23);
+            this.Button3.TabIndex = 91;
+            this.Button3.Text = "Cancelar";
+            this.Button3.UseVisualStyleBackColor = true;
+            this.Button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // datosPersonales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 252);
+            this.ClientSize = new System.Drawing.Size(449, 322);
+            this.Controls.Add(this.Button3);
             this.Controls.Add(this.Button2);
             this.Controls.Add(this.Button1);
             this.Controls.Add(this.Label11);
@@ -191,6 +205,7 @@
             this.Controls.Add(this.Label1);
             this.Name = "datosPersonales";
             this.Text = "datosPersonales";
+            this.Load += new System.EventHandler(this.datosPersonales_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,5 +228,6 @@
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.TextBox TextBox1;
         internal System.Windows.Forms.Label Label1;
+        internal System.Windows.Forms.Button Button3;
     }
 }

@@ -14,12 +14,15 @@ namespace UI
    {
         public BE.usuario usuarioMod { get; set; }
         public BE.usuario userLogin { get; set; }
+        public List<BE.idioma> etiquetas { get; set; }
+        public BE.idioma idioma { get; set; }
 
         BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
         BLL.bitacora gestorBitacora = new BLL.bitacora();
         BLL.usuario gestorUsuario = new BLL.usuario();
         BLL.seguridad seguridad = new BLL.seguridad();
-        BLL.encriptacion encriptacion = new BLL.encriptacion(); 
+        BLL.encriptacion encriptacion = new BLL.encriptacion();
+        BLL.idioma gestorIdioma = new BLL.idioma();
 
         public editUsuario()
         {
@@ -33,6 +36,24 @@ namespace UI
 
         private void editUsuario_Load(object sender, EventArgs e)
         {
+            idioma.idMenu = 3;
+            etiquetas = gestorIdioma.listarIdioma(idioma);
+
+            Label10.Text = etiquetas[0].etiqueta;
+            Label11.Text = etiquetas[1].etiqueta;
+            Label1.Text = etiquetas[2].etiqueta;
+            Label2.Text = etiquetas[3].etiqueta;
+            Label3.Text = etiquetas[4].etiqueta;
+            Label4.Text = etiquetas[5].etiqueta;
+            Label5.Text = etiquetas[6].etiqueta;
+            Label6.Text = etiquetas[7].etiqueta;
+            Label12.Text = etiquetas[8].etiqueta;
+            Label8.Text = etiquetas[9].etiqueta;
+            Label7.Text = etiquetas[10].etiqueta;
+            Label9.Text = etiquetas[11].etiqueta;
+            Button1.Text = etiquetas[12].etiqueta;
+            Button2.Text = etiquetas[13].etiqueta;
+
             usuarioMod = gestorUsuario.obtenerUsuario(usuarioMod);
             TextBox1.Text = usuarioMod.nombre;
             TextBox2.Text = usuarioMod.apellido;
@@ -79,7 +100,7 @@ namespace UI
                 if (TextBox7.Text != "") {
 
                     usuarioMod.uss = encriptacion.Encrypt(TextBox8.Text);
-                    usuarioMod.pass = encriptacion.Encrypt(TextBox7.Text);
+                    usuarioMod.pass = seguridad.ObtenerHash(TextBox7.Text);
                     usuarioMod.nombre = TextBox1.Text;
                     usuarioMod.apellido = TextBox2.Text;
                     usuarioMod.direccion = TextBox3.Text;
@@ -92,13 +113,7 @@ namespace UI
 
                         gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorUsuario.listarTablaUsuarios()), "Usuario");
 
-                        BE.bitacora bitacora = new BE.bitacora();
-                        bitacora.idUsuario = userLogin.IdUsuario;
-                        bitacora.idEvento = 2;
-                        DateTime now = DateTime.Now;
-                        bitacora.FecEvento = now;
-                        bitacora.DigitoVerificador = seguridad.ObtenerHash(gestorBitacora.concatenarCampos(bitacora));
-                        gestorBitacora.agregarBitacora(bitacora);
+                        gestorBitacora.agregarBitacora(userLogin.IdUsuario, 2);
                         gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
 
                         MessageBox.Show("Cliente modificado correctamente");

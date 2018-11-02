@@ -39,13 +39,7 @@ namespace UI
 
                 backup.importar("editorial", "C:\\Program Files\\Microsoft SQL Server\\MSSQL14.SQLEXPRESS\\MSSQL\\Backup\\" + ComboBox1.SelectedItem);
 
-                BE.bitacora bitacora = new BE.bitacora();
-                bitacora.idUsuario = userLogin.IdUsuario;
-                bitacora.idEvento = 4;
-                DateTime now = DateTime.Now;
-                bitacora.FecEvento = now;
-                bitacora.DigitoVerificador = seguridad.ObtenerHash(gestorBitacora.concatenarCampos(bitacora));
-                gestorBitacora.agregarBitacora(bitacora);
+                gestorBitacora.agregarBitacora(userLogin.IdUsuario, 4);
                 gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
 
                 MessageBox.Show("importacion realizada con exito");

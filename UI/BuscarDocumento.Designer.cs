@@ -63,6 +63,7 @@
             this.Button5.TabIndex = 30;
             this.Button5.Text = "Visualizar";
             this.Button5.UseVisualStyleBackColor = true;
+            this.Button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // Button4
             // 
@@ -195,6 +196,7 @@
             this.Controls.Add(this.Label1);
             this.Name = "BuscarDocumento";
             this.Text = "BuscarDocumento";
+            this.Load += new System.EventHandler(this.BuscarDocumento_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
