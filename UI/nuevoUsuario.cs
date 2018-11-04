@@ -62,6 +62,18 @@ namespace UI
             return cadena;
         }
 
+        private void number_keyPress(object sender, KeyPressEventArgs e)
+        {
+            Char chr = e.KeyChar;
+
+            if (!Char.IsDigit(chr) && chr != 8)
+            {
+
+                e.Handled = true;
+                MessageBox.Show("solo numeros se aceptan");
+            }
+        }
+
         private void Button1_Click(object sender, EventArgs e)
         {
             BE.usuario nuevoUsuario = new BE.usuario();

@@ -49,6 +49,29 @@ namespace DAL
             }
         }
 
+        public bool validarZonaDeNadie(int p, int u) {
+
+            DataTable datos = new DataTable();
+
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("select * from usuario_patente " +
+                                               "where id_patente = " + p +
+                                               " and id_usuario <> " + u);
+
+                if (datos.Rows.Count == 0)
+                {
+                    return true;
+                }
+                else return false;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool asignarPatenteUsuario(BE.patente patente, BE.usuario usuario) {
 
             int respuesta = 0;

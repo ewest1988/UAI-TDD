@@ -23,7 +23,8 @@ namespace UI
         BLL.usuario usuario = new BLL.usuario();
         BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
         BLL.bitacora gestorBitacora = new BLL.bitacora();
-        public BLL.idioma gestorIdioma = new BLL.idioma();
+        BLL.idioma gestorIdioma = new BLL.idioma();
+        BLL.patente gestorPatente = new BLL.patente();
         DataTable dtUsuarios = new DataTable();
 
         public gestionarUsuario()
@@ -69,7 +70,7 @@ namespace UI
 
             if (ComboBox1.SelectedItem.ToString() == "admin") {
 
-                MessageBox.Show(etiquetas[11].etiqueta);
+                MessageBox.Show(etiquetas[10].etiqueta);
             }
             else {
 
@@ -81,14 +82,34 @@ namespace UI
 
                         try
                         {
-                            usuario.eliminarUsuario(uss);
-                            gestorDV.modificarVerificador(gestorDV.CacularDVV(usuario.listarTablaUsuarios()), "Usuario");
-                            MessageBox.Show(etiquetas[11].etiqueta);
-                            ComboBox1.Items.Remove(ComboBox1.SelectedItem);
-                            ComboBox1.SelectedItem = 0;
+                            BE.usuario usuarioDel = new BE.usuario();
+                            bool del = false;
+                            usuarioDel = usuario.obtenerUsuario(encriptacion.Encrypt(uss.uss));
 
-                            gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1005);
-                            gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
+                            foreach(var p in usuarioDel.patentes) {
+
+                                if (gestorPatente.validarZonaDeNadie(p, usuarioDel.IdUsuario)) {
+
+                                    del = true;
+                                }
+                            }
+
+                            if (del)
+                            {
+
+                                MessageBox.Show("no se puede eliminar el usuario. Existe un permiso asignado a el solo");
+                            }
+                            else {
+
+                                usuario.eliminarUsuario(uss);
+                                gestorDV.modificarVerificador(gestorDV.CacularDVV(usuario.listarTablaUsuarios()), "Usuario");
+                                MessageBox.Show(etiquetas[11].etiqueta);
+                                ComboBox1.Items.Remove(ComboBox1.SelectedItem);
+                                ComboBox1.SelectedItem = 0;
+
+                                gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1005);
+                                gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
+                            }
                         }
                         catch (Exception ex)
                         {

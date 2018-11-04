@@ -162,7 +162,7 @@
             this.TextBox4.Name = "TextBox4";
             this.TextBox4.Size = new System.Drawing.Size(129, 20);
             this.TextBox4.TabIndex = 99;
-            this.TextBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox4_keyPress);
+            this.TextBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.number_KeyPress);
             // 
             // Label4
             // 
@@ -195,7 +195,7 @@
             this.TextBox6.Name = "TextBox6";
             this.TextBox6.Size = new System.Drawing.Size(129, 20);
             this.TextBox6.TabIndex = 95;
-            this.TextBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox6_KeyPress);
+            this.TextBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.number_KeyPress);
             // 
             // Label6
             // 

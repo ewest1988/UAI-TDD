@@ -20,5 +20,11 @@ namespace BLL
 
             return Patente.listarPatentes(familia);
         }
+
+        public bool validarZonaDeNadie(int idPatente, int idUsuario)
+        {
+
+            return Patente.validarZonaDeNadie(idPatente, idUsuario);
+        }
     }
 }

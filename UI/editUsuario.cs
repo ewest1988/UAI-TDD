@@ -61,32 +61,20 @@ namespace UI
             TextBox4.Text = usuarioMod.documento.ToString();
             TextBox5.Text = usuarioMod.mail;
             TextBox6.Text = usuarioMod.telefono.ToString();
-            TextBox7.Text = encriptacion.Decrypt(usuarioMod.pass);
+            //TextBox7.Text = usuarioMod.pass;
             TextBox8.Text = encriptacion.Decrypt(usuarioMod.uss);
-            TextBox9.Text = encriptacion.Decrypt(usuarioMod.pass);
+            //TextBox9.Text = usuarioMod.pass;
 
         }
 
-        private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
+        private void number_KeyPress(object sender, KeyPressEventArgs e)
         {
             Char chr = e.KeyChar;
 
             if (!Char.IsDigit(chr) && chr != 8) {
 
                 e.Handled = true;
-                MessageBox.Show("solo numeros se aceptan");
-            }
-        }
-
-        private void TextBox4_keyPress(object sender, KeyPressEventArgs e)
-        {
-            Char chr = e.KeyChar;
-
-            if (!Char.IsDigit(chr) && chr != 8)
-            {
-
-                e.Handled = true;
-                MessageBox.Show("solo numeros se aceptan");
+                MessageBox.Show("debes escribir solo numeros");
             }
         }
 
