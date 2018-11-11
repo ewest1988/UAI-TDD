@@ -10,7 +10,7 @@ namespace BE
     {
         public int idFamilia { get; set; }
         public string Familia { get; set; }
-        public List<patente> patentes { get; set; }
+        public List<int> patentes { get; set; }
 
     }
 }

@@ -32,4 +32,5 @@ C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\DA
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.exe
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.pdb
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.editUsuario.resources
-C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.modificarPermisosUsuario.resources
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.AsignarPatente.resources
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.NegarPatente.resources

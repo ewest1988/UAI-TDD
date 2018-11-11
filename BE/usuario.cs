@@ -19,7 +19,9 @@ namespace BE
         public int telefono { get; set; }
         public int IdEstado { get; set; }
         public List<int> patentes { get; set; }
+        public List<int> patentesNegadas { get; set; }
         public List<int> familias { get; set; }
+        public List<int> patentesFamilias { get; set; }
         public string digitoVerificador { get; set; }
     }
 }

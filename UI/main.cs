@@ -119,42 +119,42 @@ namespace UI
                 {
                     if (master.Text.Equals("Gestionar Usuarios") || master.Text.Equals("Manage Users"))
                     {
-                        if (userLogin.patentes.Contains(1)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(1)) master.Visible = true; else master.Visible = false;
                     }
 
                     if (master.Text.Equals("Gestionar Bitacora") || master.Text.Equals("Manage Log"))
                     {
-                        if (userLogin.patentes.Contains(2)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(2)) master.Visible = true; else master.Visible = false;
                     }
 
                     if (master.Text.Equals("Crear Documento") || master.Text.Equals("Create Document"))
                     {
-                        if (userLogin.patentes.Contains(3)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(3)) master.Visible = true; else master.Visible = false;
                     }
 
                     if (master.Text.Equals("Buscar Documento") || master.Text.Equals("Search Document"))
                     {
-                        if (userLogin.patentes.Contains(4)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(4)) master.Visible = true; else master.Visible = false;
                     }
 
                     if (master.Text.Equals("Crear Edicion") || master.Text.Equals("Create Edition"))
                     {
-                        if (userLogin.patentes.Contains(5)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(5)) master.Visible = true; else master.Visible = false;
                     }
 
                     if (master.Text.Equals("Gestionar Familia") || master.Text.Equals("Manage Family"))
                     {
-                        if (userLogin.patentes.Contains(6)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(6)) master.Visible = true; else master.Visible = false;
                     }
 
                     if (master.Text.Equals("Resguardo") || master.Text.Equals("Backup"))
                     {
-                        if (userLogin.patentes.Contains(6)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(6)) master.Visible = true; else master.Visible = false;
                     }
 
                     if (master.Text.Equals("Restaurar") || master.Text.Equals("Restore"))
                     {
-                        if (userLogin.patentes.Contains(6)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(6)) master.Visible = true; else master.Visible = false;
                     }
 
                 }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Button6 = new System.Windows.Forms.Button();
             this.Button5 = new System.Windows.Forms.Button();
             this.Button4 = new System.Windows.Forms.Button();
             this.Button3 = new System.Windows.Forms.Button();
@@ -39,18 +38,9 @@
             this.Label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // Button6
-            // 
-            this.Button6.Location = new System.Drawing.Point(27, 203);
-            this.Button6.Name = "Button6";
-            this.Button6.Size = new System.Drawing.Size(121, 23);
-            this.Button6.TabIndex = 24;
-            this.Button6.Text = "Asignar Familia";
-            this.Button6.UseVisualStyleBackColor = true;
-            // 
             // Button5
             // 
-            this.Button5.Location = new System.Drawing.Point(125, 269);
+            this.Button5.Location = new System.Drawing.Point(163, 201);
             this.Button5.Name = "Button5";
             this.Button5.Size = new System.Drawing.Size(121, 23);
             this.Button5.TabIndex = 23;
@@ -60,7 +50,7 @@
             // 
             // Button4
             // 
-            this.Button4.Location = new System.Drawing.Point(241, 145);
+            this.Button4.Location = new System.Drawing.Point(163, 160);
             this.Button4.Name = "Button4";
             this.Button4.Size = new System.Drawing.Size(121, 23);
             this.Button4.TabIndex = 22;
@@ -70,7 +60,7 @@
             // 
             // Button3
             // 
-            this.Button3.Location = new System.Drawing.Point(241, 174);
+            this.Button3.Location = new System.Drawing.Point(12, 160);
             this.Button3.Name = "Button3";
             this.Button3.Size = new System.Drawing.Size(121, 23);
             this.Button3.TabIndex = 21;
@@ -80,7 +70,7 @@
             // 
             // Button2
             // 
-            this.Button2.Location = new System.Drawing.Point(27, 146);
+            this.Button2.Location = new System.Drawing.Point(12, 131);
             this.Button2.Name = "Button2";
             this.Button2.Size = new System.Drawing.Size(121, 23);
             this.Button2.TabIndex = 20;
@@ -90,7 +80,7 @@
             // 
             // Button1
             // 
-            this.Button1.Location = new System.Drawing.Point(27, 174);
+            this.Button1.Location = new System.Drawing.Point(163, 131);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(121, 23);
             this.Button1.TabIndex = 19;
@@ -101,15 +91,15 @@
             // ComboBox1
             // 
             this.ComboBox1.FormattingEnabled = true;
-            this.ComboBox1.Location = new System.Drawing.Point(27, 85);
+            this.ComboBox1.Location = new System.Drawing.Point(12, 85);
             this.ComboBox1.Name = "ComboBox1";
-            this.ComboBox1.Size = new System.Drawing.Size(178, 21);
+            this.ComboBox1.Size = new System.Drawing.Size(121, 21);
             this.ComboBox1.TabIndex = 18;
             // 
             // Label2
             // 
             this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(24, 69);
+            this.Label2.Location = new System.Drawing.Point(9, 69);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(51, 13);
             this.Label2.TabIndex = 17;
@@ -119,7 +109,7 @@
             // 
             this.Label1.AutoSize = true;
             this.Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.Label1.Location = new System.Drawing.Point(109, 32);
+            this.Label1.Location = new System.Drawing.Point(67, 29);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(159, 24);
             this.Label1.TabIndex = 16;
@@ -129,8 +119,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 333);
-            this.Controls.Add(this.Button6);
+            this.ClientSize = new System.Drawing.Size(298, 240);
             this.Controls.Add(this.Button5);
             this.Controls.Add(this.Button4);
             this.Controls.Add(this.Button3);
@@ -148,8 +137,6 @@
         }
 
         #endregion
-
-        internal System.Windows.Forms.Button Button6;
         internal System.Windows.Forms.Button Button5;
         internal System.Windows.Forms.Button Button4;
         internal System.Windows.Forms.Button Button3;

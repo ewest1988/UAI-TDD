@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class AsignarFamilia
+    partial class AsignarPatente
     {
         /// <summary>
         /// Required designer variable.
@@ -40,9 +40,9 @@
             this.Label2.AutoSize = true;
             this.Label2.Location = new System.Drawing.Point(9, 71);
             this.Label2.Name = "Label2";
-            this.Label2.Size = new System.Drawing.Size(45, 13);
+            this.Label2.Size = new System.Drawing.Size(52, 13);
             this.Label2.TabIndex = 17;
-            this.Label2.Text = "Famlias:";
+            this.Label2.Text = "Patentes:";
             // 
             // Label1
             // 
@@ -50,9 +50,9 @@
             this.Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.Label1.Location = new System.Drawing.Point(78, 25);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(148, 24);
+            this.Label1.Size = new System.Drawing.Size(142, 24);
             this.Label1.TabIndex = 16;
-            this.Label1.Text = "Asignar Familias";
+            this.Label1.Text = "Asignar Patente";
             // 
             // Button2
             // 
@@ -82,7 +82,7 @@
             this.checkedListBox1.Size = new System.Drawing.Size(307, 244);
             this.checkedListBox1.TabIndex = 19;
             // 
-            // AsignarFamilia
+            // AsignarPatente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -92,9 +92,9 @@
             this.Controls.Add(this.Label1);
             this.Controls.Add(this.Button2);
             this.Controls.Add(this.Button1);
-            this.Name = "AsignarFamilia";
-            this.Text = "AsignarFamilia";
-            this.Load += new System.EventHandler(this.AsignarFamilia_Load);
+            this.Name = "AsignarPatente";
+            this.Text = "Asignar Patente";
+            this.Load += new System.EventHandler(this.AsignarPatente_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

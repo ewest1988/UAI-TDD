@@ -42,14 +42,11 @@ namespace UI
             Label2.Text = etiquetas[1].etiqueta;
             Button2.Text = etiquetas[2].etiqueta;
             Button1.Text = etiquetas[3].etiqueta;
-            Button6.Text = etiquetas[4].etiqueta;
             Button4.Text = etiquetas[5].etiqueta;
             Button3.Text = etiquetas[6].etiqueta;
             Button5.Text = etiquetas[7].etiqueta;
 
-            usuarios = usuario.listarUsuarios();
-            foreach (BE.usuario user in usuarios) {ComboBox1.Items.Add(user.uss);} 
-            ComboBox1.SelectedIndex = 0;
+            actualizarCombo();
         }
 
         private void Button2_Click(object sender, EventArgs e) {
@@ -57,6 +54,7 @@ namespace UI
             nuevoUsuario newUser = new nuevoUsuario();
             newUser.userLogin = userLogin;
             newUser.idioma = idioma;
+            newUser.FormClosing += new FormClosingEventHandler(ChildFormClosing);
             newUser.Owner = this;
             newUser.Show();
         }
@@ -68,58 +66,56 @@ namespace UI
 
         private void Button3_Click(object sender, EventArgs e) {
 
-            if (ComboBox1.SelectedItem.ToString() == "admin") {
+            foreach (BE.usuario uss in usuarios) {
 
-                MessageBox.Show(etiquetas[10].etiqueta);
-            }
-            else {
+                if (uss.uss == ComboBox1.SelectedItem.ToString()) {
 
-                foreach (BE.usuario uss in usuarios)
-                {
+                    try {
+                        BE.usuario usuarioDel = new BE.usuario();
+                        bool del = false;
+                        usuarioDel = usuario.obtenerUsuario(encriptacion.Encrypt(uss.uss));
 
-                    if (uss.uss == ComboBox1.SelectedItem.ToString())
-                    {
+                        foreach(var p in usuarioDel.patentes) {
 
-                        try
-                        {
-                            BE.usuario usuarioDel = new BE.usuario();
-                            bool del = false;
-                            usuarioDel = usuario.obtenerUsuario(encriptacion.Encrypt(uss.uss));
+                            if (gestorPatente.validarZonaDeNadie(p, usuarioDel.IdUsuario)) {
 
-                            foreach(var p in usuarioDel.patentes) {
-
-                                if (gestorPatente.validarZonaDeNadie(p, usuarioDel.IdUsuario)) {
-
-                                    del = true;
-                                }
-                            }
-
-                            if (del)
-                            {
-
-                                MessageBox.Show("no se puede eliminar el usuario. Existe un permiso asignado a el solo");
-                            }
-                            else {
-
-                                usuario.eliminarUsuario(uss);
-                                gestorDV.modificarVerificador(gestorDV.CacularDVV(usuario.listarTablaUsuarios()), "Usuario");
-                                MessageBox.Show(etiquetas[11].etiqueta);
-                                ComboBox1.Items.Remove(ComboBox1.SelectedItem);
-                                ComboBox1.SelectedItem = 0;
-
-                                gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1005);
-                                gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
+                                del = true;
                             }
                         }
-                        catch (Exception ex)
-                        {
 
-                            MessageBox.Show(ex.Message.ToString());
+                        if (del) {
+
+                            MessageBox.Show("no se puede eliminar el usuario. Existe un permiso asignado a el solo");
                         }
+                        else {
+
+                            usuario.eliminarUsuario(uss);
+                            gestorDV.modificarVerificador(gestorDV.CacularDVV(usuario.listarTablaUsuarios()), "Usuario");
+                            MessageBox.Show(etiquetas[11].etiqueta);
+                            gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1005);
+                            gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
+                        }
+                    } catch (Exception ex) {
+
+                        MessageBox.Show(ex.Message.ToString());
                     }
                 }
             }
+            actualizarCombo();
+        }
 
+        private void ChildFormClosing(object sender, FormClosingEventArgs e)
+        {
+            actualizarCombo();
+        }
+
+        private void actualizarCombo() {
+
+            usuarios = usuario.listarUsuarios();
+            ComboBox1.Items.Clear();
+            foreach (BE.usuario user in usuarios) { ComboBox1.Items.Add(user.uss); }
+            ComboBox1.Sorted = true;
+            ComboBox1.SelectedIndex = 0;
         }
 
         private void Button1_Click(object sender, EventArgs e)

@@ -64,7 +64,6 @@ namespace UI
             //TextBox7.Text = usuarioMod.pass;
             TextBox8.Text = encriptacion.Decrypt(usuarioMod.uss);
             //TextBox9.Text = usuarioMod.pass;
-
         }
 
         private void number_KeyPress(object sender, KeyPressEventArgs e)
@@ -117,6 +116,41 @@ namespace UI
         private void Button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var patentes = new AsignarPatente();
+            patentes.userLogin = userLogin;
+            patentes.usuarioMod = usuarioMod;
+            patentes.FormClosing += new FormClosingEventHandler(ChildFormClosing);
+            patentes.idioma = idioma;
+            patentes.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var patentesN = new NegarPatente();
+            patentesN.userLogin = userLogin;
+            patentesN.usuarioMod = usuarioMod;
+            patentesN.idioma = idioma;
+            patentesN.FormClosing += new FormClosingEventHandler(ChildFormClosing);
+            patentesN.Show();
+        }
+
+        private void ChildFormClosing(object sender, FormClosingEventArgs e)
+        {
+            usuarioMod = gestorUsuario.obtenerUsuario(usuarioMod);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var asignarFamilia = new AsignarFamilia();
+            asignarFamilia.userLogin = userLogin;
+            asignarFamilia.usuarioMod = usuarioMod;
+            asignarFamilia.idioma = idioma;
+            asignarFamilia.FormClosing += new FormClosingEventHandler(ChildFormClosing);
+            asignarFamilia.Show();
         }
     }
 }

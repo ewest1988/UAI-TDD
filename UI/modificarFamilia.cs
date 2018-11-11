@@ -29,8 +29,8 @@ namespace UI
             InitializeComponent();
         }
 
-        private void modificarFamilia_Load(object sender, EventArgs e)
-        {
+        private void modificarFamilia_Load(object sender, EventArgs e) {
+
             patentes = gestorPatente.listarPatentes();
             patentesFamilia = gestorPatente.listarPatentes(familia);
 
@@ -44,7 +44,8 @@ namespace UI
 
                     if (p.id_patente == pf.id_patente) {
 
-                        checkedListBox1.SetItemChecked(i, true);                   }
+                        checkedListBox1.SetItemChecked(i, true);
+                    }
                 }
             } 
         }
@@ -62,6 +63,7 @@ namespace UI
         private void Button2_Click(object sender, EventArgs e)
         {
             List<BE.patente> nuevasPatentes = new List<BE.patente>();
+            bool del = false;
 
             if (checkedListBox1.CheckedItems.Count != 0)
             {
@@ -79,10 +81,29 @@ namespace UI
 
             try {
 
-                gestorFamilia.modificarFamilia(nuevasPatentes, familia);
-                gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1008);
-                MessageBox.Show("Patentes modificadas correctamente");
-                this.Close();
+                foreach (var p in familia.patentes
+                                    .Where(w => !nuevasPatentes.Select(s => s.id_patente).Contains(w)).ToList())
+                {
+
+                    if (gestorPatente.validarZonaDeNadieF(p, familia.idFamilia))
+                    {
+
+                        del = true;
+                    }
+                }
+
+                if (del)
+                {
+
+                    MessageBox.Show("no se pueden modificar dicha Familia. Existe un permiso unico");
+                }
+                else {
+
+                    gestorFamilia.modificarFamilia(nuevasPatentes, familia);
+                    gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1008);
+                    MessageBox.Show("Patentes modificadas correctamente");
+                    this.Close();
+                }     
             }
             catch (Exception ex) {
 

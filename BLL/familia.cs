@@ -9,6 +9,7 @@ namespace BLL
     public class familia
     {
         public DAL.familia familiaDAL = new DAL.familia();
+        public BLL.patente gestorPatente = new BLL.patente();
         public DAL.patente patenteDAL = new DAL.patente();
 
 
@@ -23,21 +24,6 @@ namespace BLL
 
             try
             {
-                //listo los usuarios que poseen la familia
-                List<BE.usuario> usuariosFamilia = new List<BE.usuario>();
-                usuariosFamilia = familiaDAL.listarUsuariosFamilia(familia);
-
-                //por cada usuario elimino sus patentes de esta familia y le asigno las nuevas patentes
-                foreach (var us in usuariosFamilia)
-                {
-                    familiaDAL.eliminarPatentesUsuario(familia, us);
-
-                    foreach (var p in patentes) {
-
-                        patenteDAL.asignarPatenteUsuario(p, us);
-                    }
-                }
-
                 //elimino las patentes de la familia
                 familiaDAL.eliminarPatenteFamilia(familia);
 
@@ -46,6 +32,7 @@ namespace BLL
 
                     familiaDAL.modificarPatenteFamilia(p, familia);
                 }
+                return true;
             }
             catch (Exception ex)
             {
@@ -53,7 +40,28 @@ namespace BLL
                 throw ex;
             }
 
+            
+        }
+
+        public bool modificarFamilias(List<BE.familia> familias, BE.usuario usuario) {
+
+            eliminarFamiliasUsuario(usuario);
+
+            foreach (BE.familia f in familias) {
+
+                familiaDAL.asignarFamiliaUsuario(f, usuario);
+
+            }
+
             return true;
+        }
+
+            
+        
+
+        public bool eliminarFamiliasUsuario(BE.usuario usuario)
+        {
+            return familiaDAL.eliminarFamiliasUsuario(usuario);
         }
 
         public bool nuevaFamilia(BE.familia f)
@@ -65,14 +73,7 @@ namespace BLL
         public bool eliminarFamilia(BE.familia f)
         {
 
-            bool bf = familiaDAL.verificarUsuariosFamilia(f);
-
-            if (bf)
-            {
-                return false;
-                
-            }
-            else return familiaDAL.eliminarFamilia(f);
+            return familiaDAL.eliminarFamilia(f);
         }
     }
 }

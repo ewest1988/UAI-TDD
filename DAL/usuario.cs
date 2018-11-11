@@ -85,13 +85,63 @@ namespace DAL
             DataTable datos = new DataTable();
             try
             {
-                datos = sqlHelper.ObtenerDatos("SELECT id_patente FROM Usuario_Patente WHERE id_usuario = " + usuario.IdUsuario + ";");
+                datos = sqlHelper.ObtenerDatos("SELECT id_patente FROM Usuario_Patente WHERE id_usuario = " + usuario.IdUsuario);
 
                 if (datos.Rows.Count > 0)
                 {
                     foreach (DataRow reg in datos.Rows)
                     {
                          patentes.Add(Convert.ToInt32(reg["id_patente"]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return patentes;
+        }
+
+        public List<int> obtenerPatentesFamilia(BE.usuario usuario)
+        {
+            List<int> patentes = new List<int>();
+            DataTable datos = new DataTable();
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("SELECT pf.id_patente FROM Usuario_Familia uf " +
+                                               "inner join Patente_Familia pf on uf.id_familia = pf.id_familia " +
+                                               "WHERE id_usuario = " + usuario.IdUsuario);
+
+                if (datos.Rows.Count > 0)
+                {
+                    foreach (DataRow reg in datos.Rows)
+                    {
+                        patentes.Add(Convert.ToInt32(reg["id_patente"]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return patentes;
+        }
+
+        public List<int> obtenerPatentesNegadas(BE.usuario usuario)
+        {
+            List<int> patentes = new List<int>();
+            DataTable datos = new DataTable();
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("SELECT id_patente FROM Usuario_Patente_Negada WHERE id_usuario = " + usuario.IdUsuario + ";");
+
+                if (datos.Rows.Count > 0)
+                {
+                    foreach (DataRow reg in datos.Rows)
+                    {
+                        patentes.Add(Convert.ToInt32(reg["id_patente"]));
                     }
                 }
             }
@@ -185,25 +235,26 @@ namespace DAL
             else return false;
         }
 
-        public string obtenerHash(BE.usuario usuario)
-        {
+        public string obtenerHash(BE.usuario usuario) {
+
             string concat = string.Empty;
             DataTable datos = new DataTable();
             string hash = string.Empty;
-            try
-            {
+            try {
+
                 datos = sqlHelper.ObtenerDatos("SELECT usuario,contraseña,nombre,apellido,mail,direccion,telefono,id_estado FROM Usuario WHERE id_usuario = '" + usuario.IdUsuario + "'");
-                foreach (DataRow row in datos.Rows)
-                {
-                    foreach (DataColumn col in datos.Columns)
-                    {
+
+                foreach (DataRow row in datos.Rows) {
+
+                    foreach (DataColumn col in datos.Columns) {
                         
                         concat += row[col].ToString();
                     }
                 }
             }
-            catch (Exception ex)
-            {
+
+            catch (Exception ex) {
+
                 throw ex;
             }
 

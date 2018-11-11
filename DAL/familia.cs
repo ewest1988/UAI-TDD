@@ -44,6 +44,22 @@ namespace DAL
             else return false;
         }
 
+        public bool asignarFamiliaUsuario(BE.familia familia, BE.usuario usuario) {
+
+            int respuesta = 0;
+
+            try
+            {
+                respuesta = sqlHelper.Ejecutar("INSERT INTO USUARIO_FAMILIA VALUES (" + usuario.IdUsuario + "," + familia.idFamilia+ ")", false);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            if (respuesta > 0) return true;
+            else return false;
+        }
+
         public List<BE.usuario> listarUsuariosFamilia(BE.familia f)
         {
             List<BE.usuario> usuariosFamilia = new List<BE.usuario>();
@@ -79,9 +95,8 @@ namespace DAL
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("select uf.id_usuario from usuario_familia uf "
-                                             + "inner join familia f on uf.id_familia = f.id_familia "
-                                             + "where f.id_familia = " + f.idFamilia);
+                datos = sqlHelper.ObtenerDatos("select * from usuario_familia "
+                                             + "where id_familia = " + f.idFamilia);
 
                 if (datos.Rows.Count > 0) {
                     respuesta = true;
@@ -95,6 +110,24 @@ namespace DAL
             }
 
             return respuesta;
+        }
+        
+
+        public bool eliminarFamiliasUsuario(BE.usuario usuario)
+        {
+
+            int respuesta = 0;
+
+            try {
+
+                respuesta = sqlHelper.Ejecutar("DELETE FROM USUARIO_FAMILIA WHERE ID_USUARIO = " + usuario.IdUsuario, false);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            if (respuesta > 0) return true;
+            else return false;
         }
 
         public bool eliminarFamilia(BE.familia familia)
@@ -163,6 +196,33 @@ namespace DAL
             }
             if (respuesta > 0) return true;
             else return false;
+        }
+
+        public List<int> obtenerPatentesFamilia(BE.familia familia) {
+
+            List<int> patentes = new List<int>();
+            DataTable datos = new DataTable();
+
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("select id_patente from patente_familia "
+                                             + "where id_familia = " + familia.idFamilia);
+
+                foreach (DataRow reg in datos.Rows)
+                {
+                    
+                    patentes.Add(Convert.ToInt32(reg["id_patente"]));
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+            return patentes;
+
         }
 
         public List<BE.familia> mapper(DataTable tablaFamilia) {

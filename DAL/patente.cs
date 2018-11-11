@@ -49,15 +49,18 @@ namespace DAL
             }
         }
 
-        public bool validarZonaDeNadie(int p, int u) {
+        public bool validarZonaDeNadieFU(int p, int f)
+        {
 
             DataTable datos = new DataTable();
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("select * from usuario_patente " +
-                                               "where id_patente = " + p +
-                                               " and id_usuario <> " + u);
+                datos = sqlHelper.ObtenerDatos("select id_patente from usuario_patente where id_patente = " + p +
+                                               " union select pf.id_patente from patente_familia pf " +
+                                               "inner join usuario_familia uf on pf.id_familia = uf.id_familia " +
+                                               "where pf.id_patente = " + p +
+                                               " and pf.id_familia <> " + f);
 
                 if (datos.Rows.Count == 0)
                 {
@@ -72,19 +75,181 @@ namespace DAL
             }
         }
 
-        public bool asignarPatenteUsuario(BE.patente patente, BE.usuario usuario) {
+        public bool validarZonaDeNadie(int p, int u) {
+
+            DataTable datos = new DataTable();
+
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("select id_patente from usuario_patente where id_patente = " + p +
+                                               " and id_usuario <> " + u +
+                                               " union select pf.id_patente from patente_familia pf " +
+                                               "inner join usuario_familia uf on pf.id_familia = uf.id_familia " +
+                                               "where pf.id_patente = " + p);
+
+                if (datos.Rows.Count == 0)
+                {
+                    return true;
+                }
+                else return false;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool validarZonaDeNadieF(int p, int f)
+        {
+
+            DataTable datos = new DataTable();
+
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("select id_patente from usuario_patente " +
+                                               "where id_patente = " + p +
+                                               " union select id_patente from patente_familia pf " +
+                                               "inner join usuario_familia uf on pf.id_familia = uf.id_familia " +
+                                               "where pf.id_patente = " + p +
+                                               "and pf.id_familia <> " + f);
+
+                if (datos.Rows.Count == 0)
+                {
+                    return true;
+                }
+                else return false;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool validarZonaDeNadiePN(int p, int u)
+        {
+
+            DataTable datos = new DataTable();
+
+            try
+            {
+                datos = sqlHelper.ObtenerDatos("select id_patente from usuario_patente where id_patente = " + p +
+                                               " and id_usuario <> " + u +
+                                               " union select pf.id_patente from patente_familia pf " +
+                                               "inner join usuario_familia uf on pf.id_familia = uf.id_familia " +
+                                               "where pf.id_patente = " + p + 
+                                               " and uf.id_usuario <> " + u);
+
+                if (datos.Rows.Count == 0)
+                {
+                    return true;
+                }
+                else return false;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool eliminarPatentesUsuario(BE.usuario usuario)
+        {
 
             int respuesta = 0;
 
             try
             {
-                respuesta = sqlHelper.Ejecutar("INSERT INTO usuario_patente values (" + usuario.IdUsuario + "," + patente.id_patente + ")", false);
+
+                respuesta = sqlHelper.Ejecutar("DELETE FROM usuario_patente WHERE ID_USUARIO = " + usuario.IdUsuario, false);
             }
             catch (Exception ex)
             {
+
                 throw ex;
             }
             if (respuesta > 0) return true;
+            else return false;
+        }
+
+        public bool eliminarPatentesNegadaUsuario(BE.usuario usuario)
+        {
+
+            int respuesta = 0;
+
+            try {
+
+                respuesta = sqlHelper.Ejecutar("DELETE FROM usuario_patente_negada WHERE ID_USUARIO = " + usuario.IdUsuario, false);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            if (respuesta > 0) return true;
+            else return false;
+        }
+
+        public bool asignarPatenteUsuario(BE.patente patente, BE.usuario usuario) {
+
+            int respuesta = 0;
+
+            try {
+
+                respuesta = sqlHelper.Ejecutar("BEGIN IF NOT EXISTS(SELECT * FROM Usuario_Patente " +
+                                               "WHERE id_usuario = " + usuario.IdUsuario +
+                                               " AND id_patente = " + patente.id_patente + ") " +
+                                               "BEGIN INSERT INTO Usuario_Patente VALUES(" + usuario.IdUsuario + "," + patente.id_patente + ")" + 
+                                               "END END", false);
+            }
+            catch (Exception ex) {
+
+                throw ex;
+            }
+            if (respuesta > 0) return true;
+            else return false;
+        }
+
+        public bool eliminarPatenteUsuario(BE.usuario usuario, BE.patente patente)
+        {
+
+            int respuesta = 0;
+
+            try {
+
+                respuesta = sqlHelper.Ejecutar("DELETE FROM usuario_patente WHERE ID_USUARIO = " + usuario.IdUsuario + " AND ID_PATENTE = " + patente.id_patente, false);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            if (respuesta > 0) return true;
+            else return false;
+        }
+
+        public bool asignarPatenteNegadaUsuario(BE.patente patente, BE.usuario usuario)
+        {
+
+            int respuesta = 0;
+
+            try {
+
+                respuesta = sqlHelper.Ejecutar("INSERT INTO usuario_patente_negada values (" + usuario.IdUsuario + "," + patente.id_patente + ")", false);
+            }
+            catch (Exception ex) {
+
+                
+                throw ex;
+            }
+            if (respuesta > 0) {
+
+                return true;
+            }
+
+            
+
             else return false;
         }
 

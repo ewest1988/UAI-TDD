@@ -10,6 +10,9 @@ namespace BLL
     public class usuario
     {
         private DAL.usuario usuarioDatos = new DAL.usuario();
+        private DAL.familia familiaDatos = new DAL.familia();
+        private patente gestorPatente = new patente();
+        private familia gestorFamilia = new familia();
         private seguridad seguridad = new seguridad();
         private digitoVerificador digitoVerificador = new digitoVerificador();
         private encriptacion crypto = new encriptacion();
@@ -101,6 +104,8 @@ namespace BLL
             BE.usuario miUsuario = new BE.usuario();
             miUsuario = mapper(usuarioDatos.obtenerUsuario(usuario));
             miUsuario.patentes = usuarioDatos.obtenerPatentes(miUsuario);
+            miUsuario.patentesFamilias = usuarioDatos.obtenerPatentesFamilia(miUsuario);
+            miUsuario.patentesNegadas = usuarioDatos.obtenerPatentesNegadas(miUsuario);
             miUsuario.familias = usuarioDatos.obtenerFamilias(miUsuario);
 
             return miUsuario;
@@ -111,21 +116,27 @@ namespace BLL
             BE.usuario miUsuario = new BE.usuario();
             miUsuario = mapper(usuarioDatos.obtenerUsuario(usuario));
             miUsuario.patentes = usuarioDatos.obtenerPatentes(miUsuario);
+            miUsuario.patentesFamilias = usuarioDatos.obtenerPatentesFamilia(miUsuario);
+            miUsuario.patentesNegadas = usuarioDatos.obtenerPatentesNegadas(miUsuario);
             miUsuario.familias = usuarioDatos.obtenerFamilias(miUsuario);
 
             return miUsuario;
         }
 
         public bool eliminarUsuario(BE.usuario usuario) {
-            bool res = false;
 
             try {
-                res = usuarioDatos.eliminarUsuario(usuario.IdUsuario);
+                gestorPatente.eliminarPatentesUsuario(usuario);
+                gestorPatente.eliminarPatentesNegadasUsuario(usuario);
+                gestorFamilia.eliminarFamiliasUsuario(usuario);
+
+                usuarioDatos.eliminarUsuario(usuario.IdUsuario);
+
+                return true;
             }
             catch (Exception ex) {
                 throw ex;
             }
-            return res;
         }
 
         public void actualizarVerificadorTabla() {
