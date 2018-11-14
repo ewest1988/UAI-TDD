@@ -32,8 +32,19 @@ namespace UI
             
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Funcionalidad para dar de alta, baja o modificar las familias del sistema.", "Ayuda");
+            }
+        }
+
         private void gestionarFamilia_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
             actualizarComboFamilias();
         }
 

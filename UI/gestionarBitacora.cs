@@ -30,8 +30,19 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Desde esta ventana puede visualizar el historial de eventos realizados.", "Ayuda");
+            }
+        }
+
         private void gestionarBitacora_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
             string hash_nuevo = gestorDV.CacularDVV(usuario.listarTablaUsuarios());
             string hash_actual = gestorDV.ObtenerDVV("Usuario");
 

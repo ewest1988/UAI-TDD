@@ -172,6 +172,7 @@
             this.Controls.Add(this.Label1);
             this.Name = "nota";
             this.Text = "nota";
+            this.Load += new System.EventHandler(this.nota_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

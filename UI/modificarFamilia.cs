@@ -29,7 +29,18 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Ventana para modificar los permisos asignados a la familia seleccionada.", "Ayuda");
+            }
+        }
+
         private void modificarFamilia_Load(object sender, EventArgs e) {
+
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
 
             patentes = gestorPatente.listarPatentes();
             patentesFamilia = gestorPatente.listarPatentes(familia);

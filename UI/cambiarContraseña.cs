@@ -27,8 +27,19 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Esta opción permite cambiar la contraseña del usuario que esta seleccionado.", "Ayuda");
+            }
+        }
+
         private void cambiarContraseña_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
             idioma.idMenu = 8;
             etiquetas = gestorIdioma.listarIdioma(idioma);
 
@@ -41,9 +52,9 @@ namespace UI
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            string passOriginal = encriptacion.Decrypt(userLogin.pass);
+            string passOriginal = userLogin.pass;
             userLogin.pass = seguridad.ObtenerHash(TextBox1.Text);
-            if (gestorLogin.loginUser(userLogin))
+            if (userLogin.pass.Equals(seguridad.ObtenerHash(TextBox1.Text)))
             {
 
                 if (TextBox2.Text.Equals("") || TextBox3.Text.Equals("") || !TextBox2.Text.Equals(TextBox3.Text))
@@ -51,11 +62,24 @@ namespace UI
                     MessageBox.Show("las contraseñas deben coincidir");
                 }
                 else {
+                    try
+                    {
+                        userLogin.pass = seguridad.ObtenerHash(TextBox2.Text);
+                        if (gestorUsuario.modificarUsuario(userLogin))
+                        {
 
-                    userLogin.pass = seguridad.ObtenerHash(TextBox2.Text);
-                    gestorUsuario.modificarUsuario(userLogin);
-                    gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1007);
-                    MessageBox.Show("Contraseña modificada correctamente");
+                            MessageBox.Show("Contraseña modificada correctamente");
+                        }
+                        else { MessageBox.Show("No se pudo modificar la contraseña"); }
+                        gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1007);
+                        
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                    
                 }
             }
             else {

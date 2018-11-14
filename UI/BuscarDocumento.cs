@@ -21,6 +21,17 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Funcionalidad que permite Buscar documentos, visualizarlos, relacionarlos y generar una exportación de los mismos.", "Ayuda");
+            }
+        }
+
         private void BuscarDocumento_Load(object sender, EventArgs e)
         {
             List<BE.documento> documentos = new List<BE.documento>();

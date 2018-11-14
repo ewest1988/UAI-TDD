@@ -16,5 +16,19 @@ namespace UI
         {
             InitializeComponent();
         }
+
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("En esta opcion puede generar una nueva edición de la editorial.", "Ayuda");
+            }
+        }
+
+        private void generarEdicion_Load(object sender, EventArgs e)
+        {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+        }
     }
 }

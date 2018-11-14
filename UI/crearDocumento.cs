@@ -27,8 +27,19 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Desde aqui podrá crear el documento que desee.", "Ayuda");
+            }
+        }
+
         private void crearDocumento_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
             List<BE.tipoDocumento> tiposDocumentos = new List<BE.tipoDocumento>();
             tiposDocumentos = gestorDocumento.listarTiposDocumentos();
             TextBox1.Enabled = false;

@@ -112,6 +112,9 @@ namespace UI
 
         private void main_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
             foreach (ToolStripMenuItem masterToolStripMenuItem in MenuStrip1.Items)
             {
                 var items = masterToolStripMenuItem.DropDownItems;
@@ -160,7 +163,15 @@ namespace UI
                 }
             }
          }
-        
+
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Este es el menu principal de la pantalla, desde aqui puede elegir las opciones " + 
+                                "que tenga habilitadas.","Ayuda");
+            }
+        }
 
         private void HerramientasToolStripMenuItem_Click(object sender, EventArgs e)
         {

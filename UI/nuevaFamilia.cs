@@ -57,9 +57,18 @@ namespace UI
             }
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Ventana para crear nuevas familias.", "Ayuda");
+            }
+        }
+
         private void nuevaFamilia_Load(object sender, EventArgs e)
         {
-
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
         }
     }
 }

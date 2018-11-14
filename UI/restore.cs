@@ -25,6 +25,17 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Funcionalidad que permite realizar una restauración de la base de datos.", "Ayuda");
+            }
+        }
+
         private void restore_Load(object sender, EventArgs e)
         {
             DirectoryInfo d = new DirectoryInfo(@"C:\\Program Files\\Microsoft SQL Server\\MSSQL14.SQLEXPRESS\\MSSQL\\Backup");//Assuming Test is your Folder

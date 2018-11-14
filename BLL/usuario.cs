@@ -38,6 +38,11 @@ namespace BLL
             return usuarios;
         }
 
+        public bool cambiarEstadoUsuario(BE.usuario usuario) {
+
+            return usuarioDatos.cambiarEstadoUsuario(usuario);
+        }
+
         public DataTable listarTablaUsuarios()
         {
             DataTable usuariosTabla = usuarioDatos.listarUsuarios();
@@ -47,7 +52,6 @@ namespace BLL
 
         public bool agregarUsuario(BE.usuario usuario)
         {
-            string verificador = seguridad.ObtenerHash(usuario.uss + usuario.pass);
             
             return usuarioDatos.agregarUsuario(usuario);
         }
@@ -60,7 +64,8 @@ namespace BLL
             bool res = digitoVerificador.VerificadorHorizontal(concatenarCampos(usuario_actual), verificador);
 
             if (res) {
-                string hash_nuevo = seguridad.ObtenerHash(concatenarCampos(usuario));
+                
+                usuario.digitoVerificador = seguridad.ObtenerHash(concatenarCampos(usuario));
                 res = usuarioDatos.modificarUsuario(usuario);
                 actualizarVerificadorTabla();
                 return true;
@@ -89,7 +94,7 @@ namespace BLL
 
         public string concatenarCampos(BE.usuario usuario)
         {
-            return usuario.uss + usuario.pass + usuario.nombre + usuario.apellido + usuario.mail + usuario.direccion + usuario.telefono + usuario.IdEstado;
+            return usuario.uss + usuario.pass + usuario.nombre + usuario.apellido + usuario.mail + usuario.direccion + usuario.telefono + usuario.documento + usuario.IdEstado;
         }
 
         public bool validarLogin(string usuario, string contraseña)

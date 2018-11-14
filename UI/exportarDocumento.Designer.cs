@@ -102,6 +102,7 @@
             this.Controls.Add(this.TextBox1);
             this.Name = "exportarDocumento";
             this.Text = "exportarDocumento";
+            this.Load += new System.EventHandler(this.exportarDocumento_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

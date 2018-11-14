@@ -28,7 +28,18 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Modifiación de los datos personales del usuario seleccionado.", "Ayuda");
+            }
+        }
+
         private void datosPersonales_Load(object sender, EventArgs e) {
+
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
 
             idioma.idMenu = 7;
             etiquetas = gestorIdioma.listarIdioma(idioma);

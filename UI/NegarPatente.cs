@@ -27,9 +27,19 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Desde aqui puede negarle uno o mas permisos al usuario seleccionado.", "Ayuda");
+            }
+        }
+
         private void AsignarPatente_Load(object sender, EventArgs e) {
 
-            
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
             patentes = gestorPatente.listarPatentes();
 
             int i = -1;

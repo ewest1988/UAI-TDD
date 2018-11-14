@@ -16,5 +16,19 @@ namespace UI
         {
             InitializeComponent();
         }
+
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Alta de notas periodisticas.", "Ayuda");
+            }
+        }
+
+        private void nota_Load(object sender, EventArgs e)
+        {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+        }
     }
 }

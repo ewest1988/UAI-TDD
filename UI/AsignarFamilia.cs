@@ -33,8 +33,18 @@ namespace UI
             this.Close();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("En esta opción usted podrá asignarle familias al usuario seleccionado.", "Ayuda");
+            }
+        }
+
         private void AsignarFamilia_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
 
             familias = gestorFamilia.listarFamilias();
 

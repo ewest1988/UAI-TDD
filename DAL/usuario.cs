@@ -21,6 +21,23 @@ namespace DAL
             }
         }
 
+        public bool cambiarEstadoUsuario(BE.usuario usuario)
+        {
+            int respuesta = 0;
+
+            try
+            {
+                respuesta = sqlHelper.Ejecutar("UPDATE USUARIO SET ID_ESTADO = " + usuario.IdEstado + 
+                                               " WHERE ID_USUARIO = " + usuario.IdUsuario, false);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            if (respuesta > 0) return true;
+            else return false;
+        }
+
         public bool agregarUsuario(BE.usuario usuario) {
 
             int respuesta = 0;
@@ -224,7 +241,7 @@ namespace DAL
             int respuesta = 0;
             try
             {
-                respuesta = sqlHelper.Ejecutar("UPDATE Usuario SET usuario = '" + usuario.uss +  "', contraseña =  '" + usuario.pass + "', nombre = '" + usuario.nombre + "', apellido = '" + usuario.apellido +"', mail = '" + usuario.mail + "', direccion = '" + usuario.direccion + "', telefono = " + usuario.telefono + ", id_estado = " + usuario.IdEstado + ", digito_verificador = '" + usuario.digitoVerificador + "' WHERE id_usuario = " + usuario.IdUsuario, false);
+                respuesta = sqlHelper.Ejecutar("UPDATE Usuario SET usuario = '" + usuario.uss +  "', contraseña =  '" + usuario.pass + "', nombre = '" + usuario.nombre + "', apellido = '" + usuario.apellido +"', mail = '" + usuario.mail + "', direccion = '" + usuario.direccion + "', telefono = " + usuario.telefono + ", id_estado = " + usuario.IdEstado + ", documento = " + usuario.documento + ", digito_verificador = '" + usuario.digitoVerificador + "' WHERE id_usuario = " + usuario.IdUsuario, false);
             }
             catch (Exception ex)
             {

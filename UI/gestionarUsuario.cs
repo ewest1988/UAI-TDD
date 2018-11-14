@@ -33,8 +33,19 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Funcionalidad para dar de alta, baja o modificar los usuarios del sistema.", "Ayuda");
+            }
+        }
+
         private void gestionarUsuario_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
             idioma.idMenu = 2;
             etiquetas = gestorIdioma.listarIdioma(idioma);
 

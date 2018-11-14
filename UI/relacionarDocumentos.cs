@@ -16,5 +16,18 @@ namespace UI
         {
             InitializeComponent();
         }
+
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Ventana para relacionar documentos.", "Ayuda");
+            }
+        }
+
+        private void relacionarDocumentos_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

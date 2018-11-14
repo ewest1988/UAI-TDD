@@ -214,6 +214,7 @@
             this.Controls.Add(this.Label1);
             this.Name = "generarEdicion";
             this.Text = "generarEdicion";
+            this.Load += new System.EventHandler(this.generarEdicion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

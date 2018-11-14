@@ -162,6 +162,7 @@
             this.Controls.Add(this.Label1);
             this.Name = "relacionarDocumentos";
             this.Text = "relacionarDocumentos";
+            this.Load += new System.EventHandler(this.relacionarDocumentos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

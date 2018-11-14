@@ -24,7 +24,18 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Funcionalidad que permite realizar un backup de la base de datos.", "Ayuda");
+            }
+        }
+
         private void Backup_Load(object sender, EventArgs e) {
+
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
 
             saveFileDialog1.FileName = "C:\\Program Files\\Microsoft SQL Server\\MSSQL14.SQLEXPRESS\\MSSQL\\Backup";
             textBox1.Text = saveFileDialog1.FileName;

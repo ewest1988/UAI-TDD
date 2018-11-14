@@ -23,6 +23,7 @@ namespace UI
         BLL.seguridad seguridad = new BLL.seguridad();
         BLL.encriptacion encriptacion = new BLL.encriptacion();
         BLL.idioma gestorIdioma = new BLL.idioma();
+        BLL.patente gestorPatente = new BLL.patente();
 
         public editUsuario()
         {
@@ -34,8 +35,19 @@ namespace UI
 
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("En esta opción usted podrá editar el usuario seleccionado.", "Ayuda");
+            }
+        }
+
         private void editUsuario_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
             idioma.idMenu = 3;
             etiquetas = gestorIdioma.listarIdioma(idioma);
 
@@ -84,16 +96,19 @@ namespace UI
                 MessageBox.Show("las contraseñas deben coincidir");
             }
             else {
+
+                usuarioMod.uss = encriptacion.Encrypt(TextBox8.Text);
+                usuarioMod.nombre = TextBox1.Text;
+                usuarioMod.apellido = TextBox2.Text;
+                usuarioMod.direccion = TextBox3.Text;
+                usuarioMod.documento = Convert.ToInt32(TextBox4.Text);
+                usuarioMod.mail = TextBox5.Text;
+                usuarioMod.telefono = Convert.ToInt32(TextBox6.Text);
+
                 if (TextBox7.Text != "") {
 
-                    usuarioMod.uss = encriptacion.Encrypt(TextBox8.Text);
                     usuarioMod.pass = seguridad.ObtenerHash(TextBox7.Text);
-                    usuarioMod.nombre = TextBox1.Text;
-                    usuarioMod.apellido = TextBox2.Text;
-                    usuarioMod.direccion = TextBox3.Text;
-                    usuarioMod.documento = Convert.ToInt32(TextBox4.Text);
-                    usuarioMod.mail = TextBox5.Text;
-                    usuarioMod.telefono = Convert.ToInt32(TextBox6.Text);
+                }
                     usuarioMod.digitoVerificador = seguridad.ObtenerHash(gestorUsuario.concatenarCampos(usuarioMod));
 
                     if (gestorUsuario.modificarUsuario(usuarioMod)) {
@@ -109,7 +124,6 @@ namespace UI
                     else {
                         MessageBox.Show("no se ha podido modificar el cliente");
                     }
-                }
             }
         }
 
@@ -151,6 +165,39 @@ namespace UI
             asignarFamilia.idioma = idioma;
             asignarFamilia.FormClosing += new FormClosingEventHandler(ChildFormClosing);
             asignarFamilia.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            bool zn = false;
+            if (usuarioMod.IdEstado == 1)
+            {
+                foreach (var p in usuarioMod.patentes.Union(usuarioMod.patentesFamilias).Except(usuarioMod.patentesNegadas)) {
+
+                    if (gestorPatente.validarZonaDeNadie(p, usuarioMod.IdUsuario)) {
+
+                        zn = true;
+                    }
+                }
+
+                if (zn)
+                {
+                    MessageBox.Show("No se puede bloquear el usuario. Posee permisos unicos.");
+                }
+                else {
+
+                    usuarioMod.IdEstado = 2;
+                    gestorUsuario.modificarUsuario(usuarioMod);
+                    MessageBox.Show("Usuario bloqueado correctamente");
+                }
+                
+            }
+            else {
+
+                usuarioMod.IdEstado = 1;
+                gestorUsuario.cambiarEstadoUsuario(usuarioMod);
+                MessageBox.Show("Usuario desbloqueado correctamente");
+            }
         }
     }
 }

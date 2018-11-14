@@ -26,8 +26,19 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Ventana de inicio al sistema, si tiene usuario, por favor ingreselo.", "Ayuda");
+            }
+        }
+
         private void login_Load(object sender, EventArgs e)
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(myKeyDown);
+
             ComboBox1.Items.Add("ES");
             ComboBox1.Items.Add("EN");
 
@@ -54,43 +65,51 @@ namespace UI
                 {
                     if (validarUsuario == true)
                     {
-
                         this.Hide();
                         var main = new main();
                         userLogin = usuario.obtenerUsuario(userLogin.uss);
 
-                        gestorBitacora.agregarBitacora(userLogin.IdUsuario, 5);
-
-                        main.userLogin = userLogin;
-                        main.WindowState = FormWindowState.Maximized;
-
-                        if (ComboBox1.SelectedItem.Equals("ES")) {
-
-                            mainIdioma.idLanguage = 1;
-                        }
-                        else { mainIdioma.idLanguage = 2; }
-                        
-                        mainIdioma.idMenu = 1;
-
-                        List<BE.idioma> idiomas = new List<BE.idioma>();
-
-                        idiomas = gestorIdioma.listarIdioma(mainIdioma);
-
-                        int i = 0;
-
-                        foreach (ToolStripMenuItem masterToolStripMenuItem in main.MenuStrip1.Items)
+                        if (userLogin.IdEstado == 1)
                         {
-                            foreach ( ToolStripMenuItem master in masterToolStripMenuItem.DropDownItems)
-                            {
-                                master.Text = idiomas[i].etiqueta;
-                                i += 1;
-                            }
-                        }
-                        main.MenuStrip1.Items[0].Text = idiomas[10].etiqueta;
-                        main.MenuStrip1.Items[1].Text = idiomas[11].etiqueta;
 
-                        main.idioma = mainIdioma;
-                        main.Show();
+                            gestorBitacora.agregarBitacora(userLogin.IdUsuario, 5);
+
+                            main.userLogin = userLogin;
+                            main.WindowState = FormWindowState.Maximized;
+
+                            if (ComboBox1.SelectedItem.Equals("ES"))
+                            {
+
+                                mainIdioma.idLanguage = 1;
+                            }
+                            else { mainIdioma.idLanguage = 2; }
+
+                            mainIdioma.idMenu = 1;
+
+                            List<BE.idioma> idiomas = new List<BE.idioma>();
+
+                            idiomas = gestorIdioma.listarIdioma(mainIdioma);
+
+                            int i = 0;
+
+                            foreach (ToolStripMenuItem masterToolStripMenuItem in main.MenuStrip1.Items)
+                            {
+                                foreach (ToolStripMenuItem master in masterToolStripMenuItem.DropDownItems)
+                                {
+                                    master.Text = idiomas[i].etiqueta;
+                                    i += 1;
+                                }
+                            }
+                            main.MenuStrip1.Items[0].Text = idiomas[10].etiqueta;
+                            main.MenuStrip1.Items[1].Text = idiomas[11].etiqueta;
+
+                            main.idioma = mainIdioma;
+                            main.Show();
+                        }
+
+                        else { MessageBox.Show("usuario Bloqueado");
+                                this.Show();
+                        }
                     }
 
                     else {

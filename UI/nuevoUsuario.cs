@@ -29,6 +29,14 @@ namespace UI
             InitializeComponent();
         }
 
+        public void myKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode.ToString() == "F1")
+            {
+                MessageBox.Show("Ventana para crear nuevos usuarios.", "Ayuda");
+            }
+        }
+
         private void nuevoUsuario_Load(object sender, EventArgs e) {
 
             idioma.idMenu = 5;
@@ -89,21 +97,11 @@ namespace UI
                 nuevoUsuario.nombre = TextBox1.Text;
                 nuevoUsuario.apellido = TextBox2.Text;
                 nuevoUsuario.direccion = TextBox3.Text;
+                nuevoUsuario.documento = Convert.ToInt32(TextBox4.Text);
+                nuevoUsuario.telefono = Convert.ToInt32(TextBox6.Text);
                 nuevoUsuario.IdEstado = 1;
                 nuevoUsuario.mail = TextBox5.Text;
                 nuevoUsuario.digitoVerificador = seguridad.ObtenerHash(usuario.concatenarCampos(nuevoUsuario));
-                
-                    try
-                {
-                    nuevoUsuario.documento = Convert.ToInt32(TextBox4.Text);
-                    nuevoUsuario.telefono = Convert.ToInt32(TextBox6.Text);
-                }
-
-                catch (Exception)
-                {
-
-                    MessageBox.Show("el telefono y el documento deben ser numericos");
-                }
 
                 try
                 {
