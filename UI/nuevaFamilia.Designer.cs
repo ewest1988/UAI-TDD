@@ -44,11 +44,11 @@
             // Label1
             // 
             this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(12, 22);
+            this.Label1.Location = new System.Drawing.Point(12, 23);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(188, 13);
+            this.Label1.Size = new System.Drawing.Size(47, 13);
             this.Label1.TabIndex = 4;
-            this.Label1.Text = "Ingrese el nombre de la nueva Familia:";
+            this.Label1.Text = "Nombre:";
             // 
             // Button1
             // 

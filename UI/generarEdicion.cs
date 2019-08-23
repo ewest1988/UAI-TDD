@@ -27,6 +27,8 @@ namespace UI
 
         private void generarEdicion_Load(object sender, EventArgs e)
         {
+            ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
         }

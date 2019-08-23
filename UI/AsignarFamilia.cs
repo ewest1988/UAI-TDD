@@ -20,6 +20,7 @@ namespace UI
         BLL.usuario gestorUsuario = new BLL.usuario();
         BLL.patente gestorPatente = new BLL.patente();
         BLL.familia gestorFamilia = new BLL.familia();
+        BLL.idioma gestorIdioma = new BLL.idioma();
         BLL.bitacora gestorBitacora = new BLL.bitacora();
         List<BE.familia> familias = new List<BE.familia>();
 
@@ -37,12 +38,20 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("En esta opción usted podrá asignarle familias al usuario seleccionado.", "Ayuda");
+                MessageBox.Show(etiquetas[0].etiqueta);
             }
         }
 
         private void AsignarFamilia_Load(object sender, EventArgs e)
         {
+            idioma.idMenu = 9;
+            etiquetas = gestorIdioma.listarIdioma(idioma);
+
+            Label1.Text = etiquetas[1].etiqueta;
+            Button2.Text = etiquetas[2].etiqueta;
+            Button1.Text = etiquetas[3].etiqueta;
+            Label2.Text = etiquetas[4].etiqueta;
+
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
 
@@ -56,11 +65,9 @@ namespace UI
                 checkedListBox1.Items.Add(f.Familia);
                 i += 1;
 
-                foreach (int fa in usuarioMod.familias)
-                {
+                foreach (int fa in usuarioMod.familias) {
 
-                    if (f.idFamilia == fa)
-                    {
+                    if (f.idFamilia == fa) {
 
                         checkedListBox1.SetItemChecked(i, true);
                     }

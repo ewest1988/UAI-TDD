@@ -14,10 +14,14 @@ namespace UI
     {
         public BE.usuario userLogin { get; set; }
         public BE.idioma idioma { get; set; }
+        public List<BE.idioma> etiquetas { get; set; }
 
         public BLL.bitacora gestorBitacora = new BLL.bitacora();
         public BLL.seguridad seguridad = new BLL.seguridad();
         public BLL.idioma gestorIdioma = new BLL.idioma();
+        public BLL.usuario gestorUsuario = new BLL.usuario();
+        public BLL.patente gestorPatente = new BLL.patente();
+        public BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
 
         public main()
         {
@@ -99,6 +103,7 @@ namespace UI
             var backup = new Backup();
             backup.MdiParent = this;
             backup.userLogin = userLogin;
+            backup.idioma = idioma;
             backup.Show();
         }
 
@@ -107,13 +112,17 @@ namespace UI
             var restore = new restore();
             restore.MdiParent = this;
             restore.userLogin = userLogin;
+            restore.idioma = idioma;
             restore.Show();
         }
 
         private void main_Load(object sender, EventArgs e)
         {
-            this.KeyPreview = true;
-            this.KeyDown += new KeyEventHandler(myKeyDown);
+            //this.KeyPreview = true;
+            //this.KeyDown += new KeyEventHandler(myKeyDown);
+
+            idioma.idMenu = 1;
+            etiquetas = gestorIdioma.listarIdioma(idioma);
 
             foreach (ToolStripMenuItem masterToolStripMenuItem in MenuStrip1.Items)
             {
@@ -122,59 +131,66 @@ namespace UI
                 {
                     if (master.Text.Equals("Gestionar Usuarios") || master.Text.Equals("Manage Users"))
                     {
-                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(1)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(1)) master.Enabled = true; else master.Enabled = false;
                     }
 
                     if (master.Text.Equals("Gestionar Bitacora") || master.Text.Equals("Manage Log"))
                     {
-                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(2)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(2)) master.Enabled = true; else master.Enabled = false;
                     }
 
                     if (master.Text.Equals("Crear Documento") || master.Text.Equals("Create Document"))
                     {
-                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(3)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(3)) master.Enabled = true; else master.Enabled = false;
                     }
 
                     if (master.Text.Equals("Buscar Documento") || master.Text.Equals("Search Document"))
                     {
-                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(4)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(4)) master.Enabled = true; else master.Enabled = false;
                     }
 
                     if (master.Text.Equals("Crear Edicion") || master.Text.Equals("Create Edition"))
                     {
-                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(5)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(5)) master.Enabled = true; else master.Enabled = false;
                     }
 
                     if (master.Text.Equals("Gestionar Familia") || master.Text.Equals("Manage Family"))
                     {
-                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(6)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(6)) master.Enabled = true; else master.Enabled = false;
                     }
 
                     if (master.Text.Equals("Resguardo") || master.Text.Equals("Backup"))
                     {
-                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(6)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(6)) master.Enabled = true; else master.Enabled = false;
                     }
 
                     if (master.Text.Equals("Restaurar") || master.Text.Equals("Restore"))
                     {
-                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(6)) master.Visible = true; else master.Visible = false;
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(6)) master.Enabled = true; else master.Enabled = false;
+                    }
+
+                    if (master.Text.Equals("Recalcular Digito Verificador") || master.Text.Equals("Recalculate digit verifier"))
+                    {
+                        if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(22)) master.Enabled = true; else master.Enabled = false;
                     }
 
                 }
             }
          }
 
-        public void myKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode.ToString() == "F1")
-            {
-                MessageBox.Show("Este es el menu principal de la pantalla, desde aqui puede elegir las opciones " + 
-                                "que tenga habilitadas.","Ayuda");
-            }
-        }
-
         private void HerramientasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void recalcularDigitosVerificadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gestorDV.modificarVerificador(gestorDV.CacularDVV("Usuario"), "Usuario");
+            gestorDV.modificarVerificador(gestorDV.CacularDVV("bitacora"), "bitacora");
+            gestorDV.modificarVerificador(gestorDV.CacularDVV("Usuario_Patente"), "Usuario_Patente");
+            gestorDV.modificarVerificador(gestorDV.CacularDVV("documento"), "documento");
+
+            MessageBox.Show(etiquetas[14].etiqueta);
 
         }
     }

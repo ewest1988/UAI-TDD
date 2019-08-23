@@ -9,14 +9,14 @@ namespace BLL
     public class Backup
     {
         DAL.backup backup = new DAL.backup();
-        public void exportar(string Database, string path) {
+        public void exportar(string path, int volumenes) {
 
-            backup.exportar(Database, path);
+            backup.RealizarBackup(path, volumenes);
         }
 
-        public void importar(string Database, string path) {
+        public bool importar(string path) {
 
-            backup.importar(Database, path);
+            return backup.RealizarRestore(path);
         }
     }
 }

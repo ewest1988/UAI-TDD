@@ -70,6 +70,7 @@
             this.Button1.TabIndex = 23;
             this.Button1.Text = "Guardar";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // Label5
             // 

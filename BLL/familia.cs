@@ -11,6 +11,8 @@ namespace BLL
         public DAL.familia familiaDAL = new DAL.familia();
         public BLL.patente gestorPatente = new BLL.patente();
         public DAL.patente patenteDAL = new DAL.patente();
+        public digitoVerificador gestorDV = new digitoVerificador();
+        public seguridad gestorSeguridad = new seguridad();
 
 
         public List<BE.familia> listarFamilias()
@@ -21,7 +23,6 @@ namespace BLL
 
         public bool modificarFamilia(List<BE.patente> patentes, BE.familia familia)
         {
-
             try
             {
                 //elimino las patentes de la familia
@@ -30,8 +31,11 @@ namespace BLL
                 //asigno las patentes seleccionadas a la familia
                 foreach (BE.patente p in patentes) {
 
-                    familiaDAL.modificarPatenteFamilia(p, familia);
+                    string dv = gestorSeguridad.ObtenerHash(p.id_patente.ToString() + familia.idFamilia.ToString());
+                    familiaDAL.modificarPatenteFamilia(p, familia, dv);
                 }
+
+                gestorDV.modificarVerificador(gestorDV.CacularDVV(familiaDAL.listarTablaPatentesFamilias()), "Patente_Familia");
                 return true;
             }
             catch (Exception ex)
@@ -39,8 +43,6 @@ namespace BLL
 
                 throw ex;
             }
-
-            
         }
 
         public bool modificarFamilias(List<BE.familia> familias, BE.usuario usuario) {

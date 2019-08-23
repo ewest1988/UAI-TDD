@@ -9,14 +9,13 @@ namespace DAL
 {
     public class idioma
     {
-        SQLHelper sqlHelper = new SQLHelper();
         public List<BE.idioma> listarIdioma(BE.idioma idioma) {
 
             DataTable datos = new DataTable();
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("SELECT * FROM Etiqueta WHERE ID_IDIOMA = " + idioma.idLanguage + "AND ID_MENU = " + idioma.idMenu);
+                datos = SQLHelper.GetInstance().ObtenerDatos("SELECT * FROM Etiqueta WHERE ID_IDIOMA = " + idioma.idLanguage + "AND ID_MENU = " + idioma.idMenu);
 
                 return mapper(datos);
             }

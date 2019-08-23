@@ -30,5 +30,10 @@ namespace UI
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

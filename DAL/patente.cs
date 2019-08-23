@@ -10,17 +10,33 @@ namespace DAL
     
     public class patente
     {
-        SQLHelper sqlHelper = new SQLHelper();
-
         public List<BE.patente> listarPatentes() {
 
             DataTable datos = new DataTable();
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("SELECT * FROM Patente;");
+                datos = SQLHelper.GetInstance().ObtenerDatos("SELECT * FROM Patente;");
 
                 return mapper(datos);
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataTable listarTablaUsuariosPatentes()
+        {
+
+            DataTable datos = new DataTable();
+
+            try
+            {
+                datos = SQLHelper.GetInstance().ObtenerDatos("SELECT * FROM Usuario_Patente;");
+
+                return datos;
             }
 
             catch (Exception ex)
@@ -36,7 +52,7 @@ namespace DAL
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("select p.* from patente p " +
+                datos = SQLHelper.GetInstance().ObtenerDatos("select p.* from patente p " +
                                                "inner join patente_familia pf on p.id_patente = pf.id_patente " +
                                                "where pf.id_familia = " + familia.idFamilia);
 
@@ -56,7 +72,7 @@ namespace DAL
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("select id_patente from usuario_patente where id_patente = " + p +
+                datos = SQLHelper.GetInstance().ObtenerDatos("select id_patente from usuario_patente where id_patente = " + p +
                                                " union select pf.id_patente from patente_familia pf " +
                                                "inner join usuario_familia uf on pf.id_familia = uf.id_familia " +
                                                "where pf.id_patente = " + p +
@@ -81,7 +97,7 @@ namespace DAL
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("select id_patente from usuario_patente where id_patente = " + p +
+                datos = SQLHelper.GetInstance().ObtenerDatos("select id_patente from usuario_patente where id_patente = " + p +
                                                " and id_usuario <> " + u +
                                                " union select pf.id_patente from patente_familia pf " +
                                                "inner join usuario_familia uf on pf.id_familia = uf.id_familia " +
@@ -107,7 +123,7 @@ namespace DAL
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("select id_patente from usuario_patente " +
+                datos = SQLHelper.GetInstance().ObtenerDatos("select id_patente from usuario_patente " +
                                                "where id_patente = " + p +
                                                " union select id_patente from patente_familia pf " +
                                                "inner join usuario_familia uf on pf.id_familia = uf.id_familia " +
@@ -134,7 +150,7 @@ namespace DAL
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("select id_patente from usuario_patente where id_patente = " + p +
+                datos = SQLHelper.GetInstance().ObtenerDatos("select id_patente from usuario_patente where id_patente = " + p +
                                                " and id_usuario <> " + u +
                                                " union select pf.id_patente from patente_familia pf " +
                                                "inner join usuario_familia uf on pf.id_familia = uf.id_familia " +
@@ -162,7 +178,7 @@ namespace DAL
             try
             {
 
-                respuesta = sqlHelper.Ejecutar("DELETE FROM usuario_patente WHERE ID_USUARIO = " + usuario.IdUsuario, false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("DELETE FROM usuario_patente WHERE ID_USUARIO = " + usuario.IdUsuario, false);
             }
             catch (Exception ex)
             {
@@ -180,7 +196,7 @@ namespace DAL
 
             try {
 
-                respuesta = sqlHelper.Ejecutar("DELETE FROM usuario_patente_negada WHERE ID_USUARIO = " + usuario.IdUsuario, false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("DELETE FROM usuario_patente_negada WHERE ID_USUARIO = " + usuario.IdUsuario, false);
             }
             catch (Exception ex)
             {
@@ -191,16 +207,16 @@ namespace DAL
             else return false;
         }
 
-        public bool asignarPatenteUsuario(BE.patente patente, BE.usuario usuario) {
+        public bool asignarPatenteUsuario(BE.patente patente, BE.usuario usuario, string dv) {
 
             int respuesta = 0;
 
             try {
 
-                respuesta = sqlHelper.Ejecutar("BEGIN IF NOT EXISTS(SELECT * FROM Usuario_Patente " +
+                respuesta = SQLHelper.GetInstance().Ejecutar("BEGIN IF NOT EXISTS(SELECT * FROM Usuario_Patente " +
                                                "WHERE id_usuario = " + usuario.IdUsuario +
                                                " AND id_patente = " + patente.id_patente + ") " +
-                                               "BEGIN INSERT INTO Usuario_Patente VALUES(" + usuario.IdUsuario + "," + patente.id_patente + ")" + 
+                                               "BEGIN INSERT INTO Usuario_Patente VALUES(" + usuario.IdUsuario + "," + patente.id_patente + ",'" + dv + "')" + 
                                                "END END", false);
             }
             catch (Exception ex) {
@@ -218,7 +234,7 @@ namespace DAL
 
             try {
 
-                respuesta = sqlHelper.Ejecutar("DELETE FROM usuario_patente WHERE ID_USUARIO = " + usuario.IdUsuario + " AND ID_PATENTE = " + patente.id_patente, false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("DELETE FROM usuario_patente WHERE ID_USUARIO = " + usuario.IdUsuario + " AND ID_PATENTE = " + patente.id_patente, false);
             }
             catch (Exception ex)
             {
@@ -236,7 +252,7 @@ namespace DAL
 
             try {
 
-                respuesta = sqlHelper.Ejecutar("INSERT INTO usuario_patente_negada values (" + usuario.IdUsuario + "," + patente.id_patente + ")", false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("INSERT INTO usuario_patente_negada values (" + usuario.IdUsuario + "," + patente.id_patente + ")", false);
             }
             catch (Exception ex) {
 

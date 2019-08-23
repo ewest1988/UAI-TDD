@@ -27,7 +27,8 @@ namespace UI
 
         private void relacionarDocumentos_Load(object sender, EventArgs e)
         {
-
+            ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            
         }
     }
 }

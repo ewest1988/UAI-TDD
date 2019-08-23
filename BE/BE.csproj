@@ -49,6 +49,7 @@
     <Compile Include="documento.cs" />
     <Compile Include="evento.cs" />
     <Compile Include="familia.cs" />
+    <Compile Include="filtroDocumento.cs" />
     <Compile Include="filtroBitacora.cs" />
     <Compile Include="ICRUD.cs" />
     <Compile Include="idioma.cs" />

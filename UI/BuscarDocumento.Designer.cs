@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.Button6 = new System.Windows.Forms.Button();
-            this.Button5 = new System.Windows.Forms.Button();
             this.Button4 = new System.Windows.Forms.Button();
             this.Button3 = new System.Windows.Forms.Button();
             this.Button2 = new System.Windows.Forms.Button();
@@ -38,32 +37,23 @@
             this.DateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.Label4 = new System.Windows.Forms.Label();
-            this.TextBox3 = new System.Windows.Forms.TextBox();
             this.Label3 = new System.Windows.Forms.Label();
             this.Label2 = new System.Windows.Forms.Label();
             this.TextBox1 = new System.Windows.Forms.TextBox();
             this.Label1 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // Button6
             // 
-            this.Button6.Location = new System.Drawing.Point(346, 35);
+            this.Button6.Location = new System.Drawing.Point(437, 35);
             this.Button6.Name = "Button6";
             this.Button6.Size = new System.Drawing.Size(85, 23);
             this.Button6.TabIndex = 31;
             this.Button6.Text = "Exportar";
             this.Button6.UseVisualStyleBackColor = true;
-            // 
-            // Button5
-            // 
-            this.Button5.Location = new System.Drawing.Point(437, 35);
-            this.Button5.Name = "Button5";
-            this.Button5.Size = new System.Drawing.Size(85, 23);
-            this.Button5.TabIndex = 30;
-            this.Button5.Text = "Visualizar";
-            this.Button5.UseVisualStyleBackColor = true;
-            this.Button5.Click += new System.EventHandler(this.Button5_Click);
+            this.Button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // Button4
             // 
@@ -73,6 +63,7 @@
             this.Button4.TabIndex = 29;
             this.Button4.Text = "Eliminar";
             this.Button4.UseVisualStyleBackColor = true;
+            this.Button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // Button3
             // 
@@ -80,8 +71,9 @@
             this.Button3.Name = "Button3";
             this.Button3.Size = new System.Drawing.Size(75, 23);
             this.Button3.TabIndex = 28;
-            this.Button3.Text = "Aceptar";
+            this.Button3.Text = "Cerrar";
             this.Button3.UseVisualStyleBackColor = true;
+            this.Button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // Button2
             // 
@@ -91,6 +83,7 @@
             this.Button2.TabIndex = 27;
             this.Button2.Text = "Relacionar";
             this.Button2.UseVisualStyleBackColor = true;
+            this.Button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // Button1
             // 
@@ -100,6 +93,7 @@
             this.Button1.TabIndex = 26;
             this.Button1.Text = "Buscar";
             this.Button1.UseVisualStyleBackColor = true;
+            this.Button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // DataGridView1
             // 
@@ -108,6 +102,9 @@
             this.DataGridView1.Name = "DataGridView1";
             this.DataGridView1.Size = new System.Drawing.Size(473, 297);
             this.DataGridView1.TabIndex = 25;
+            this.DataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellClick);
+            this.DataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
+            this.DataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentDoubleClick);
             // 
             // DateTimePicker1
             // 
@@ -132,13 +129,6 @@
             this.Label4.Size = new System.Drawing.Size(85, 13);
             this.Label4.TabIndex = 22;
             this.Label4.Text = "Fecha Creacion:";
-            // 
-            // TextBox3
-            // 
-            this.TextBox3.Location = new System.Drawing.Point(11, 172);
-            this.TextBox3.Name = "TextBox3";
-            this.TextBox3.Size = new System.Drawing.Size(150, 20);
-            this.TextBox3.TabIndex = 21;
             // 
             // Label3
             // 
@@ -174,13 +164,21 @@
             this.Label1.TabIndex = 17;
             this.Label1.Text = "Nombre:";
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(11, 171);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(150, 21);
+            this.comboBox2.TabIndex = 32;
+            // 
             // BuscarDocumento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(735, 438);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.Button6);
-            this.Controls.Add(this.Button5);
             this.Controls.Add(this.Button4);
             this.Controls.Add(this.Button3);
             this.Controls.Add(this.Button2);
@@ -189,7 +187,6 @@
             this.Controls.Add(this.DateTimePicker1);
             this.Controls.Add(this.ComboBox1);
             this.Controls.Add(this.Label4);
-            this.Controls.Add(this.TextBox3);
             this.Controls.Add(this.Label3);
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.TextBox1);
@@ -206,7 +203,6 @@
         #endregion
 
         internal System.Windows.Forms.Button Button6;
-        internal System.Windows.Forms.Button Button5;
         internal System.Windows.Forms.Button Button4;
         internal System.Windows.Forms.Button Button3;
         internal System.Windows.Forms.Button Button2;
@@ -215,10 +211,10 @@
         internal System.Windows.Forms.DateTimePicker DateTimePicker1;
         internal System.Windows.Forms.ComboBox ComboBox1;
         internal System.Windows.Forms.Label Label4;
-        internal System.Windows.Forms.TextBox TextBox3;
         internal System.Windows.Forms.Label Label3;
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.TextBox TextBox1;
         internal System.Windows.Forms.Label Label1;
+        internal System.Windows.Forms.ComboBox comboBox2;
     }
 }

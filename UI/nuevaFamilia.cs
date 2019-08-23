@@ -14,6 +14,7 @@ namespace UI
     {
         public BE.usuario userLogin { get; set; }
         public BE.idioma idioma { get; set; }
+        public List<BE.idioma> etiquetas { get; set; }
 
         public BLL.bitacora gestorBitacora = new BLL.bitacora();
         public BLL.seguridad seguridad = new BLL.seguridad();
@@ -42,12 +43,12 @@ namespace UI
 
                     gestorfamilia.nuevaFamilia(familia);
                     gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1009);
-                    MessageBox.Show("Nueva familia creada correctamente");
+                    MessageBox.Show(etiquetas[0].etiqueta);
                     this.Close();
                 }
                 else {
 
-                    MessageBox.Show("debe escribir un nombre para la nueva Familia");
+                    MessageBox.Show(etiquetas[1].etiqueta);
                 }
             }
             catch (Exception ex)
@@ -61,12 +62,18 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("Ventana para crear nuevas familias.", "Ayuda");
+                MessageBox.Show(etiquetas[2].etiqueta);
             }
         }
 
         private void nuevaFamilia_Load(object sender, EventArgs e)
         {
+            idioma.idMenu = 16;
+            etiquetas = gestorIdioma.listarIdioma(idioma);
+
+            Label1.Text = etiquetas[3].etiqueta;
+            Button1.Text = etiquetas[4].etiqueta;
+            button2.Text = etiquetas[5].etiqueta;
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
         }

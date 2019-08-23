@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Ionic.Zip;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -11,14 +13,28 @@ namespace DAL
 {
     public class backup {
 
-        SQLHelper sqlHelper = new SQLHelper();
+        public string ObtenerBackup() {
 
-        public void exportar(string database, string path) {
+            var rutaBackup = "";
+            var nombreBaseDeDatos = SQLHelper.GetInstance().cn.Database.ToString();
+            var nombreBackup = nombreBaseDeDatos + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".bak";
 
             try {
 
-                sqlHelper.MasterQuery("BACKUP DATABASE " + database + " TO disk='" + path + "-original.zip'");
-                zIpDatabseFile(path + "-original.zip", path + ".zip");
+                SQLHelper.GetInstance().MasterQuery("BACKUP DATABASE " + nombreBaseDeDatos + " TO disk='" + nombreBackup + "'");
+
+                var dtDest = SQLHelper.GetInstance().ObtenerDatos("SELECT top 1 physical_device_name as ruta ,backup_start_date, backup_finish_date, backup_size AS tamaño FROM msdb.dbo.backupset b JOIN msdb.dbo.backupmediafamily m ON b.media_set_id = m.media_set_id WHERE physical_device_name like '%" + nombreBackup + "%' ORDER BY backup_finish_date DESC");
+
+                if (dtDest.Rows.Count > 0)
+                {
+                    foreach (DataRow reg in dtDest.Rows)
+                    {
+                        rutaBackup = Convert.ToString(reg["ruta"]);
+                    }
+                }
+
+                return rutaBackup;
+                //zIpDatabseFile(path + "-original.zip", path + ".zip");
             }
             catch (Exception ex) {
 
@@ -26,15 +42,62 @@ namespace DAL
             }
         }
 
-        public void importar(string database, string path) {
+        public bool RealizarRestore(String rutaOrigen)
+        {
+            try
+            {
+                if(!File.Exists("backup.txt"))
+                {
+                    FileStream f = File.Create("backup.txt");
+                    f.Close();
+                }
 
-            string pathDest = path.Substring(0, path.Length - 5);
+                StreamReader SR = File.OpenText("backup.txt");
+
+                var rutaBackup = SR.ReadLine();
+
+                SR.Close();
+                //var rutaBackup = "C:\\Program Files\\Microsoft SQL Server\\MSSQL14.SQLEXPRESS\\MSSQL\\Backup\\";
+
+                using (ZipFile zipFile = new ZipFile(rutaOrigen))
+                {
+                    rutaBackup = rutaBackup + "\\Backup-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+                    zipFile.ExtractAll(rutaBackup);
+
+                    string[] zipFiles = Directory.GetFiles(rutaBackup, "*.zip*", SearchOption.AllDirectories);
+
+                    if (zipFiles.Length > 0)
+                    {
+                        var zipFile2 = new ZipFile(zipFiles[0]);
+                        zipFile2.ExtractAll(rutaBackup);
+                    }
+
+                    string[] backFiles = Directory.GetFiles(rutaBackup, "*.bak*", SearchOption.AllDirectories);
+
+                    if (backFiles.Length == 1)
+                    {
+                        Restore(backFiles[0]);
+                    } else { return false; }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return true;
+        }
+
+        public string Restore( string path) {
+
+            var nombreBaseDeDatos = SQLHelper.GetInstance().cn.Database.ToString();
+            //string pathDest = path.Substring(0, path.Length - 5);
 
             try {
-                uNzIpDatabaseFile(path, pathDest);
-                sqlHelper.MasterQuery("USE MASTER ALTER DATABASE " + database + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
-                sqlHelper.MasterQuery("USE MASTER RESTORE DATABASE " + database + " FROM disk='" + pathDest + "' WITH REPLACE");
-                sqlHelper.MasterQuery("USE MASTER ALTER DATABASE " + database + " SET MULTI_USER");
+                SQLHelper.GetInstance().MasterQuery("USE MASTER ALTER DATABASE " + nombreBaseDeDatos + " SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+                SQLHelper.GetInstance().MasterQuery("USE MASTER RESTORE DATABASE " + nombreBaseDeDatos + " FROM disk='" + path + "' WITH REPLACE");
+                SQLHelper.GetInstance().MasterQuery("USE MASTER ALTER DATABASE " + nombreBaseDeDatos + " SET MULTI_USER");
+
+                return path;
             }
             catch (Exception ex) {
 
@@ -42,67 +105,42 @@ namespace DAL
             }
         }
 
+        public bool RealizarBackup(String rutaDestino, int cantidadVolumenes)
+        {
+            try
+            {
+                using (ZipFile zip = new ZipFile())
+                {
+                    var backupPath = ObtenerBackup();
+                    var ruta = backupPath;
+                    var multiplesVolumenes = cantidadVolumenes > 1;
+                    var rutaDestinoTemp = rutaDestino + "\\Editorial-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".zip";
 
+                    zip.AddFile(ruta, "");
+                    zip.TempFileFolder = Path.GetTempPath();
+                    zip.Save(rutaDestinoTemp);
 
-        private void zIpDatabseFile(string srcPath, string destPath) {
+                    if (cantidadVolumenes > 1)
+                    {
+                        FileInfo fileInfo = new FileInfo(rutaDestinoTemp);
+                        var tamañoDeVolumen = fileInfo.Length / cantidadVolumenes;
 
-            byte[] bufferWrite;
-            FileStream fsSource;
-            FileStream fsDest;
-            GZipStream gzCompressed;
+                        using (ZipFile zip2 = new ZipFile())
+                        {
+                            zip2.MaxOutputSegmentSize = (int)tamañoDeVolumen;
+                            zip2.AddFile(rutaDestinoTemp, "");
+                            zip2.TempFileFolder = Path.GetTempPath();
+                            zip2.Save(rutaDestinoTemp);
+                        }
 
-            fsSource = new FileStream(srcPath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            bufferWrite = new byte[fsSource.Length];
-
-            fsSource.Read(bufferWrite, 0, bufferWrite.Length);
-            fsDest = new FileStream(destPath, FileMode.OpenOrCreate, FileAccess.Write);
-            gzCompressed = new GZipStream(fsDest, CompressionMode.Compress, true);
-            gzCompressed.Write(bufferWrite, 0, bufferWrite.Length);
-
-            fsSource.Close();
-            gzCompressed.Close();
-            fsDest.Close();
-
-            File.Delete(srcPath);
-        }
-
-        private void uNzIpDatabaseFile(string SrcPath, string DestPath) {
-
-            byte[] bufferWrite;
-            FileStream fsSource;
-            FileStream fsDest;
-            GZipStream gzDecompressed;
-
-            fsSource = new FileStream(SrcPath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            gzDecompressed = new GZipStream(fsSource, CompressionMode.Decompress, true);
-
-            bufferWrite = new byte[4];
-            fsSource.Position = (int)fsSource.Length - 4;
-            fsSource.Read(bufferWrite, 0, 4);
-            fsSource.Position = 0;
-
-            int bufferLength = BitConverter.ToInt32(bufferWrite, 0);
-            byte[] buffer = new byte[bufferLength + 100];
-
-            int readOffset = 0;
-            int totalBytes = 0;
-
-            while (true) {
-
-                int bytesRead = gzDecompressed.Read(buffer, readOffset, 100);
-
-                if (bytesRead == 0) break;
-
-                readOffset += bytesRead;
-                totalBytes += bytesRead;
+                    }
+                }
             }
-
-            fsDest = new FileStream(DestPath, FileMode.Create);
-            fsDest.Write(buffer, 0, totalBytes);
-
-            fsSource.Close();
-            gzDecompressed.Close();
-            fsDest.Close();
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return true;
         }
     }
 }

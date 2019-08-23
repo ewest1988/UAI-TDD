@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,14 +9,12 @@ namespace DAL
 {
     public class digitoVerificador
     {
-        private SQLHelper sqlHelper = new SQLHelper();
-
         public string obtenerDigito(string tabla)
         {
             string digito = string.Empty;
             try
             {
-                digito = sqlHelper.EjecutarScalar("SELECT Digito_Verificador FROM Digito_Verificador WHERE Tabla = '" + tabla + "'");
+                digito = SQLHelper.GetInstance().EjecutarScalar("SELECT Digito_Verificador FROM Digito_Verificador WHERE Tabla = '" + tabla + "'");
             }
             catch (Exception ex)
             {
@@ -24,13 +23,29 @@ namespace DAL
             return digito;
         }
 
+        public DataTable listarTabla(string tabla)
+        {
+            DataTable datos = new DataTable();
+
+            try
+            {
+                datos = SQLHelper.GetInstance().ObtenerDatos("SELECT * FROM " + tabla);
+                return datos;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool modificarVerificador(string cadena, string tabla)
         {
             int respuesta = 0;
 
             try {
 
-                respuesta = sqlHelper.Ejecutar("UPDATE Digito_Verificador SET Digito_Verificador = '" + cadena + "' WHERE Tabla = '" + tabla + "'", false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("UPDATE Digito_Verificador SET Digito_Verificador = '" + cadena + "' WHERE Tabla = '" + tabla + "'", false);
             }
             catch (Exception ex)
             {

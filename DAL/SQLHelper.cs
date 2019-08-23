@@ -2,17 +2,89 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL
 {
-    class SQLHelper
+    public class SQLHelper
     {
-        private SqlConnection cn = new SqlConnection(@"Data Source=N1075001\SQLEXPRESS;Initial Catalog=editorial;User ID=administrador;Password=Admin2018");
+        public SqlConnection cn { get; set; }
+
+        public SqlConnection con = new SqlConnection(@"Data Source=N1075002\SQLEXPRESS;Initial Catalog=editorial;User ID=administrador;Password=Admin2018");
         private SqlTransaction tx;
         private SqlCommand command;
+
+        private static SQLHelper instance = null;
+
+        private SQLHelper() {
+
+            if (!File.Exists("conexion.txt"))
+            {
+                File.Create("conexion.txt");
+            }
+            StreamReader SR = File.OpenText("conexion.txt");
+
+            try
+            {
+                string s = SR.ReadLine();
+                con.ConnectionString.ToString();
+                cn = new SqlConnection(@"");
+                cn.ConnectionString = s;
+                SR.Close();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            } finally
+            {
+                SR.Close();
+            }
+        }
+
+        public static SQLHelper GetInstance()
+        {
+            if (instance == null)
+                instance = new SQLHelper();
+
+            return instance;
+        }
+
+        public bool modificarStringConexion(string strCon) {
+
+            try
+            {
+                cn.ConnectionString = strCon;
+
+                if (File.Exists("conexion.txt"))
+                {
+                    File.Delete("conexion.txt");
+                }
+
+                FileStream F = File.Create("conexion.txt");
+                F.Close();
+
+                StreamWriter SW = File.AppendText("conexion.txt");
+                SW.WriteLine(strCon);
+                SW.Close();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public string obtenerStringConexion()
+        {
+
+            return cn.ConnectionString;
+        }
 
         public DataTable ObtenerDatos(string comando)
         {
@@ -25,6 +97,7 @@ namespace DAL
                 command.Transaction = tx;
             try
             {
+
                 da.Fill(datos);
                 ConfirmarTX();
             }
@@ -97,7 +170,10 @@ namespace DAL
 
             try
             {
-                fa = command.ExecuteScalar().ToString(); 
+                object result = command.ExecuteScalar();
+                if (result != null)
+                    fa = result.ToString();
+                //fa = command.ExecuteScalar().ToString() + ""; 
 
                 ConfirmarTX();
             }

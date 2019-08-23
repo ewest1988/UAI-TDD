@@ -14,7 +14,9 @@ namespace UI
     public partial class restore : Form
     {
         public BE.usuario userLogin { get; set; }
-
+        public BE.idioma idioma { get; set; }
+        public List<BE.idioma> etiquetas { get; set; }
+        public BLL.idioma gestorIdioma = new BLL.idioma();
         BLL.seguridad seguridad = new BLL.seguridad();
         BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
         BLL.bitacora gestorBitacora = new BLL.bitacora();
@@ -32,29 +34,41 @@ namespace UI
 
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("Funcionalidad que permite realizar una restauración de la base de datos.", "Ayuda");
+                MessageBox.Show(etiquetas[0].etiqueta);
             }
         }
 
         private void restore_Load(object sender, EventArgs e)
         {
-            DirectoryInfo d = new DirectoryInfo(@"C:\\Program Files\\Microsoft SQL Server\\MSSQL14.SQLEXPRESS\\MSSQL\\Backup");//Assuming Test is your Folder
-            FileInfo[] Files = d.GetFiles("*editorial*"); //Getting Text files
+            idioma.idMenu = 17;
+            etiquetas = gestorIdioma.listarIdioma(idioma);
 
-            foreach (FileInfo file in Files) { ComboBox1.Items.Add(file); }
+            Label1.Text = etiquetas[1].etiqueta;
+            button1.Text = etiquetas[2].etiqueta;
+            Button2.Text = etiquetas[3].etiqueta;
+            button3.Text = etiquetas[4].etiqueta;
+
+            textBox1.Enabled = false;
+            openFileDialog1.Filter = "Zip Files|*.zip";
         }
 
         private void Button2_Click(object sender, EventArgs e) {
 
             try {
 
-                backup.importar("editorial", "C:\\Program Files\\Microsoft SQL Server\\MSSQL14.SQLEXPRESS\\MSSQL\\Backup\\" + ComboBox1.SelectedItem);
+                if (backup.importar(openFileDialog1.FileName))
+                {
 
-                gestorBitacora.agregarBitacora(userLogin.IdUsuario, 4);
-                gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
+                    gestorBitacora.agregarBitacora(userLogin.IdUsuario, 4);
+                    gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
 
-                MessageBox.Show("importacion realizada con exito");
-                this.Close();
+                    MessageBox.Show(etiquetas[5].etiqueta);
+                    this.Close();
+                }
+                else {
+
+                    MessageBox.Show(etiquetas[6].etiqueta);
+                }
 
             }
             catch (Exception ex)
@@ -67,6 +81,15 @@ namespace UI
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+                textBox1.Text = openFileDialog1.FileName;
+            }
         }
     }
 }

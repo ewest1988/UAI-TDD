@@ -33,10 +33,6 @@
             this.Label10 = new System.Windows.Forms.Label();
             this.Label12 = new System.Windows.Forms.Label();
             this.Label11 = new System.Windows.Forms.Label();
-            this.TextBox9 = new System.Windows.Forms.TextBox();
-            this.Label9 = new System.Windows.Forms.Label();
-            this.TextBox7 = new System.Windows.Forms.TextBox();
-            this.Label7 = new System.Windows.Forms.Label();
             this.TextBox8 = new System.Windows.Forms.TextBox();
             this.Label8 = new System.Windows.Forms.Label();
             this.TextBox4 = new System.Windows.Forms.TextBox();
@@ -59,7 +55,7 @@
             // 
             // Button2
             // 
-            this.Button2.Location = new System.Drawing.Point(232, 500);
+            this.Button2.Location = new System.Drawing.Point(232, 435);
             this.Button2.Name = "Button2";
             this.Button2.Size = new System.Drawing.Size(75, 23);
             this.Button2.TabIndex = 110;
@@ -69,7 +65,7 @@
             // 
             // Button1
             // 
-            this.Button1.Location = new System.Drawing.Point(143, 500);
+            this.Button1.Location = new System.Drawing.Point(143, 435);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(75, 23);
             this.Button1.TabIndex = 109;
@@ -107,40 +103,6 @@
             this.Label11.Size = new System.Drawing.Size(135, 20);
             this.Label11.TabIndex = 106;
             this.Label11.Text = "Datos Personales";
-            // 
-            // TextBox9
-            // 
-            this.TextBox9.Location = new System.Drawing.Point(178, 376);
-            this.TextBox9.Name = "TextBox9";
-            this.TextBox9.PasswordChar = '*';
-            this.TextBox9.Size = new System.Drawing.Size(129, 20);
-            this.TextBox9.TabIndex = 105;
-            // 
-            // Label9
-            // 
-            this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(175, 360);
-            this.Label9.Name = "Label9";
-            this.Label9.Size = new System.Drawing.Size(111, 13);
-            this.Label9.TabIndex = 104;
-            this.Label9.Text = "Confirmar Contraseña:";
-            // 
-            // TextBox7
-            // 
-            this.TextBox7.Location = new System.Drawing.Point(16, 376);
-            this.TextBox7.Name = "TextBox7";
-            this.TextBox7.PasswordChar = '*';
-            this.TextBox7.Size = new System.Drawing.Size(129, 20);
-            this.TextBox7.TabIndex = 103;
-            // 
-            // Label7
-            // 
-            this.Label7.AutoSize = true;
-            this.Label7.Location = new System.Drawing.Point(13, 360);
-            this.Label7.Name = "Label7";
-            this.Label7.Size = new System.Drawing.Size(64, 13);
-            this.Label7.TabIndex = 102;
-            this.Label7.Text = "Contraseña:";
             // 
             // TextBox8
             // 
@@ -260,7 +222,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(16, 421);
+            this.button3.Location = new System.Drawing.Point(16, 356);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(129, 23);
             this.button3.TabIndex = 111;
@@ -270,7 +232,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(178, 421);
+            this.button4.Location = new System.Drawing.Point(178, 356);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(129, 23);
             this.button4.TabIndex = 112;
@@ -280,7 +242,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(16, 459);
+            this.button5.Location = new System.Drawing.Point(16, 394);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(129, 23);
             this.button5.TabIndex = 113;
@@ -290,7 +252,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(178, 459);
+            this.button6.Location = new System.Drawing.Point(178, 394);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(129, 23);
             this.button6.TabIndex = 114;
@@ -312,10 +274,6 @@
             this.Controls.Add(this.Label10);
             this.Controls.Add(this.Label12);
             this.Controls.Add(this.Label11);
-            this.Controls.Add(this.TextBox9);
-            this.Controls.Add(this.Label9);
-            this.Controls.Add(this.TextBox7);
-            this.Controls.Add(this.Label7);
             this.Controls.Add(this.TextBox8);
             this.Controls.Add(this.Label8);
             this.Controls.Add(this.TextBox4);
@@ -345,10 +303,6 @@
         internal System.Windows.Forms.Label Label10;
         internal System.Windows.Forms.Label Label12;
         internal System.Windows.Forms.Label Label11;
-        internal System.Windows.Forms.TextBox TextBox9;
-        internal System.Windows.Forms.Label Label9;
-        internal System.Windows.Forms.TextBox TextBox7;
-        internal System.Windows.Forms.Label Label7;
         internal System.Windows.Forms.TextBox TextBox8;
         internal System.Windows.Forms.Label Label8;
         internal System.Windows.Forms.TextBox TextBox4;

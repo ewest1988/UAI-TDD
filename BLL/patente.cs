@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,20 @@ namespace BLL
     public class patente
     {
         DAL.patente Patente = new DAL.patente();
+        digitoVerificador gestorDV = new digitoVerificador();
+        seguridad gestorSeguridad = new seguridad();
 
         public List<BE.patente> listarPatentes()
         {
 
             return Patente.listarPatentes();
+        }
+
+        public DataTable listarTablaUsuariosPatente()
+        {
+            DataTable usuariosPatentesTabla = Patente.listarTablaUsuariosPatentes();
+
+            return usuariosPatentesTabla;
         }
 
         public List<BE.patente> listarPatentes(BE.familia familia)
@@ -68,9 +78,12 @@ namespace BLL
                 foreach (int p in nuevasPatentes)
                 {
                     BE.patente patente = new BE.patente();
-                    patente.id_patente = p; 
-                    Patente.asignarPatenteUsuario(patente, usuario);
+                    patente.id_patente = p;
+                    string dv = gestorSeguridad.ObtenerHash(p.ToString() + usuario.IdUsuario.ToString());
+                    Patente.asignarPatenteUsuario(patente, usuario, dv);
                 }
+
+                gestorDV.modificarVerificador(gestorDV.CacularDVV(Patente.listarTablaUsuariosPatentes()), "Usuario_Patente");
             }
             catch (Exception ex)
             {

@@ -34,3 +34,11 @@ C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.editUsuario.resources
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.AsignarPatente.resources
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.NegarPatente.resources
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\itextsharp.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\itextsharp.xml
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\DotNetZip.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\DotNetZip.xml
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\UI.exe.manifest
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\bin\Debug\UI.application
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.exe.manifest
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\UI\obj\Debug\UI.application

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace UI
 {
@@ -18,6 +19,7 @@ namespace UI
         public BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
         public BLL.bitacora gestorBitacora = new BLL.bitacora();
         public BLL.idioma gestorIdioma = new BLL.idioma();
+        public BLL.login gestorLogin = new BLL.login();
         public List<BE.idioma> etiquetas = new List<BE.idioma>();
         BE.idioma mainIdioma = new BE.idioma();
 
@@ -50,75 +52,90 @@ namespace UI
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
-            string hash_nuevo = gestorDV.CacularDVV(usuario.listarTablaUsuarios());
-            string hash_actual = gestorDV.ObtenerDVV("Usuario");
+            var digitos = gestorDV.listarDigitos();
+            bool esDigitoRoto = false;
             BE.usuario userLogin = new BE.usuario();
             userLogin.uss = encriptacion.Encrypt(txtUser.Text);
             userLogin.pass = seguridad.ObtenerHash(txtPass.Text);
 
             try {
 
-                bool validarUsuario = new BLL.login().loginUser(userLogin);
+                bool login = new BLL.login().loginUser(userLogin);
 
-                if (hash_nuevo == hash_actual)
+                foreach (string digito in digitos)
                 {
-                    if (validarUsuario == true)
-                    {
-                        this.Hide();
-                        var main = new main();
-                        userLogin = usuario.obtenerUsuario(userLogin.uss);
+                    
+                    string hash_nuevo = gestorDV.CacularDVV(digito);
+                    string hash_actual = gestorDV.ObtenerDVV(digito);
 
-                        if (userLogin.IdEstado == 1)
+                    if (hash_nuevo != hash_actual) {
+                        esDigitoRoto = true;
+                    }
+                }
+
+                if (login == true) {
+                    this.Hide();
+                    var main = new main();
+                    userLogin = usuario.obtenerUsuario(userLogin.uss);
+
+                    if (userLogin.IdEstado == 1)
+                    { 
+
+                        gestorBitacora.agregarBitacora(userLogin.IdUsuario, 5);
+
+                        main.userLogin = userLogin;
+                        main.WindowState = FormWindowState.Maximized;
+
+                        if (ComboBox1.SelectedItem.Equals("ES"))
                         {
 
-                            gestorBitacora.agregarBitacora(userLogin.IdUsuario, 5);
-
-                            main.userLogin = userLogin;
-                            main.WindowState = FormWindowState.Maximized;
-
-                            if (ComboBox1.SelectedItem.Equals("ES"))
-                            {
-
-                                mainIdioma.idLanguage = 1;
-                            }
-                            else { mainIdioma.idLanguage = 2; }
-
-                            mainIdioma.idMenu = 1;
-
-                            List<BE.idioma> idiomas = new List<BE.idioma>();
-
-                            idiomas = gestorIdioma.listarIdioma(mainIdioma);
-
-                            int i = 0;
-
-                            foreach (ToolStripMenuItem masterToolStripMenuItem in main.MenuStrip1.Items)
-                            {
-                                foreach (ToolStripMenuItem master in masterToolStripMenuItem.DropDownItems)
-                                {
-                                    master.Text = idiomas[i].etiqueta;
-                                    i += 1;
-                                }
-                            }
-                            main.MenuStrip1.Items[0].Text = idiomas[10].etiqueta;
-                            main.MenuStrip1.Items[1].Text = idiomas[11].etiqueta;
-
-                            main.idioma = mainIdioma;
-                            main.Show();
+                            mainIdioma.idLanguage = 1;
                         }
+                        else { mainIdioma.idLanguage = 2; }
 
-                        else { MessageBox.Show("usuario Bloqueado");
-                                this.Show();
+                        mainIdioma.idMenu = 1;
+
+                        List<BE.idioma> idiomas = new List<BE.idioma>();
+
+                        idiomas = gestorIdioma.listarIdioma(mainIdioma);
+
+                        int i = 0;
+
+                        foreach (ToolStripMenuItem masterToolStripMenuItem in main.MenuStrip1.Items)
+                        {
+                            foreach (ToolStripMenuItem master in masterToolStripMenuItem.DropDownItems)
+                            {
+                                master.Text = idiomas[i].etiqueta;
+                                i += 1;
+                            }
                         }
+                        main.MenuStrip1.Items[0].Text = idiomas[11].etiqueta;
+                        main.MenuStrip1.Items[1].Text = idiomas[12].etiqueta;
+
+                        main.idioma = mainIdioma;
+                        main.Show();
+                    }
+                    
+                    else { MessageBox.Show(etiquetas[6].etiqueta);
+                            this.Show();
                     }
 
-                    else {
-                        MessageBox.Show(etiquetas[4].etiqueta);
+                    if (esDigitoRoto)
+                    {
+
+                        MessageBox.Show(etiquetas[5].etiqueta);
                     }
                 }
 
                 else {
-                    MessageBox.Show(etiquetas[5].etiqueta);
+
+                    if (usuario.actualizarIntentosFallidos(txtUser.Text) < 3)
+                    {
+
+                        MessageBox.Show(etiquetas[4].etiqueta);
+                    }
+                    else MessageBox.Show(etiquetas[7].etiqueta);
+                    
                 }
             }
             catch (Exception ex)
@@ -130,12 +147,20 @@ namespace UI
 
         public void mapearIdioma() {
 
-            etiquetas = gestorIdioma.listarIdioma(mainIdioma);
+            try
+            {
+                etiquetas = gestorIdioma.listarIdioma(mainIdioma);
 
-            Label1.Text = etiquetas [0].etiqueta;
-            Label2.Text = etiquetas [1].etiqueta;
-            Button1.Text = etiquetas [2].etiqueta;
-            Label3.Text = etiquetas [3].etiqueta;
+                Label1.Text = etiquetas[0].etiqueta;
+                Label2.Text = etiquetas[1].etiqueta;
+                Button1.Text = etiquetas[2].etiqueta;
+                Label3.Text = etiquetas[3].etiqueta;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString()); ;
+            }
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -153,5 +178,10 @@ namespace UI
             mapearIdioma();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            gestorLogin.modificarStringConexion(Interaction.InputBox("","", gestorLogin.obtenerStringConexion()));
+            
+        }
     }
 }

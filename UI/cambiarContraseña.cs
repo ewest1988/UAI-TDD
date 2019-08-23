@@ -31,7 +31,7 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("Esta opción permite cambiar la contraseña del usuario que esta seleccionado.", "Ayuda");
+                MessageBox.Show(etiquetas[5].etiqueta);
             }
         }
 
@@ -59,18 +59,25 @@ namespace UI
 
                 if (TextBox2.Text.Equals("") || TextBox3.Text.Equals("") || !TextBox2.Text.Equals(TextBox3.Text))
                 {
-                    MessageBox.Show("las contraseñas deben coincidir");
+                    MessageBox.Show(etiquetas[6].etiqueta);
                 }
-                else {
+                else if (!userLogin.pass.Equals(seguridad.ObtenerHash(TextBox1.Text))) {
+
+                    MessageBox.Show(etiquetas[7].etiqueta);
+                } else if (userLogin.pass.Equals(seguridad.ObtenerHash(TextBox2.Text))) {
+
+                    MessageBox.Show(etiquetas[8].etiqueta);
+                } else {
+
                     try
                     {
                         userLogin.pass = seguridad.ObtenerHash(TextBox2.Text);
                         if (gestorUsuario.modificarUsuario(userLogin))
                         {
 
-                            MessageBox.Show("Contraseña modificada correctamente");
+                            MessageBox.Show(etiquetas[9].etiqueta);
                         }
-                        else { MessageBox.Show("No se pudo modificar la contraseña"); }
+                        else { MessageBox.Show(etiquetas[10].etiqueta); }
                         gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1007);
                         
                     }
@@ -83,7 +90,7 @@ namespace UI
                 }
             }
             else {
-                MessageBox.Show("contraseña incorrecta");
+                MessageBox.Show(etiquetas[11].etiqueta);
             }
         }
 

@@ -14,6 +14,7 @@ namespace UI
     {
         public BE.usuario userLogin { get; set; }
         public BE.idioma idioma { get; set; }
+        public List<BE.idioma> etiquetas { get; set; }
         public BE.familia familia { get; set; }
 
         public BLL.bitacora gestorBitacora = new BLL.bitacora();
@@ -33,11 +34,19 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("Ventana para modificar los permisos asignados a la familia seleccionada.", "Ayuda");
+                MessageBox.Show(etiquetas[0].etiqueta);
             }
         }
 
         private void modificarFamilia_Load(object sender, EventArgs e) {
+
+            idioma.idMenu = 14;
+            etiquetas = gestorIdioma.listarIdioma(idioma);
+
+            Label1.Text = etiquetas[1].etiqueta;
+            label2.Text = etiquetas[2].etiqueta;
+            Button2.Text = etiquetas[3].etiqueta;
+            Button1.Text = etiquetas[4].etiqueta;
 
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
@@ -106,13 +115,13 @@ namespace UI
                 if (del)
                 {
 
-                    MessageBox.Show("no se pueden modificar dicha Familia. Existe un permiso unico");
+                    MessageBox.Show(etiquetas[5].etiqueta);
                 }
                 else {
 
                     gestorFamilia.modificarFamilia(nuevasPatentes, familia);
                     gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1008);
-                    MessageBox.Show("Patentes modificadas correctamente");
+                    MessageBox.Show(etiquetas[6].etiqueta);
                     this.Close();
                 }     
             }

@@ -21,6 +21,7 @@ namespace UI
         BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
         BLL.seguridad seguridad = new BLL.seguridad();
         BE.documento documento = new BE.documento();
+        List<BE.tipoDocumento> tiposDocumentos = new List<BE.tipoDocumento>();
 
         public crearDocumento()
         {
@@ -37,10 +38,11 @@ namespace UI
 
         private void crearDocumento_Load(object sender, EventArgs e)
         {
+            ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
 
-            List<BE.tipoDocumento> tiposDocumentos = new List<BE.tipoDocumento>();
             tiposDocumentos = gestorDocumento.listarTiposDocumentos();
             TextBox1.Enabled = false;
 
@@ -66,13 +68,54 @@ namespace UI
                     Nota.Show();
                 }
                 else {
-                    gestorDocumento.guardarDocumento(documento);
+                    try
+                    {
+                        foreach(var t in tiposDocumentos)
+                        {
+                            if (t.descTipo == ComboBox1.SelectedItem)
+                            {
+                                documento.idTipo = t.idTipo;
+                            }
+                        }
+
+                        if (gestorDocumento.guardarDocumento(documento))
+                        {
+
+                            MessageBox.Show("Documento guardado correctamente");
+                            this.Close();
+
+                        } else
+                        {
+                            MessageBox.Show("no se ha podido guardar el documento.");
+                        }
+                        
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message.ToString());
+                    }
                 }
             } 
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
+            if (ComboBox1.SelectedItem.Equals("Imagen"))
+            {
+                openFileDialog1.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+
+            } else if (ComboBox1.SelectedItem.Equals("Audio"))
+            {
+                openFileDialog1.Filter = "All Supported Audio | *.mp3; *.wma | MP3s | *.mp3 | WMAs | *.wma";
+            }
+            else 
+            {
+                openFileDialog1.Filter = "All Videos Files | *.dat; *.wmv; *.3g2; *.3gp; *.3gp2; *.3gpp; *.amv; *.asf; *.avi; *.bin; *.cue; *.divx; *.dv; *.flv; *.gxf; *.iso; *.m1v; *.m2v; *.m2t; *.m2ts; *.m4v; " +
+                  " *.mkv; *.mov; *.mp2; *.mp2v; *.mp4; *.mp4v; *.mpa; *.mpe; *.mpeg; *.mpeg1; *.mpeg2; *.mpeg4; *.mpg; *.mpv2; *.mts; *.nsv; *.nuv; *.ogg; *.ogm; *.ogv; *.ogx; *.ps; *.rec; *.rm; *.rmvb; *.tod; *.ts; *.tts; *.vob; *.vro; *.webm";
+                
+            }
+
             openFileDialog1.ShowDialog();
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)

@@ -43,6 +43,7 @@
             this.RealizarBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RealizarRestoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.recalcularDigitosVerificadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -132,7 +133,8 @@
             // 
             this.HerramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.RealizarBackupToolStripMenuItem,
-            this.RealizarRestoreToolStripMenuItem});
+            this.RealizarRestoreToolStripMenuItem,
+            this.recalcularDigitosVerificadoresToolStripMenuItem});
             this.HerramientasToolStripMenuItem.Name = "HerramientasToolStripMenuItem";
             this.HerramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
             this.HerramientasToolStripMenuItem.Text = "Herramientas";
@@ -141,14 +143,14 @@
             // RealizarBackupToolStripMenuItem
             // 
             this.RealizarBackupToolStripMenuItem.Name = "RealizarBackupToolStripMenuItem";
-            this.RealizarBackupToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.RealizarBackupToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.RealizarBackupToolStripMenuItem.Text = "Realizar Backup";
             this.RealizarBackupToolStripMenuItem.Click += new System.EventHandler(this.RealizarBackupToolStripMenuItem_Click);
             // 
             // RealizarRestoreToolStripMenuItem
             // 
             this.RealizarRestoreToolStripMenuItem.Name = "RealizarRestoreToolStripMenuItem";
-            this.RealizarRestoreToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.RealizarRestoreToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
             this.RealizarRestoreToolStripMenuItem.Text = "Realizar Restore";
             this.RealizarRestoreToolStripMenuItem.Click += new System.EventHandler(this.RealizarRestoreToolStripMenuItem_Click);
             // 
@@ -156,6 +158,13 @@
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // recalcularDigitosVerificadoresToolStripMenuItem
+            // 
+            this.recalcularDigitosVerificadoresToolStripMenuItem.Name = "recalcularDigitosVerificadoresToolStripMenuItem";
+            this.recalcularDigitosVerificadoresToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.recalcularDigitosVerificadoresToolStripMenuItem.Text = "Recalcular Digitos Verificadores";
+            this.recalcularDigitosVerificadoresToolStripMenuItem.Click += new System.EventHandler(this.recalcularDigitosVerificadoresToolStripMenuItem_Click);
             // 
             // main
             // 
@@ -190,5 +199,6 @@
         internal System.Windows.Forms.ToolStripMenuItem RealizarBackupToolStripMenuItem;
         internal System.Windows.Forms.ToolStripMenuItem RealizarRestoreToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem recalcularDigitosVerificadoresToolStripMenuItem;
     }
 }

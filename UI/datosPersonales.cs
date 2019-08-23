@@ -32,7 +32,7 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("Modifiación de los datos personales del usuario seleccionado.", "Ayuda");
+                MessageBox.Show(etiquetas[10].etiqueta);
             }
         }
 
@@ -78,7 +78,7 @@ namespace UI
             {
                 gestorUsuario.modificarUsuario(userLogin);
                 gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1006);
-                MessageBox.Show("Cambios guardados correctamente");
+                MessageBox.Show(etiquetas[11].etiqueta);
             }
             catch (Exception ex)
             {

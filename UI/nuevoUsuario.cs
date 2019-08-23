@@ -33,7 +33,7 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("Ventana para crear nuevos usuarios.", "Ayuda");
+                MessageBox.Show(etiquetas[14].etiqueta);
             }
         }
 
@@ -52,8 +52,6 @@ namespace UI
             Label6.Text = etiquetas[7].etiqueta;
             Label12.Text = etiquetas[8].etiqueta;
             Label8.Text = etiquetas[9].etiqueta;
-            Label7.Text = etiquetas[10].etiqueta;
-            Label9.Text = etiquetas[11].etiqueta;
             Button1.Text = etiquetas[12].etiqueta;
             Button2.Text = etiquetas[13].etiqueta;
         }
@@ -78,7 +76,7 @@ namespace UI
             {
 
                 e.Handled = true;
-                MessageBox.Show("solo numeros se aceptan");
+                MessageBox.Show(etiquetas[15].etiqueta);
             }
         }
 
@@ -87,13 +85,31 @@ namespace UI
             BE.usuario nuevoUsuario = new BE.usuario();
             BLL.usuario gestorUsuario = new BLL.usuario();
 
-            if (TextBox7.Text != TextBox9.Text) {
+            if (!gestorUsuario.IsValidEmail(TextBox5.Text))
+            {
 
-                MessageBox.Show("Las contraseñas no coinciden");
-            } else {
+                MessageBox.Show(etiquetas[16].etiqueta);
+            }
+
+            else if (gestorUsuario.validarCorreo(TextBox5.Text))
+            {
+
+                MessageBox.Show(etiquetas[17].etiqueta);
+            }
+
+            else if (gestorUsuario.validarUsuario(TextBox8.Text))
+            {
+
+                MessageBox.Show(etiquetas[18].etiqueta);
+            }
+
+            else if (validarNulos()) {
+
+                MessageBox.Show(etiquetas[19].etiqueta);
+            }
+            else {
 
                 nuevoUsuario.uss = encriptacion.Encrypt(TextBox8.Text);
-                nuevoUsuario.pass = seguridad.ObtenerHash(TextBox7.Text);
                 nuevoUsuario.nombre = TextBox1.Text;
                 nuevoUsuario.apellido = TextBox2.Text;
                 nuevoUsuario.direccion = TextBox3.Text;
@@ -101,26 +117,46 @@ namespace UI
                 nuevoUsuario.telefono = Convert.ToInt32(TextBox6.Text);
                 nuevoUsuario.IdEstado = 1;
                 nuevoUsuario.mail = TextBox5.Text;
-                nuevoUsuario.digitoVerificador = seguridad.ObtenerHash(usuario.concatenarCampos(nuevoUsuario));
+
+                nuevoUsuario = usuario.generarPassword(nuevoUsuario);
 
                 try
                 {
                     gestorUsuario.agregarUsuario(nuevoUsuario);
-                    gestorDV.modificarVerificador(gestorDV.CacularDVV(usuario.listarTablaUsuarios()), "Usuario");
+                    gestorDV.modificarVerificador(gestorDV.CacularDVV("Usuario"), "Usuario");
 
                     gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1);
                     gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
 
-                    MessageBox.Show("Cliente guardado correctamente");
+                    MessageBox.Show(etiquetas[20].etiqueta);
                     this.Owner.Refresh();
                     this.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message.ToString()); 
+                    MessageBox.Show(ex.Message.ToString());
                 }
 
             }
+        }
+
+        public bool validarNulos() {
+
+            if (TextBox1.Text == null ||
+                TextBox1.Text.Trim() == "" ||
+                TextBox2.Text == null ||
+                TextBox2.Text.Trim() == "" ||
+                TextBox3.Text == null ||
+                TextBox3.Text.Trim() == "" ||
+                TextBox4.Text == null ||
+                TextBox4.Text.Trim() == "" ||
+                TextBox5.Text == null ||
+                TextBox5.Text.Trim() == "" ||
+                TextBox6.Text == null ||
+                TextBox6.Text.Trim() == "" ||
+                TextBox8.Text == null ||
+                TextBox8.Text.Trim() == "") return true;
+            else return false;
         }
 
         private void Button2_Click(object sender, EventArgs e)

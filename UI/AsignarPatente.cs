@@ -18,8 +18,10 @@ namespace UI
         public BE.idioma idioma { get; set; }
 
         BLL.usuario gestorUsuario = new BLL.usuario();
+        BLL.idioma gestorIdioma = new BLL.idioma();
         BLL.patente gestorPatente = new BLL.patente();
         BLL.bitacora gestorBitacora = new BLL.bitacora();
+        BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
         List<BE.patente> patentes = new List<BE.patente>();
 
         public AsignarPatente()
@@ -31,7 +33,7 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("En esta opción usted podrá asignarle permisos al usuario seleccionado.", "Ayuda");
+                MessageBox.Show(etiquetas[0].etiqueta);
             }
         }
 
@@ -39,6 +41,14 @@ namespace UI
 
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
+
+            idioma.idMenu = 10;
+            etiquetas = gestorIdioma.listarIdioma(idioma);
+
+            Label1.Text = etiquetas[1].etiqueta;
+            Button2.Text = etiquetas[2].etiqueta;
+            Button1.Text = etiquetas[3].etiqueta;
+            Label2.Text = etiquetas[4].etiqueta;
 
             patentes = gestorPatente.listarPatentes();
 
@@ -90,14 +100,15 @@ namespace UI
 
                 if (del) {
 
-                    MessageBox.Show("no se pueden modificar dichas patentes. Existe un permiso asignado a el solo");
+                    MessageBox.Show(etiquetas[5].etiqueta);
                 }
                 else {
 
                     gestorPatente.modificarPatentes(nuevasPatentes, usuarioMod);
                     usuarioMod = gestorUsuario.obtenerUsuario(usuarioMod);
                     gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1011);
-                    MessageBox.Show("Patentes modificadas correctamente");
+                    gestorDV.modificarVerificador(gestorDV.CacularDVV("Usuario_Patente"), "Usuario_Patente");
+                    MessageBox.Show(etiquetas[6].etiqueta);
                     this.Close();
                 }
             }

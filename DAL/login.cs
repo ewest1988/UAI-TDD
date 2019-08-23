@@ -16,7 +16,7 @@ namespace DAL
 
             try
             {
-                passbase = new SQLHelper().EjecutarScalar("SELECT contraseña FROM Usuario WHERE Usuario = '" + user.uss + "'");
+                passbase = SQLHelper.GetInstance().EjecutarScalar("SELECT contraseña FROM Usuario WHERE Usuario = '" + user.uss + "' AND ID_ESTADO <> 3");
             }
             catch (Exception ex)
             {

@@ -1,0 +1,26 @@
+backup restore: corregir volumenes y rutas de origen y destino
+
+combos deshabilitados (HECHO)
+validar correos (HECHO)
+sacar password en modificar usuario (HECHO)
+no puedo tener 2 usuarios con el mismo mail ni el mismo nombre de usuario (HECHO)
+arreglar error de login por usuario incorrecto. (HECHO)
+cambiar el ocultar permisos por deshabilitar permisos. (HECHO)
+en caso de blanqueo y alta enviar contraseña por mail (en un archivo de texto). (HECHO)
+corregir criticidad en bitacora (limpiar campo). (HECHO)
+verificar cambiar contraseña actual en mi perfil. (HECHO)
+agregar permisos ejemplos (gestionar familia, por alta baja o modificacion). (HECHO)
+negar patente de usuarios unicos (posible error: ver indices al recorrer patentes). (HECHO)
+agregar hora en bitacora. (HECHO)
+borrado logico de usuarios. (HECHO)
+ordenamiento de bitacora. (HECHO)
+
+
+imprimir de bitacora.
+
+tooltips en algun lugar del sistema multi idioma.
+cabeceras de grilla multi idioma.
+
+verificar digito verificador en base de datos, no es clave unica. (HECHO)
+hay muy poco del negocio.
+modificar contraseña tras 3 intentos fallidos;

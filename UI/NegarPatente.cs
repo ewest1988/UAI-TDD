@@ -18,9 +18,11 @@ namespace UI
         public BE.idioma idioma { get; set; }
 
         BLL.usuario gestorUsuario = new BLL.usuario();
+        BLL.idioma gestorIdioma = new BLL.idioma();
         BLL.patente gestorPatente = new BLL.patente();
         BLL.bitacora gestorBitacora = new BLL.bitacora();
         List<BE.patente> patentes = new List<BE.patente>();
+        BLL.digitoVerificador gestorDV = new BLL.digitoVerificador();
 
         public NegarPatente()
         {
@@ -31,11 +33,20 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("Desde aqui puede negarle uno o mas permisos al usuario seleccionado.", "Ayuda");
+                MessageBox.Show(etiquetas[0].etiqueta);
             }
         }
 
         private void AsignarPatente_Load(object sender, EventArgs e) {
+
+
+            idioma.idMenu = 15;
+            etiquetas = gestorIdioma.listarIdioma(idioma);
+
+            Label1.Text = etiquetas[1].etiqueta;
+            Label2.Text = etiquetas[2].etiqueta;
+            Button2.Text = etiquetas[3].etiqueta;
+            Button1.Text = etiquetas[4].etiqueta;
 
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
@@ -94,13 +105,13 @@ namespace UI
                 if (del)
                 {
 
-                    MessageBox.Show("no se pueden negar dichas patentes. Existe un permiso asignado a el solo");
+                    MessageBox.Show(etiquetas[5].etiqueta);
                 }
                 else {
 
                     gestorPatente.modificarPatentesNegadas(nuevasPatentes, usuarioMod);
                     gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1012);
-                    MessageBox.Show("Patentes negadas modificadas correctamente");
+                    MessageBox.Show(etiquetas[6].etiqueta);
 
                     this.Close();
                 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Button5 = new System.Windows.Forms.Button();
             this.Button4 = new System.Windows.Forms.Button();
             this.Button3 = new System.Windows.Forms.Button();
@@ -36,6 +37,7 @@
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.Label2 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // Button5
@@ -65,6 +67,7 @@
             this.Button3.Size = new System.Drawing.Size(121, 23);
             this.Button3.TabIndex = 21;
             this.Button3.Text = "Eliminar Usuario";
+            this.toolTip1.SetToolTip(this.Button3, "eliminar Usuario Gatin");
             this.Button3.UseVisualStyleBackColor = true;
             this.Button3.Click += new System.EventHandler(this.Button3_Click);
             // 
@@ -145,5 +148,6 @@
         internal System.Windows.Forms.ComboBox ComboBox1;
         internal System.Windows.Forms.Label Label2;
         internal System.Windows.Forms.Label Label1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

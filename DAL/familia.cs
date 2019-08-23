@@ -9,17 +9,33 @@ namespace DAL
 {
     public class familia
     {
-        SQLHelper sqlHelper = new SQLHelper();
-
         public List<BE.familia> listarFamilias() {
 
             DataTable datos = new DataTable();
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("SELECT * FROM Familia");
+                datos = SQLHelper.GetInstance().ObtenerDatos("SELECT * FROM Familia");
 
                 return mapper(datos);
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataTable listarTablaPatentesFamilias()
+        {
+
+            DataTable datos = new DataTable();
+
+            try
+            {
+                datos = SQLHelper.GetInstance().ObtenerDatos("SELECT * FROM Patente_Familia");
+
+                return datos;
             }
 
             catch (Exception ex)
@@ -34,7 +50,7 @@ namespace DAL
 
             try
             {
-                respuesta = sqlHelper.Ejecutar("INSERT INTO FAMILIA VALUES ('" + familia.Familia + "')", false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("INSERT INTO FAMILIA VALUES ('" + familia.Familia + "')", false);
             }
             catch (Exception ex)
             {
@@ -50,7 +66,7 @@ namespace DAL
 
             try
             {
-                respuesta = sqlHelper.Ejecutar("INSERT INTO USUARIO_FAMILIA VALUES (" + usuario.IdUsuario + "," + familia.idFamilia+ ")", false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("INSERT INTO USUARIO_FAMILIA VALUES (" + usuario.IdUsuario + "," + familia.idFamilia+ ")", false);
             }
             catch (Exception ex)
             {
@@ -67,7 +83,7 @@ namespace DAL
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("select id_usuario from usuario_familia "
+                datos = SQLHelper.GetInstance().ObtenerDatos("select id_usuario from usuario_familia "
                                              + "where id_familia = " + f.idFamilia);
 
                 foreach (DataRow reg in datos.Rows)
@@ -95,7 +111,7 @@ namespace DAL
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("select * from usuario_familia "
+                datos = SQLHelper.GetInstance().ObtenerDatos("select * from usuario_familia "
                                              + "where id_familia = " + f.idFamilia);
 
                 if (datos.Rows.Count > 0) {
@@ -120,7 +136,7 @@ namespace DAL
 
             try {
 
-                respuesta = sqlHelper.Ejecutar("DELETE FROM USUARIO_FAMILIA WHERE ID_USUARIO = " + usuario.IdUsuario, false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("DELETE FROM USUARIO_FAMILIA WHERE ID_USUARIO = " + usuario.IdUsuario, false);
             }
             catch (Exception ex)
             {
@@ -138,7 +154,7 @@ namespace DAL
             try
             {
                 eliminarPatenteFamilia(familia);
-                respuesta = sqlHelper.Ejecutar("DELETE FROM FAMILIA WHERE ID_FAMILIA = " + familia.idFamilia, false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("DELETE FROM FAMILIA WHERE ID_FAMILIA = " + familia.idFamilia, false);
             }
             catch (Exception ex)
             {
@@ -154,7 +170,7 @@ namespace DAL
 
             try
             {
-                respuesta = sqlHelper.Ejecutar("DELETE FROM PATENTE_FAMILIA WHERE ID_FAMILIA = " + familia.idFamilia, false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("DELETE FROM PATENTE_FAMILIA WHERE ID_FAMILIA = " + familia.idFamilia, false);
             }
             catch (Exception ex)
             {
@@ -170,7 +186,7 @@ namespace DAL
 
             try
             {
-                respuesta = sqlHelper.Ejecutar("delete from usuario_patente "
+                respuesta = SQLHelper.GetInstance().Ejecutar("delete from usuario_patente "
                                              + "where id_usuario = " + us.IdUsuario
                                              + " and id_patente in (select id_patente from Patente_Familia where id_familia = " + familia.idFamilia + ")", false);
             }
@@ -182,13 +198,13 @@ namespace DAL
             else return false;
         }
 
-        public bool modificarPatenteFamilia(BE.patente patente, BE.familia familia)
+        public bool modificarPatenteFamilia(BE.patente patente, BE.familia familia, string dv)
         {
             int respuesta = 0;
 
             try
             {
-                respuesta = sqlHelper.Ejecutar("INSERT INTO PATENTE_FAMILIA VALUES (" + patente.id_patente + "," + familia.idFamilia + ")", false);
+                respuesta = SQLHelper.GetInstance().Ejecutar("INSERT INTO PATENTE_FAMILIA VALUES (" + patente.id_patente + "," + familia.idFamilia + ",'" + dv + "')", false);
             }
             catch (Exception ex)
             {
@@ -205,7 +221,7 @@ namespace DAL
 
             try
             {
-                datos = sqlHelper.ObtenerDatos("select id_patente from patente_familia "
+                datos = SQLHelper.GetInstance().ObtenerDatos("select id_patente from patente_familia "
                                              + "where id_familia = " + familia.idFamilia);
 
                 foreach (DataRow reg in datos.Rows)

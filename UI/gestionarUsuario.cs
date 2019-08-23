@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using System.IO;
 
 namespace UI
 {
@@ -37,12 +38,19 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("Funcionalidad para dar de alta, baja o modificar los usuarios del sistema.", "Ayuda");
+                MessageBox.Show(etiquetas[14].etiqueta);
             }
         }
 
         private void gestionarUsuario_Load(object sender, EventArgs e)
         {
+            Button1.Enabled = false;
+            Button2.Enabled = false;
+            Button3.Enabled = false;
+            Button4.Enabled = false;
+
+            ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
 
@@ -57,7 +65,38 @@ namespace UI
             Button3.Text = etiquetas[6].etiqueta;
             Button5.Text = etiquetas[7].etiqueta;
 
+            toolTip1.SetToolTip(this.ComboBox1, etiquetas[16].etiqueta);
+            toolTip1.SetToolTip(this.Button2, etiquetas[17].etiqueta);
+            toolTip1.SetToolTip(this.Button1, etiquetas[18].etiqueta);
+            toolTip1.SetToolTip(this.Button3, etiquetas[19].etiqueta);
+            toolTip1.SetToolTip(this.Button4, etiquetas[20].etiqueta);
+            toolTip1.SetToolTip(this.Button5, etiquetas[21].etiqueta);
+
             actualizarCombo();
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(9))
+            {
+                //Alta de Usuario
+                Button2.Enabled = true;
+            }
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(11))
+            {
+                //Modificar Usuario
+                Button1.Enabled = true;
+            }
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(10))
+            {
+                //Eliminar Usuario
+                Button3.Enabled = true;
+            }
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(18))
+            {
+                //Resetear Contraseña
+                Button4.Enabled = true;
+            }
         }
 
         private void Button2_Click(object sender, EventArgs e) {
@@ -96,7 +135,7 @@ namespace UI
 
                         if (del) {
 
-                            MessageBox.Show("no se puede eliminar el usuario. Existe un permiso asignado a el solo");
+                            MessageBox.Show(etiquetas[15].etiqueta);
                         }
                         else {
 
@@ -104,7 +143,7 @@ namespace UI
                             gestorDV.modificarVerificador(gestorDV.CacularDVV(usuario.listarTablaUsuarios()), "Usuario");
                             MessageBox.Show(etiquetas[11].etiqueta);
                             gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1005);
-                            gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
+                            
                         }
                     } catch (Exception ex) {
 
@@ -150,12 +189,13 @@ namespace UI
         {
             if (MessageBox.Show(etiquetas[9].etiqueta + " " + ComboBox1.SelectedItem + "?", etiquetas[8].etiqueta, MessageBoxButtons.YesNo) == DialogResult.Yes) {
 
-                userLogin.pass = seguridad.ObtenerHash("123456");
-                userLogin.digitoVerificador = seguridad.ObtenerHash(usuario.concatenarCampos(userLogin));
+                BE.usuario usuarioSel = new BE.usuario();
+                usuarioSel = usuario.generarPassword(ComboBox1.SelectedItem.ToString());
 
-                if (usuario.modificarUsuario(userLogin))
+                //modifico el usuario en la base de datos
+                if (usuario.modificarUsuario(usuarioSel))
                 {
-
+                    //actualizo el digito verificador
                     gestorDV.modificarVerificador(gestorDV.CacularDVV(usuario.listarTablaUsuarios()), "Usuario");
                     MessageBox.Show(etiquetas[13].etiqueta);
                     this.Close();

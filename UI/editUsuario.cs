@@ -39,12 +39,17 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("En esta opción usted podrá editar el usuario seleccionado.", "Ayuda");
+                MessageBox.Show(etiquetas[18].etiqueta);
             }
         }
 
         private void editUsuario_Load(object sender, EventArgs e)
         {
+            button3.Enabled = false;
+            button4.Enabled = false;
+            button5.Enabled = false;
+            button6.Enabled = false;
+
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
 
@@ -61,10 +66,12 @@ namespace UI
             Label6.Text = etiquetas[7].etiqueta;
             Label12.Text = etiquetas[8].etiqueta;
             Label8.Text = etiquetas[9].etiqueta;
-            Label7.Text = etiquetas[10].etiqueta;
-            Label9.Text = etiquetas[11].etiqueta;
             Button1.Text = etiquetas[12].etiqueta;
             Button2.Text = etiquetas[13].etiqueta;
+            button3.Text = etiquetas[14].etiqueta;
+            button4.Text = etiquetas[15].etiqueta;
+            button5.Text = etiquetas[16].etiqueta;
+            button6.Text = etiquetas[17].etiqueta;
 
             usuarioMod = gestorUsuario.obtenerUsuario(usuarioMod);
             TextBox1.Text = usuarioMod.nombre;
@@ -73,9 +80,31 @@ namespace UI
             TextBox4.Text = usuarioMod.documento.ToString();
             TextBox5.Text = usuarioMod.mail;
             TextBox6.Text = usuarioMod.telefono.ToString();
-            //TextBox7.Text = usuarioMod.pass;
             TextBox8.Text = encriptacion.Decrypt(usuarioMod.uss);
-            //TextBox9.Text = usuarioMod.pass;
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(15))
+            {
+                //Asignar Permisos
+                button3.Enabled = true;
+            }
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(20))
+            {
+                //Asignar Familias
+                button4.Enabled = true;
+            }
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(21))
+            {
+                //Negar Permisos
+                button5.Enabled = true;
+            }
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(19))
+            {
+                //Bloquear/Desbloquear
+                button6.Enabled = true;
+            }
         }
 
         private void number_KeyPress(object sender, KeyPressEventArgs e)
@@ -85,15 +114,34 @@ namespace UI
             if (!Char.IsDigit(chr) && chr != 8) {
 
                 e.Handled = true;
-                MessageBox.Show("debes escribir solo numeros");
+                MessageBox.Show(etiquetas[19].etiqueta);
             }
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if ((TextBox7.Text != "" || TextBox9.Text != "") && TextBox7.Text != TextBox9.Text)
+            if (!TextBox8.Text.Equals(encriptacion.Decrypt(usuarioMod.uss)) && gestorUsuario.validarUsuario(TextBox8.Text))
             {
-                MessageBox.Show("las contraseñas deben coincidir");
+
+                MessageBox.Show(etiquetas[20].etiqueta);
+            }
+
+            else if (!gestorUsuario.IsValidEmail(TextBox5.Text))
+            {
+
+                MessageBox.Show(etiquetas[21].etiqueta);
+            }
+
+            else if (gestorUsuario.validarCorreo(TextBox5.Text, usuarioMod.IdUsuario))
+            {
+
+                MessageBox.Show(etiquetas[22].etiqueta);
+            }
+
+            else if (validarNulos())
+            {
+
+                MessageBox.Show(etiquetas[23].etiqueta);
             }
             else {
 
@@ -104,26 +152,19 @@ namespace UI
                 usuarioMod.documento = Convert.ToInt32(TextBox4.Text);
                 usuarioMod.mail = TextBox5.Text;
                 usuarioMod.telefono = Convert.ToInt32(TextBox6.Text);
+                usuarioMod.digitoVerificador = seguridad.ObtenerHash(gestorUsuario.concatenarCampos(usuarioMod));
 
-                if (TextBox7.Text != "") {
+                if (gestorUsuario.modificarUsuario(usuarioMod)) {
 
-                    usuarioMod.pass = seguridad.ObtenerHash(TextBox7.Text);
+                    gestorBitacora.agregarBitacora(userLogin.IdUsuario, 2);
+                    gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
+
+                    MessageBox.Show("Cliente modificado correctamente");
+                    this.Close();
                 }
-                    usuarioMod.digitoVerificador = seguridad.ObtenerHash(gestorUsuario.concatenarCampos(usuarioMod));
-
-                    if (gestorUsuario.modificarUsuario(usuarioMod)) {
-
-                        gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorUsuario.listarTablaUsuarios()), "Usuario");
-
-                        gestorBitacora.agregarBitacora(userLogin.IdUsuario, 2);
-                        gestorDV.modificarVerificador(gestorDV.CacularDVV(gestorBitacora.listarTablaBitacora()), "bitacora");
-
-                        MessageBox.Show("Cliente modificado correctamente");
-                        this.Close();
-                    }
-                    else {
-                        MessageBox.Show("no se ha podido modificar el cliente");
-                    }
+                else {
+                    MessageBox.Show("no se ha podido modificar el cliente");
+                }
             }
         }
 
@@ -150,6 +191,26 @@ namespace UI
             patentesN.idioma = idioma;
             patentesN.FormClosing += new FormClosingEventHandler(ChildFormClosing);
             patentesN.Show();
+        }
+
+        public bool validarNulos()
+        {
+
+            if (TextBox1.Text == null ||
+                TextBox1.Text.Trim() == "" ||
+                TextBox2.Text == null ||
+                TextBox2.Text.Trim() == "" ||
+                TextBox3.Text == null ||
+                TextBox3.Text.Trim() == "" ||
+                TextBox4.Text == null ||
+                TextBox4.Text.Trim() == "" ||
+                TextBox5.Text == null ||
+                TextBox5.Text.Trim() == "" ||
+                TextBox6.Text == null ||
+                TextBox6.Text.Trim() == "" ||
+                TextBox8.Text == null ||
+                TextBox8.Text.Trim() == "") return true;
+            else return false;
         }
 
         private void ChildFormClosing(object sender, FormClosingEventArgs e)

@@ -14,6 +14,7 @@ namespace UI
     {
         public BE.usuario userLogin { get; set; }
         public BE.idioma idioma { get; set; }
+        public List<BE.idioma> etiquetas { get; set; }
 
         public BLL.bitacora gestorBitacora = new BLL.bitacora();
         public BLL.seguridad seguridad = new BLL.seguridad();
@@ -36,14 +37,47 @@ namespace UI
         {
             if (e.KeyCode.ToString() == "F1")
             {
-                MessageBox.Show("Funcionalidad para dar de alta, baja o modificar las familias del sistema.", "Ayuda");
+                MessageBox.Show(etiquetas[8].etiqueta);
             }
         }
 
         private void gestionarFamilia_Load(object sender, EventArgs e)
         {
+            ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(myKeyDown);
+
+            idioma.idMenu = 13;
+            etiquetas = gestorIdioma.listarIdioma(idioma);
+
+            Label1.Text = etiquetas[0].etiqueta;
+            Label2.Text = etiquetas[1].etiqueta;
+            Button2.Text = etiquetas[2].etiqueta;
+            Button1.Text = etiquetas[3].etiqueta;
+            Button3.Text = etiquetas[4].etiqueta;
+
+            Button1.Enabled = false;
+            Button2.Enabled = false;
+            Button3.Enabled = false;
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(12))
+            {
+                //Alta de Familia
+                Button2.Enabled = true;
+            }
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(14))
+            {
+                //Modificar Familia
+                Button1.Enabled = true;
+            }
+
+            if (userLogin.patentes.Union(userLogin.patentesFamilias).Except(userLogin.patentesNegadas).Contains(13))
+            {
+                //Eliminar Familia
+                Button3.Enabled = true;
+            }
 
             actualizarComboFamilias();
         }
@@ -68,18 +102,23 @@ namespace UI
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            var editFamilia = new modificarFamilia();
+            if (familias.Count > 0) {
 
-            foreach (BE.familia f in familias)
-            {
-                if (f.Familia.Equals(ComboBox1.SelectedItem)) {
+                var editFamilia = new modificarFamilia();
 
-                    editFamilia.familia = f;
-                    editFamilia.familia.patentes = gestorPatente.listarPatentes(f).Select(s => s.id_patente).ToList();
+                foreach (BE.familia f in familias)
+                {
+                    if (f.Familia.Equals(ComboBox1.SelectedItem))
+                    {
+                        editFamilia.familia = f;
+                        editFamilia.familia.patentes = gestorPatente.listarPatentes(f).Select(s => s.id_patente).ToList();
+                    }
                 }
-            }
-            editFamilia.userLogin = userLogin;
-            editFamilia.Show();
+
+                editFamilia.idioma = idioma;
+                editFamilia.userLogin = userLogin;
+                editFamilia.Show();
+            } else { MessageBox.Show(etiquetas[5].etiqueta); }
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -117,12 +156,12 @@ namespace UI
 
                         if (del)
                         {
-                            MessageBox.Show("Existen usuarios con permisos unicos de esta familia");
+                            MessageBox.Show(etiquetas[6].etiqueta);
                         }
                         else {
                             gestorfamilia.eliminarFamilia(f);
                             gestorBitacora.agregarBitacora(userLogin.IdUsuario, 1010);
-                            MessageBox.Show("Familia eliminada correctamente");
+                            MessageBox.Show(etiquetas[7].etiqueta);
                         }
 
                         

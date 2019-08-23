@@ -6,3 +6,5 @@ C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\bin\Debug\B
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\bin\Debug\BE.pdb
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\obj\Debug\DAL.dll
 C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\obj\Debug\DAL.pdb
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\bin\Debug\DotNetZip.dll
+C:\Users\P045922\Documents\Visual Studio 2015\Projects\Editorial\DAL\bin\Debug\DotNetZip.xml

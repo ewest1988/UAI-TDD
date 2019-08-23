@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BLL.Backup">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Backup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.bitacora">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EoAQAAAEAAAIAAAAABAgAAAAAQAAAAAEAAAADAAQAAA=</HashCode>
+      <FileName>bitacora.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.digitoVerificador">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAYAAAAAAAAAAAAEAAAAAgAQAAEAAAEAAAIBAAAAAA=</HashCode>
+      <FileName>digitoVerificador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.documento">
+    <Position X="2.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAQAAgAGAAAAAQAAAAA=</HashCode>
+      <FileName>documento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.encriptacion">
+    <Position X="5.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>encriptacion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.familia">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gIACAAAAIAAAAAAAAAAABAIAAgAIkAQAAAAAAAAAAAA=</HashCode>
+      <FileName>familia.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.idioma">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>idioma.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.login">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAQAAAAA=</HashCode>
+      <FileName>login.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.patente">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gIAAAASAAAAAAAAAACAAEAAAAgAAAAACAAAMAkCAAAA=</HashCode>
+      <FileName>patente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.seguridad">
+    <Position X="2.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAEgAQAAAAAAAAAAAAAAAAAAQAIgAAEAAAgI=</HashCode>
+      <FileName>seguridad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BLL.usuario">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEEkyAAAIAAoMAAIACAgBCAEAAAIAQAEAABABCAAAAA=</HashCode>
+      <FileName>usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
